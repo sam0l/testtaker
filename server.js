@@ -8,9 +8,9 @@ const app = express();
 const port = 3000;
 
 app.use(fileUpload());
+app.use(express.json()); // Added to parse JSON bodies
 app.use(express.static('public'));
 
-// Add CORS headers
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
@@ -21,13 +21,11 @@ app.use((req, res, next) => {
   next();
 });
 
-// Ensure uploads directory exists
 const uploadsDir = './uploads';
 fs.mkdir(uploadsDir, { recursive: true })
   .then(() => console.log('Uploads directory ensured:', uploadsDir))
   .catch(err => console.error('Error ensuring uploads directory:', err));
 
-// Load or initialize question bank
 let questions = [];
 const questionFile = 'questions.json';
 
@@ -51,17 +49,45 @@ async function saveQuestions() {
   }
 }
 
-// --- Improved Parsing Logic ---
+function shuffleArray(array) {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
+function cleanOCRText(text) {
+  const corrections = {
+    'Açri': 'April',
+    'Jaw': 'Jan',
+    'Lending': 'Bending',
+    'Â': '',
+    'â': '',
+    'ç': 'c'
+  };
+  let cleaned = text;
+  for (const [wrong, right] of Object.entries(corrections)) {
+    cleaned = cleaned.replace(new RegExp(wrong, 'g'), right);
+  }
+  return cleaned;
+}
 
 function parseLinesToQuestions(lines) {
-  const questionRegex = /^(\d+)\)/;
-  const optionRegex = /^[a-d]\)/i;
-  const answerSectionRegex = /MOCK BOARD EXAM ANSWERS/i;
+  const questionRegex = /^(\d+)[\)\.]\s*/;
+  const optionRegex = /^[a-d][\)\.]\s*/i; // Restrict to a-d for four options
+  const answerSectionRegex = /MOCK BOARD EXAM ANSWERS|ANSWERS AND SOLUTIONS|ANSWERS:/i;
+  const answerTableRegex = /^\d+\.\s*[A-E]/i;
+  const asteriskAnswerRegex = /\*\s*$/;
 
   let inAnswerSection = false;
   let answers = {};
   let newQuestions = [];
+  let errors = [];
   let i = 0;
+
+  lines = lines.map(line => cleanOCRText(line.trim())).filter(line => line);
 
   while (i < lines.length) {
     let line = lines[i];
@@ -73,25 +99,23 @@ function parseLinesToQuestions(lines) {
     }
 
     if (inAnswerSection) {
-      // Example: "12. A"
-      if (line.match(/^\d+\.\s+[A-D]/i)) {
-        const [qNum, ans] = line.split('. ');
-        const answerText = ans.slice(2).trim();
-        answers[qNum.replace('.', '')] = answerText;
-        // console.log('Found answer:', qNum, answerText);
+      if (answerTableRegex.test(line)) {
+        const match = line.match(/^(\d+)\.\s*([A-E])/i);
+        if (match) {
+          answers[match[1]] = match[2];
+        }
       }
       i++;
       continue;
     }
 
-    // Parse question block
     let questionMatch = line.match(questionRegex);
     if (questionMatch) {
       let questionNumber = questionMatch[1];
-      let questionLines = [line.replace(questionRegex, '').trim()];
+      let questionText = line.replace(questionRegex, '').trim();
+      let questionLines = [questionText];
       i++;
 
-      // Accumulate question lines until we hit an option or next question or answer section
       while (
         i < lines.length &&
         !optionRegex.test(lines[i]) &&
@@ -102,61 +126,76 @@ function parseLinesToQuestions(lines) {
         i++;
       }
 
-      // Parse options
       let options = [];
+      let inlineAnswer = null;
+      let expectedOptions = 4; // Expect exactly 4 options
       while (
         i < lines.length &&
         optionRegex.test(lines[i]) &&
-        options.length < 4
+        options.length < expectedOptions
       ) {
         let optionText = lines[i].replace(optionRegex, '').trim();
+        let optionLines = [optionText];
         i++;
-        // Accumulate option lines
         while (
           i < lines.length &&
           !optionRegex.test(lines[i]) &&
           !questionRegex.test(lines[i]) &&
-          !answerSectionRegex.test(lines[i])
+          !answerSectionRegex.test(lines[i]) &&
+          lines[i].trim()
         ) {
-          optionText += ' ' + lines[i].trim();
+          optionLines.push(lines[i].trim());
           i++;
         }
-        options.push(optionText);
+        let fullOptionText = optionLines.join(' ').trim();
+        if (asteriskAnswerRegex.test(fullOptionText)) {
+          inlineAnswer = String.fromCharCode(97 + options.length);
+          fullOptionText = fullOptionText.replace(asteriskAnswerRegex, '').trim();
+        }
+        options.push(fullOptionText);
+        console.log(`Question ${questionNumber}: Added option ${String.fromCharCode(97 + options.length - 1)}: ${fullOptionText}`);
       }
 
-      newQuestions.push({
+      let question = {
         questionNumber,
-        question: questionLines.join(' '),
+        question: questionLines.join(' ').trim(),
         options,
-        answer: ''
-      });
+        answer: inlineAnswer || ''
+      };
+
+      if (options.length < 2) {
+        errors.push(`Question ${questionNumber}: Only ${options.length} options found, skipping`);
+      } else if (options.length !== expectedOptions) {
+        errors.push(`Question ${questionNumber}: Found ${options.length} options, expected ${expectedOptions}`);
+      }
+
+      newQuestions.push(question);
       continue;
     }
 
     i++;
   }
 
-  // Offset logic to align answers with questions
-  const firstAnswerKey = Math.min(...Object.keys(answers).map(Number));
-  const firstQuestionNumber = Math.min(...newQuestions.map(q => Number(q.questionNumber)));
-  const offset = firstAnswerKey - firstQuestionNumber;
   newQuestions.forEach(q => {
-    q.questionNumber = (Number(q.questionNumber) + offset).toString();
-  });
-
-  newQuestions.forEach(q => {
-    if (answers[q.questionNumber]) {
-      q.answer = answers[q.questionNumber];
-      // console.log('Assigned answer to question', q.questionNumber, ':', q.answer);
+    if (answers[q.questionNumber] && !q.answer) {
+      const answerIndex = 'ABCD'.indexOf(answers[q.questionNumber].toUpperCase());
+      if (answerIndex >= 0 && answerIndex < q.options.length) {
+        q.answer = String.fromCharCode(97 + answerIndex); // a, b, c, d
+      }
     }
   });
 
-  const validQuestions = newQuestions.filter(q => q.options.length === 4 && q.answer);
-  console.log('Parsed', validQuestions.length, 'valid questions');
-  return validQuestions;
-}
+  const validQuestions = newQuestions.filter(q => q.options.length >= 2 && q.answer);
+  errors.push(`Parsed ${newQuestions.length} questions, ${validQuestions.length} valid`);
 
-// --- PDF Parsing ---
+  console.log('Parsing complete:', {
+    totalQuestions: newQuestions.length,
+    validQuestions: validQuestions.length,
+    errors
+  });
+
+  return { questions: validQuestions, errors };
+}
 
 async function parsePDF(filePath) {
   try {
@@ -176,15 +215,11 @@ async function parsePDF(filePath) {
   }
 }
 
-// --- Plain Text Parsing ---
-
 async function parseText(content) {
   console.log('Parsing text content, length:', content.length);
   const lines = content.split('\n').map(line => line.trim()).filter(line => line);
   return parseLinesToQuestions(lines);
 }
-
-// --- DOCX Parsing ---
 
 async function parseDocx(filePath) {
   console.log('Parsing DOCX file:', filePath);
@@ -192,26 +227,47 @@ async function parseDocx(filePath) {
   return parseText(result.value);
 }
 
-// --- Endpoints ---
-
-// Health check endpoint
 app.get('/health', (req, res) => {
   res.json({ status: 'healthy' });
 });
 
-// Log all incoming requests
 app.use((req, res, next) => {
   console.log(`Received ${req.method} request at ${req.path} from ${req.ip}`);
   next();
 });
 
-// API to get questions
 app.get('/api/questions', async (req, res) => {
   await loadQuestions();
-  res.json(questions);
+  const randomizedQuestions = shuffleArray(questions);
+  res.json(randomizedQuestions);
 });
 
-// API to upload and parse files
+app.post('/api/reset', async (req, res) => {
+  try {
+    await loadQuestions();
+    console.log('Quiz reset, reloaded questions:', questions.length);
+    res.json({ message: 'Quiz reset successfully', questionCount: questions.length });
+  } catch (error) {
+    console.error('Error resetting quiz:', error.message);
+    res.status(500).json({ message: 'Error resetting quiz: ' + error.message });
+  }
+});
+
+app.post('/api/clear', async (req, res) => {
+  try {
+    if (!req.body.confirm || req.body.confirm !== 'DELETE') {
+      return res.status(400).json({ message: 'Confirmation required: send { "confirm": "DELETE" } in request body' });
+    }
+    questions = [];
+    await saveQuestions();
+    console.log('Questions cleared, questions.json wiped');
+    res.json({ message: 'Questions cleared successfully' });
+  } catch (error) {
+    console.error('Error clearing questions:', error.message);
+    res.status(500).json({ message: 'Error clearing questions: ' + error.message });
+  }
+});
+
 app.post('/api/upload', async (req, res) => {
   if (!req.files || !req.files.file) {
     console.log('No file uploaded');
@@ -226,31 +282,31 @@ app.post('/api/upload', async (req, res) => {
     await file.mv(filePath);
     console.log('File moved to:', filePath);
 
-    let newQuestions = [];
+    let result = { questions: [], errors: [] };
     if (file.mimetype === 'application/pdf') {
-      newQuestions = await parsePDF(filePath);
+      result = await parsePDF(filePath);
     } else if (file.mimetype === 'text/plain') {
       const content = await fs.readFile(filePath, 'utf8');
-      newQuestions = await parseText(content);
+      result = await parseText(content);
     } else if (file.mimetype === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
-      newQuestions = await parseDocx(filePath);
+      result = await parseDocx(filePath);
     } else {
       console.log('Unsupported file type:', file.mimetype);
       return res.status(400).json({ message: 'Unsupported file type' });
     }
 
-    questions = questions.concat(newQuestions);
+    questions = questions.concat(result.questions);
     await saveQuestions();
-    await fs.unlink(filePath);
+    await fs.unlink(filePath).catch(() => {});
     console.log('Upload complete, total questions:', questions.length);
-    res.json({ message: 'File parsed and questions added', questionsAdded: newQuestions.length });
+    res.json({
+      message: 'File parsed and questions added',
+      questionsAdded: result.questions.length,
+      errors: result.errors
+    });
   } catch (error) {
     console.error('Error processing upload:', error.message);
-    try {
-      await fs.unlink(filePath).catch(() => {});
-    } catch (cleanupError) {
-      console.error('Error cleaning up file:', cleanupError.message);
-    }
+    await fs.unlink(filePath).catch(() => {});
     res.status(500).json({ message: 'Error processing file: ' + error.message });
   }
 });

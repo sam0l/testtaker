@@ -9,18 +9,19 @@
 </head>
 <body class="bg-gray-100 flex items-center justify-center h-screen">
   <div id="sketch-holder" class="w-full max-w-2xl"></div>
+  <input type="file" id="fileInput" accept=".txt,.pdf,.docx" class="mt-4 p-2 border rounded" style="display: none;">
   <script>
-    let state = 'start'; // Game states: start, quiz, upload
+    let state = 'start';
     let questions = [];
     let currentQuestion = 0;
     let score = 0;
     let questionNumber = 1;
-    let progress = 0; // Progress bar percentage
-    let isUploading = false; // Flag to track upload state
-    let loadingTimeout; // Timeout for question loading
-    let answerFeedback = null; // To track feedback state
-    let feedbackTimer = null; // Timer for feedback display
-    const API_URL = 'https://testtaker-f33a.onrender.com';
+    let progress = 0;
+    let isUploading = false;
+    let loadingTimeout;
+    let answerFeedback = null;
+    let feedbackTimer = null;
+    const API_URL = 'http://127.0.0.1:3000';
 
     function setup() {
       let canvas = createCanvas(600, 700);
@@ -40,7 +41,6 @@
       } else if (state === 'upload') {
         drawUploadScreen();
       }
-      // Draw feedback if active
       if (answerFeedback) {
         drawFeedback();
       }
@@ -53,15 +53,25 @@
       text('Welcome to the Quiz Game!', width / 2, height / 4);
 
       fill(100, 200, 100);
-      rect(width / 2 - 100, height / 2 - 40, 200, 50, 10);
+      rect(width / 2 - 100, height / 2 - 100, 200, 50, 10);
       fill(255);
       textSize(20);
-      text('Play', width / 2, height / 2 - 15);
+      text('Play', width / 2, height / 2 - 75);
 
       fill(100, 100, 200);
-      rect(width / 2 - 100, height / 2 + 20, 200, 50, 10);
+      rect(width / 2 - 100, height / 2 - 30, 200, 50, 10);
       fill(255);
-      text('Upload Questions', width / 2, height / 2 + 45);
+      text('Upload Questions', width / 2, height / 2 - 5);
+
+      fill(255, 165, 0);
+      rect(width / 2 - 100, height / 2 + 40, 200, 50, 10);
+      fill(255);
+      text('Reset Quiz', width / 2, height / 2 + 65);
+
+      fill(200, 100, 100);
+      rect(width / 2 - 100, height / 2 + 110, 200, 50, 10);
+      fill(255);
+      text('Clear Questions', width / 2, height / 2 + 135);
     }
 
     function drawQuizScreen() {
@@ -74,13 +84,11 @@
       }
       let q = questions[currentQuestion];
 
-      // Score and question number
       textSize(18);
       textAlign(RIGHT, TOP);
       fill(0);
       text(`Score: ${score} | Question: ${questionNumber}`, width - 40, 40);
 
-      // Draw the question (centered, wrapped)
       let questionBoxWidth = 400;
       let questionBoxX = (width - questionBoxWidth) / 2;
       textSize(22);
@@ -88,7 +96,6 @@
       fill(0);
       text(q.question, questionBoxX, 100, questionBoxWidth, 120);
 
-      // Draw answer options
       let buttonWidth = 400;
       let buttonHeight = 50;
       let buttonX = (width - buttonWidth) / 2;
@@ -97,29 +104,34 @@
 
       for (let i = 0; i < q.options.length; i++) {
         let y = firstButtonY + i * (buttonHeight + buttonSpacing);
-
-        // Button background
         if (answerFeedback && answerFeedback.selected === i) {
           fill(answerFeedback.correct ? 0 : 255, answerFeedback.correct ? 255 : 0, 0);
         } else {
           fill(200);
         }
         rect(buttonX, y, buttonWidth, buttonHeight, 12);
-
-        // Button text
         fill(0);
         textSize(18);
         textAlign(CENTER, CENTER);
         text(q.options[i], buttonX + buttonWidth / 2, y + buttonHeight / 2);
       }
 
-      // Draw upload button
       fill(100, 100, 200);
       rect(width / 2 - 100, 600, 200, 50, 10);
       fill(255);
       textSize(20);
       textAlign(CENTER, CENTER);
       text('Upload Questions', width / 2, 625);
+
+      fill(255, 165, 0);
+      rect(width / 2 - 300, 600, 150, 50, 10);
+      fill(255);
+      text('Reset Quiz', width / 2 - 225, 625);
+
+      fill(200, 100, 100);
+      rect(width / 2 + 150, 600, 150, 50, 10);
+      fill(255);
+      text('Clear Questions', width / 2 + 225, 625);
     }
 
     function drawUploadScreen() {
@@ -132,9 +144,6 @@
         rect(width / 2 - 100, height / 2 - 40, 200, 30);
         fill(100, 200, 100);
         rect(width / 2 - 100, height / 2 - 40, (progress / 100) * 200, 30);
-        fill(0);
-        textSize(16);
-        text(`Uploading: ${Math.round(progress)}%`, width / 2, height / 2 - 25);
       } else {
         fill(100, 100, 200);
         rect(width / 2 - 100, height / 2 - 40, 200, 50, 10);
@@ -147,38 +156,42 @@
         fill(255);
         text('Back', width / 2, height / 2 + 45);
       }
-      if (progress === 66) { // Confirmation after parsing
-        textSize(14);
-        fill(0, 200, 0);
-        text('Upload successful!', width / 2, height / 2 + 80, width - 40);
-      }
     }
 
     function drawFeedback() {
       if (answerFeedback) {
-        fill(255, 255, 255, 200); // Semi-transparent overlay
+        fill(255, 255, 255, 200);
         rect(0, 0, width, height);
         textSize(20);
         fill(0);
         textAlign(CENTER, CENTER);
-        text('Answer Feedback', width / 2, height / 2 - 20);
-        text(answerFeedback.correct ? 'Correct!' : 'Wrong!', width / 2, height / 2 + 20);
+        text('Answer Feedback', width / 2, height / 2 - 40);
+        text(answerFeedback.correct ? 'Correct!' : 'Wrong!', width / 2, height / 2);
+        if (!answerFeedback.correct) {
+          textSize(16);
+          text(`Correct answer: ${answerFeedback.correctAnswer}`, width / 2, height / 2 + 40, width - 40);
+        }
       }
     }
 
     function mousePressed() {
       if (state === 'start') {
         if (mouseX > width / 2 - 100 && mouseX < width / 2 + 100) {
-          if (mouseY > height / 2 - 40 && mouseY < height / 2 + 10) {
+          if (mouseY > height / 2 - 100 && mouseY < height / 2 - 50) {
             state = 'quiz';
             currentQuestion = 0;
             score = 0;
             questionNumber = 1;
             answerFeedback = null;
+            saveProgress();
             redraw();
-          } else if (mouseY > height / 2 + 20 && mouseY < height / 2 + 70) {
+          } else if (mouseY > height / 2 - 30 && mouseY < height / 2 + 20) {
             state = 'upload';
             redraw();
+          } else if (mouseY > height / 2 + 40 && mouseY < height / 2 + 90) {
+            resetQuiz();
+          } else if (mouseY > height / 2 + 110 && mouseY < height / 2 + 160) {
+            clearQuestions();
           }
         }
       } else if (state === 'quiz') {
@@ -187,16 +200,20 @@
         let buttonX = (width - buttonWidth) / 2;
         let firstButtonY = 250;
         let buttonSpacing = 20;
-        for (let i = 0; i < 4; i++) {
+        for (let i = 0; i < questions[currentQuestion].options.length; i++) {
           let y = firstButtonY + i * (buttonHeight + buttonSpacing);
           if (mouseX > buttonX && mouseX < buttonX + buttonWidth && mouseY > y && mouseY < y + buttonHeight) {
             checkAnswer(i);
-            return; // Exit after selecting an answer
+            return;
           }
         }
         if (mouseX > width / 2 - 100 && mouseX < width / 2 + 100 && mouseY > 600 && mouseY < 650) {
           state = 'upload';
           redraw();
+        } else if (mouseX > width / 2 - 300 && mouseX < width / 2 - 150 && mouseY > 600 && mouseY < 650) {
+          resetQuiz();
+        } else if (mouseX > width / 2 + 150 && mouseX < width / 2 + 300 && mouseY > 600 && mouseY < 650) {
+          clearQuestions();
         }
       } else if (state === 'upload' && !isUploading) {
         if (mouseX > width / 2 - 100 && mouseX < width / 2 + 100 && mouseY > height / 2 - 40 && mouseY < height / 2 + 10) {
@@ -211,20 +228,23 @@
 
     function checkAnswer(selected) {
       let q = questions[currentQuestion];
-      // Accept both index and value as answer for compatibility
-      let correct = (q.answer === selected || q.options[selected] === q.answer);
-      answerFeedback = { selected, correct };
+      let correctIndex = 'abcd'.indexOf(q.answer.toLowerCase());
+      let correct = selected === correctIndex;
+      answerFeedback = {
+        selected,
+        correct,
+        correctAnswer: correctIndex >= 0 ? q.options[correctIndex] : 'Unknown'
+      };
       if (correct) score++;
       questionNumber++;
       saveProgress();
 
-      // Show feedback for 1.2 seconds
       if (feedbackTimer) clearTimeout(feedbackTimer);
       feedbackTimer = setTimeout(() => {
         answerFeedback = null;
         currentQuestion = (currentQuestion + 1) % questions.length;
         redraw();
-      }, 1200);
+      }, 2000); // Increased to 2 seconds for readability
       redraw();
     }
 
@@ -265,6 +285,7 @@
           redraw();
         })
         .catch(error => {
+          console.error('Error fetching questions:', error.message);
           questions = [];
           progress = 0;
           isUploading = false;
@@ -273,7 +294,54 @@
         });
     }
 
-    document.getElementById('fileInput')?.addEventListener('change', (event) => {
+    async function resetQuiz() {
+      try {
+        const response = await fetch(`${API_URL}/api/reset`, { method: 'POST' });
+        if (!response.ok) {
+          throw new Error('Network response was not ok: ' + await response.text());
+        }
+        const result = await response.json();
+        score = 0;
+        questionNumber = 1;
+        currentQuestion = 0;
+        answerFeedback = null;
+        saveProgress();
+        fetchQuestions();
+        alert(result.message);
+      } catch (error) {
+        console.error('Error resetting quiz:', error.message);
+        alert('Error resetting quiz: ' + error.message);
+      }
+    }
+
+    async function clearQuestions() {
+      if (!confirm('Are you sure you want to delete all questions? This cannot be undone.')) {
+        return;
+      }
+      try {
+        const response = await fetch(`${API_URL}/api/clear`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ confirm: 'DELETE' })
+        });
+        if (!response.ok) {
+          throw new Error('Network response was not ok: ' + await response.text());
+        }
+        const result = await response.json();
+        score = 0;
+        questionNumber = 1;
+        currentQuestion = 0;
+        answerFeedback = null;
+        saveProgress();
+        fetchQuestions();
+        alert(result.message);
+      } catch (error) {
+        console.error('Error clearing questions:', error.message);
+        alert('Error clearing questions: ' + error.message);
+      }
+    }
+
+    document.getElementById('fileInput').addEventListener('change', (event) => {
       const file = event.target.files[0];
       if (!file) return;
 
@@ -301,31 +369,19 @@
           return response.json();
         })
         .then(data => {
-          progress = 33; // Start progress
-          const checkQuestions = () => {
-            fetch(`${API_URL}/api/questions`)
-              .then(resp => resp.json())
-              .then(qs => {
-                if (qs.length > 0 || progress >= 66) {
-                  progress = 66;
-                  fetchQuestions();
-                } else {
-                  progress = Math.min(progress + 10, 65);
-                  setTimeout(checkQuestions, 500);
-                }
-              });
-          };
-          checkQuestions();
+          progress = 100;
+          isUploading = false;
+          fetchQuestions();
+          redraw();
         })
         .catch(error => {
-          clearTimeout(timeoutId);
+          console.error('Upload error:', error.message);
           progress = 0;
           isUploading = false;
-          alert('Error uploading file: ' + error.message);
+          clearTimeout(timeoutId);
+          redraw();
         });
-      redraw();
     });
   </script>
-  <input type="file" id="fileInput" accept=".txt,.pdf,.docx" class="mt-4 p-2 border rounded" style="display: none;">
 </body>
 </html>

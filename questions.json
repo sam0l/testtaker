@@ -1,6 +1,1106 @@
 [
   {
     "questionNumber": "1",
+    "question": "A fixed support can handle a / an ________",
+    "options": [
+      "Axial Load",
+      "Transverse Force",
+      "Bending Moment",
+      "All of the preceding"
+    ],
+    "answer": "d"
+  },
+  {
+    "questionNumber": "2",
+    "question": "The difference between the market value of the share and its face value is called",
+    "options": [
+      "Profit or Margin",
+      "Premium",
+      "Deficit",
+      "Surplus"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "3",
+    "question": "The present worth of P9,300 due 15 years hence with interest rate of 8% compounded quarterly is ___",
+    "options": [
+      "P 2,834.75",
+      "P 2,384.75",
+      "P 3,824.57",
+      "P 8,234.75"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "4",
+    "question": "A flowerpot falls off the ledge of a fifth floor window, just as it passes the third floor window, someone accidentally drops off a glass of water from the window. Which of the following statements is true?",
+    "options": [
+      "The flowerpot hits the ground first and with a higher speed than the glass.",
+      "The flowerpot and the glass will land at the same instant and speed.",
+      "The glass hits the ground before the flower pot does.",
+      "It is impossible to determine which object will hit the ground due to insufficient data."
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "5",
+    "question": "Two bodies, each having a mass of 450 milligrams are separated in space a distance of 10 kilometers apart. The force exerted on each other due to gravitation is _____ Newtons.",
+    "options": [
+      "1.35 x 10 -7",
+      "1.35 x 10 -19",
+      "1.35 x 10 -9",
+      "1.35 x 10 -18"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "6",
+    "question": "At Guimaras Island where orchards abound, an extra large mango falls from a branch five (5) meters above the ground. Assuming a “g” of 9.81 m/sec 2 , the speed of the falling mango is ___ meters/second as it strikes the ground.",
+    "options": [
+      "9.905",
+      "14.905",
+      "12.905",
+      "8.905"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "7",
+    "question": "In a funny movie, a man in a hot air balloon, 150 meters from the ground drops a bottle of coke that made the life of African tribesmen in great trouble. If the balloon is rising at 15 meters per second, the highest point reached by the bottle is ___ meters.",
+    "options": [
+      "141.50",
+      "151.50",
+      "161.50",
+      "171.50"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "8",
+    "question": "Is the unit of illuminance or illumination on a one square meter surface area on which there is a luminous flux of one lumen uniformly distributed, or the illumination on a surface all points of which are one meter away from a point source of 1 candela.",
+    "options": [
+      "Lux",
+      "Phot",
+      "Stilb",
+      "Brillouin"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "9",
+    "question": "One gauss is equivalent to",
+    "options": [
+      "1 x 10 -4 Tesla",
+      "79.5774 Oersteds",
+      "100 maxwells",
+      "10 -5 webers"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "10",
+    "question": "The measure of the resistance of an object to a changed in its state of motion is called _____",
+    "options": [
+      "Momentum",
+      "mass",
+      "inertia",
+      "velocity"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "11",
+    "question": "Refers to the agreement of a particular value with the true value.",
+    "options": [
+      "Precision",
+      "Error",
+      "Tolerante",
+      "accuracy"
+    ],
+    "answer": "d"
+  },
+  {
+    "questionNumber": "12",
+    "question": "The amount of heat which is absorbed during the change of state of a substance without rise in its temperature is called its ______.",
+    "options": [
+      "Specific heat",
+      "Latent heat",
+      "Thermal conductivity",
+      "Water equivalent"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "13",
+    "question": "The scientist who systematically demonstrated the equivalence of mechanical energy and heat was _____.",
+    "options": [
+      "Joule",
+      "Boltzmann",
+      "Faraday",
+      "Kelvin"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "14",
+    "question": "Momentum is a property related to the object's _____",
+    "options": [
+      "motion and mass",
+      "mass and acceleration",
+      "motion and weight",
+      "weight and velocity"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "15",
+    "question": "The study of motion without reference. to the force that causes the motion is known as______.",
+    "options": [
+      "Statics",
+      "Dynamics",
+      "Kinetics",
+      "kinematics"
+    ],
+    "answer": "d"
+  },
+  {
+    "questionNumber": "16",
+    "question": "A vapor that is about to condense is called ______.",
+    "options": [
+      "saturated vapor",
+      "plasma",
+      "super heated vapor",
+      "saturated liquid"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "17",
+    "question": "At a given pressure, the temperature at which pure substance changes phase is called ____.",
+    "options": [
+      "critical temperature",
+      "saturation temperature",
+      "triple point",
+      "kindling temperature"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "18",
+    "question": "When a body is resistant to heat, it is called ____.",
+    "options": [
+      "Thermoscopic",
+      "Thermotropic",
+      "thermoduric",
+      "thermoplastic"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "19",
+    "question": "The property of fluids by virtue of which they offer resistance to flow is known as _____.",
+    "options": [
+      "Gummosity",
+      "Glutinosity",
+      "Viscidity",
+      "viscosity"
+    ],
+    "answer": "d"
+  },
+  {
+    "questionNumber": "20",
+    "question": "The condition under which the stress is constant or uniform is known as ____.",
+    "options": [
+      "Simple stress",
+      "Shearing stress",
+      "Tangential stress",
+      "Normal stress"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "21",
+    "question": "The highest ordinate on the stress-strain curve is called _____.",
+    "options": [
+      "rupture stress",
+      "elastic limit",
+      "ultimate stress or ultimate strength",
+      "proportional limit"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "22",
+    "question": "Estimated value of the property at the end of the useful life.",
+    "options": [
+      "Market value",
+      "Fair value",
+      "Salvage value",
+      "Book value"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "23",
+    "question": "Determination of the actual quantity of the materials on hand as of a given date.",
+    "options": [
+      "physical inventory",
+      "counting principle",
+      "stock assessment",
+      "periodic material update"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "24",
+    "question": "The last step in Decision making process is to_____.",
+    "options": [
+      "Analyze environment",
+      "Make a choice",
+      "Diagnose problem",
+      "Evaluate and adapt decision results"
+    ],
+    "answer": "d"
+  },
+  {
+    "questionNumber": "25",
+    "question": "Refers to evaluation of alternatives using intuition and subjective judgment.",
+    "options": [
+      "Quantitative evaluation",
+      "Qualitative evaluation",
+      "Relative evaluation",
+      "Subjective evaluation"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "26",
+    "question": "A novation where the principal conditions of the obligation is changed.",
+    "options": [
+      "True novation",
+      "Real novation",
+      "Personal novation",
+      "Substitute novation"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "27",
+    "question": "\"A\" obliged himself to deliver to \"B\" a car. Subsequently,. they entered into another contract whereby instead of \"A\"delivering a car, \"A\" would deliver a truck. This illustrates:",
+    "options": [
+      "True novation",
+      "Real novation",
+      "Personal novation",
+      "Substitute novation"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "28",
+    "question": "Smoking and storing of inflammable materials is prohibited in battery rooms and \"NO SMOKING\" signs should be posted _____.",
+    "options": [
+      "inside the room only",
+      "before entering battery rooms",
+      "outside the room only",
+      "Both A and C"
+    ],
+    "answer": "d"
+  },
+  {
+    "questionNumber": "29",
+    "question": "An acid neutralizing agent such as ____ should be stored and available in battery rooms for use in accidental electrolyte or acid spillage.",
+    "options": [
+      "Oil",
+      "Kerosene",
+      "Flour",
+      "Caustic soda"
+    ],
+    "answer": "d"
+  },
+  {
+    "questionNumber": "30",
+    "question": "A type of distribution system comprised of two components which are distribution ducts and feeder (header) ducts and may be designed into a one or two-level system, depending on the floor structure.",
+    "options": [
+      "Conduit system",
+      "Under floor duct system",
+      "Ceiling system",
+      "Cellular floor system"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "31",
+    "question": "Type of distribution system that serves the same floor where the cables (wires) are placed within the ceiling and brought down to desk locations.",
+    "options": [
+      "Conduit system",
+      "Under floor duct system",
+      "Ceiling system",
+      "Cellular floor system"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "32",
+    "question": "The members of the Board shall hold office for a term of ____ years from date of appointment or until their successors shall have been appointed and qualified and may be re-appointed once for another term.",
+    "options": [
+      "7 years",
+      "10 years",
+      "5 years",
+      "3 years"
+    ],
+    "answer": "d"
+  },
+  {
+    "questionNumber": "33",
+    "question": "To pass the licensure examination, a candidate for Electronics Engineer or Electronics Technician must obtain a passing rating of ____ in each subject given during the examination.",
+    "options": [
+      "50%",
+      "60%",
+      "70%",
+      "80%"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "34",
+    "question": "One shall be allowed to take one removal examination on the subject/s where he/she failed to obtain the passing rating. Provided, however, that a candidate who obtains a passing rating in the majority of the subjects but obtains a rating in the other subject/s.",
+    "options": [
+      "below 70% but not lower than 60%",
+      "below 70% but not lower than 50%",
+      "below 60% but not lower than 50%",
+      "below 75% but not lower than 60%"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "35",
+    "question": "An applicant for Professional Electronics must have a certified experience record of active self-practice and/or employment either in government service or in the private sector, in the format to be prescribed by the Board, indicating the inclusive dates, companies worked for, description of specific responsibilities, relevant accomplishments and name, position of immediate supervisors for a period of at least ____ years (inclusive and/or aggregate), at least _____ years of which are in responsible charge of significant engineering work, from the date applicant took his/her oath as an Electronics and Communications Engineer or Electronics Engineer.",
+    "options": [
+      "10 years; 3 years",
+      "7 years; 2 years",
+      "5 years; 2 years",
+      "10 years; 2 years"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "36",
+    "question": "A commercial following the close of the program is called:",
+    "options": [
+      "A. cow-catcher",
+      "hitch-hiker",
+      "lead commercial",
+      "sweeper"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "37",
+    "question": "Commercial load for radio shall not exceed ___ for one hour program in Metro Manila.",
+    "options": [
+      "15 min",
+      "17 min",
+      "18 min",
+      "20 min"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "38",
+    "question": "A half-hour program shall have a maximum of ____ commercial minutes within Metro Manila.",
+    "options": [
+      "15 min",
+      "7 min and 30 sec",
+      "3 min and 30 sec",
+      "1 min and 15 sec"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "39",
+    "question": "A quarter-hour program shall not exceed ____ commercial minutes within Metro Manila.",
+    "options": [
+      "15 min",
+      "7 min and 30 sec",
+      "3 min and 30 sec",
+      "1 min and 15 sec"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "40",
+    "question": "A five-minute program shall have a maximum of _____ commercial minutes within Metro Manila.",
+    "options": [
+      "15 min",
+      "7 min and 30 sec",
+      "3 min and 30 sec",
+      "1 min and 15 sec"
+    ],
+    "answer": "d"
+  },
+  {
+    "questionNumber": "41",
+    "question": "The spectrum user fee FOR PAIRED 3G RADIO FREQUENCY BANDS for each additional 1 MHz or fraction thereof in excess of the first 5MHz but not exceeding 10Mhz is ____.",
+    "options": [
+      "PhP5,000,000.00 per MHz",
+      "PhP15,000,000.00 per MHz",
+      "PhP8,000,000.00 per MHz",
+      "PhP10,000,000.00 per MHz"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "42",
+    "question": "The spectrum user fee FOR PAIRED 3G RADIO FREQUENCY BANDS for each additional 1 MHz or fraction thereof in excess of the first 10MHz but not exceeding 15Mhz is ____.",
+    "options": [
+      "PhP5,000,000.00 per MHz",
+      "PhP15,000,000.00 per MHz",
+      "PhP8,000,000.00 per MHz",
+      "PhP10,000,000.00 per MHz"
+    ],
+    "answer": "d"
+  },
+  {
+    "questionNumber": "43",
+    "question": "The spectrum user fee FOR PAIRED 3G RADIO FREQUENCY BANDS for each additional 1 MHz or fraction thereof in excess of the first 15MHz ____.",
+    "options": [
+      "PhP5,000,000.00 per MHz",
+      "PhP15,000,000.00 per MHz",
+      "PhP8,000,000.00 per MHz",
+      "PhP10,000,000.00 per MHz"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "44",
+    "question": "The spectrum user fee FOR UNPAIRED 3G RADIO FREQUENCY BANDS for the first 5MHz is _____.",
+    "options": [
+      "PhP3,000,000.00 per MHz",
+      "PhP8,000,000.00 per MHz",
+      "PhP6,000,000.00 per MHz",
+      "PhP12,000,000.00 per MHz"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "45",
+    "question": "The spectrum user fee FOR UNPAIRED 3G RADIO FREQUENCY BANDS for each additional 1 MHz or fraction thereof in excess of the first 5MHz but not exceeding 10Mhz is ____.",
+    "options": [
+      "PhP3,000,000.00 per MHz",
+      "PhP8,000,000.00 per MHz",
+      "PhP6,000,000.00 per MHz",
+      "PhP12,000,000.00 per MHz"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "46",
+    "question": "At an interest rate of 10% compounded annually, how much will a deposit of P 1500 be in 15 years?",
+    "options": [
+      "P 6, 100.00",
+      "P 6, 234.09",
+      "P 6, 265.87",
+      "P 6, 437.90"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "47",
+    "question": "What is the force in Newtons, required to move a car with 1000 kg. Mass with an acceleration of 12.0 meters/sec?",
+    "options": [
+      "12 000 N",
+      "30 000 N",
+      "8 000 N",
+      "6 000 N"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "48",
+    "question": "At 10% interest rate, how much should you invest today to be able to withdraw P10 000 at the end of 10 years?",
+    "options": [
+      "P 4 855.43",
+      "P 5 855.43",
+      "P 3 855.43",
+      "P6 855.43"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "49",
+    "question": "Two lead balls whose masses are 5 kg and 0.5 kg are placed with their center 50 cm apart. With what force do they attract each other?",
+    "options": [
+      "6.67 x 10 -10 N",
+      "6.67 x 10 -11 N",
+      "6.67 x 10 -8 N",
+      "6.67 x 10 -9 N"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "50",
+    "question": "P 1 000 becomes P 1500 in three years. Find the simple interest rate.",
+    "options": [
+      "16.67%",
+      "15.67%",
+      "17.67%",
+      "18.67%"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "51",
+    "question": "Find the least number of years required to double a certain amount of money at 5% per annum compound interest to the nearest year.",
+    "options": [
+      "14 years",
+      "12 years",
+      "18 years",
+      "20 years"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "52",
+    "question": "What is the accumulated amount after 3 years of P 6500 invested at the rate of 12% per year compounded semi- annually?",
+    "options": [
+      "P 9220.37",
+      "P 9332.37",
+      "P 9753.37",
+      "P 9243.37"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "53",
+    "question": "It is a beam whereby one end is fixed and the other end is free.",
+    "options": [
+      "propped beam",
+      "simple beam",
+      "cantilever beam",
+      "fixed and beam"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "54",
+    "question": "A body fired from the ground at an inclination of 30° with the horizontal, attained a maximum height of 500m. The body stayed in air for how many seconds?",
+    "options": [
+      "20.2 secs",
+      "30.5 secs",
+      "15.4 secs",
+      "25.4 secs"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "55",
+    "question": "A 50 mm. diameter solid circular shaft was stressed by 40 MPa when transmitting power at 1200 rpm. If G = 100GPa, what horsepower is transmitted?",
+    "options": [
+      "156.5 h.p.",
+      "165.36 h.p.",
+      "136.55 h.p.",
+      "155.6 h.p."
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "56",
+    "question": "An object was dropped from a height of 50 m. At the same instant, another object was fired vertically from the ground at an initial velocity of 20 m/s. when will the two object be at same level?",
+    "options": [
+      "4.5 secs.",
+      "5.5 secs.",
+      "2.5 secs.",
+      "3.5 secs."
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "57",
+    "question": "A bond whereby the security behind it are the equipments of the issuing corporation.",
+    "options": [
+      "debenture bond",
+      "mortgage bond",
+      "collateral bond",
+      "lien bond"
+    ],
+    "answer": "d"
+  },
+  {
+    "questionNumber": "58",
+    "question": "It is the stress development when a force is directed away from a resisting area.",
+    "options": [
+      "tensile stress",
+      "axial stress",
+      "compressive stress",
+      "shearing stress"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "59",
+    "question": "A stone will be dropped from a bridge where a small boat is approaching. The bridge is 15 m high and the boat has a constant velocity of 10 kph. How far from the bridge must the stone be dropped to insure hitting the boat?",
+    "options": [
+      "7.85 m",
+      "6.15 m",
+      "4.86 m",
+      "8.07 m"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "60",
+    "question": "The actual interest earned by a given principal is known as ___.",
+    "options": [
+      "nominal interest",
+      "effective interest",
+      "compounded interest",
+      "simple interest"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "61",
+    "question": "An object is fired vertically and reached a maximum height of 100 m. How long was it in air?",
+    "options": [
+      "9.03 secs.",
+      "4.51 secs.",
+      "10.5 secs.",
+      "5.4 secs."
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "62",
+    "question": "What is the equivalent in terms of interest compounded daily is 16% compounded quarterly?",
+    "options": [
+      "17.2 %",
+      "14.5 %",
+      "16.2 %",
+      "15.7 %"
+    ],
+    "answer": "d"
+  },
+  {
+    "questionNumber": "63",
+    "question": "An annuity whereby payment is postponed for a certain period of time is known as____.",
+    "options": [
+      "annuity due",
+      "Deferred Annuity",
+      "Ordinary annuity",
+      "Perpetuity"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "64",
+    "question": "It is a single force that has the same effect as a system of forces.",
+    "options": [
+      "Moment",
+      "Equilibrium",
+      "force couple",
+      "resultant"
+    ],
+    "answer": "d"
+  },
+  {
+    "questionNumber": "65",
+    "question": "If P 200, 000 must be available in 10 years by depositing equal amount monthly for 6 years, what must each monthly deposit be to attain this goal if nominal interest is 18%.",
+    "options": [
+      "P 625.40",
+      "P 910.60",
+      "P 764.17",
+      "P 815.50"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "66",
+    "question": "Refers to the degree of agreement among several measurements of the same quantity.",
+    "options": [
+      "Accuracy",
+      "precisión",
+      "error",
+      "margin"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "67",
+    "question": "A property of matter that is often used by chemist as an \"identification tag\" for a substance.",
+    "options": [
+      "Mass",
+      "Molarity",
+      "density",
+      "volume"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "68",
+    "question": "Protons and neutrons can be broken down further into elementary particles called ____.",
+    "options": [
+      "quarks",
+      "ions",
+      "isotope",
+      "warks"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "69",
+    "question": "The principle of the constant composition of compounds, originally called \"Proust's Law\" is now known as",
+    "options": [
+      "The law of multiple proportion",
+      "The law of definite proportion",
+      "The law of conservation of mass",
+      "The law of compounds"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "70",
+    "question": "On a sunny day at the beach, the sand gets so hot and the water stays relatively cool is due to the difference in of water and sand.",
+    "options": [
+      "Density",
+      "specific heat",
+      "depth",
+      "thermal conductivity"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "71",
+    "question": "The instrument, which measures temperature by radiation, is called ___.",
+    "options": [
+      "Thermopile",
+      "thermometer",
+      "pyrometer",
+      "hydrometer"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "72",
+    "question": "When the temperature of an ideal gas is increased at constant pressure,",
+    "options": [
+      "the potential energy of molecules increases",
+      "the potential energy of molecules decreases",
+      "the kinetic energy of molecules increases",
+      "the kinetic energy of molecules decreases"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "73",
+    "question": "The root mean square speed of the molecules of a gas is ___.",
+    "options": [
+      "independent of its pressure P",
+      "directly proportional to square root of P",
+      "directly proportional to the square of its temperature T",
+      "proportional to T"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "74",
+    "question": "Varignon's theorem is used to determine ____.",
+    "options": [
+      "location of centroid",
+      "moment of inertia",
+      "mass moment of inertia",
+      "moment of area"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "75",
+    "question": "The periodic oscillations either up or down or back and fourth motion in the straight line is known as ______.",
+    "options": [
+      "transverse harmonic motion",
+      "resonance",
+      "rotational harmonic motion",
+      "translational harmonic motion"
+    ],
+    "answer": "d"
+  },
+  {
+    "questionNumber": "76",
+    "question": "A freely falling body is a body in rectilinear motion and with constant ______.",
+    "options": [
+      "Velocity",
+      "Speed",
+      "Deceleration",
+      "acceleration"
+    ],
+    "answer": "d"
+  },
+  {
+    "questionNumber": "77",
+    "question": "When the total kinetic energy of the system is the same as before and after the collision of two bodies, it is called ___.",
+    "options": [
+      "Static collision",
+      "Elastic collision",
+      "Inelastic collision",
+      "Plastic collision"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "78",
+    "question": "At a given temperature, the pressure at which a pure substance changes phase is called ____.",
+    "options": [
+      "critical pressure",
+      "saturation pressure",
+      "absolute pressure",
+      "vacuum pressure"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "79",
+    "question": "The amount of energy absorbed during melting and is equivalent to the amount of energy released during freezing is called ______.",
+    "options": [
+      "latent heat of vaporization",
+      "melting energy",
+      "latent heat of fusion",
+      "specific heat"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "80",
+    "question": "The amount of energy absorbed during vaporization and is equivalent to the amount of energy released during condensation is called _____.",
+    "options": [
+      "latent heat of vaporization",
+      "melting energy",
+      "latent heat of fusion",
+      "specific heat"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "81",
+    "question": "A process during which there is no heat transfer is called ______.",
+    "options": [
+      "isentropic process",
+      "isothermal process",
+      "adiabatic process",
+      "isometric process"
+    ],
+    "answer": "d"
+  },
+  {
+    "questionNumber": "82",
+    "question": "The tendency of a body to return to its original size or shape after having been deformed is called _____.",
+    "options": [
+      "Elastance",
+      "elasticity",
+      "elastivity",
+      "anelastivity"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "83",
+    "question": "The emission of light by a material because of its high temperature is known as ___.",
+    "options": [
+      "incandescence",
+      "luminescence",
+      "scintillation",
+      "phosphorescence"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "84",
+    "question": "Which of the following statements is correct concerning the passage of white light into a glass prism?",
+    "options": [
+      "The violet color travels faster than the red color",
+      "The violet color travels slower than the red color",
+      "All the colors of white light travel with the same speed",
+      "Greater the wavelength, slower the speed of color"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "85",
+    "question": "The property of an isolated conductor to store electric charge is _______.",
+    "options": [
+      "capacitance",
+      "conductance",
+      "permeability",
+      "accumulation"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "86",
+    "question": "If the properties of a body are the same in all directions, it is called ___.",
+    "options": [
+      "Isodynamic",
+      "isotropic",
+      "isogonic",
+      "isotopic"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "87",
+    "question": "The property of an object that determines the direction of heat flow when in contact with another object is called ____.",
+    "options": [
+      "Calidity",
+      "Pyrexia",
+      "Caloric",
+      "temperature"
+    ],
+    "answer": "d"
+  },
+  {
+    "questionNumber": "88",
+    "question": "The rate of flow of thermal energy through a material in the presence of a temperature gradient is called ___.",
+    "options": [
+      "thermal capacity",
+      "thermal conductivity",
+      "thermal radiation",
+      "thermal convection"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "89",
+    "question": "Shearing stress is also known as____.",
+    "options": [
+      "Simple stress",
+      "Shearing stress",
+      "Tangential stress",
+      "Normal stress"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "90",
+    "question": "Stress caused by forces perpendicular to the areas on which they act is called _____.",
+    "options": [
+      "Simple stress",
+      "Shearing stress",
+      "Tangential stress",
+      "Normal stress"
+    ],
+    "answer": "d"
+  },
+  {
+    "questionNumber": "91",
+    "question": "What type of stress is produced whenever the applied load cause one section of a body to tend to slide past its adjacent section?",
+    "options": [
+      "normal stress",
+      "sliding stress",
+      "shearing stress",
+      "bearing stress"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "92",
+    "question": "Under guidelines for the registration of VolP service providers and resellers, the code for local access 3G network provider is _____.",
+    "options": [
+      "306",
+      "303",
+      "400",
+      "405"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "93",
+    "question": "Refers to the rules and regulation on the allocation and assignment of 3G radio frequency bands.",
+    "options": [
+      "MC No. 3-11-2005",
+      "MC No. 07-08-2005",
+      "MC No. 06-08-2005",
+      "MC No. 03-03-2005"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "94",
+    "question": "The standard name for 3G mobile telecommunications is _____.",
+    "options": [
+      "WCDMA",
+      "CDMA 2000",
+      "DECT",
+      "IMT 2000"
+    ],
+    "answer": "d"
+  },
+  {
+    "questionNumber": "95",
+    "question": "AII applicants for the assignment of 3G radio frequency bands shall post performance bond equivalent to _____.",
+    "options": [
+      "PHP100M",
+      "PHP200M",
+      "PHP500M",
+      "PHP300M"
+    ],
+    "answer": "d"
+  },
+  {
+    "questionNumber": "96",
+    "question": "The spectrum user fee FOR PAIRED 3G RADIO FREQUENCY BANDS for the first 5MHz is _______.",
+    "options": [
+      "PhP5,000,000.00 per MHz",
+      "PhP15,000,000.00 per MHz",
+      "PhP8,000,000.00 per MHz",
+      "PhP10,000,000.00 per MHz"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "97",
+    "question": "RA 9292 is a consolidation of House Bill No.____ and Senate Bill No. ___.",
+    "options": [
+      "5224; 2683",
+      "5447;458",
+      "5734; 109",
+      "5533;4552"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "98",
+    "question": "RA 9292 was finally passed by the House of Representatives and the Senate on ____.",
+    "options": [
+      "February 2, 2004",
+      "March 2, 2007",
+      "April 17, 2004",
+      "March 5, 2005"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "99",
+    "question": "RA 9292 was approved on _____.",
+    "options": [
+      "April 17, 2004",
+      "April 27, 2004",
+      "March 17, 2005",
+      "March 27, 2004"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "100",
+    "question": "The effectivity of RA 9292 was on _____.",
+    "options": [
+      "April 17, 2004",
+      "April 27, 2004",
+      "May 24, 2004",
+      "May 28, 2004"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "1",
     "question": "A four-element solid-state device that combines the characteristics of both diodes and transistors.",
     "options": [
       "Tunnel diode",
@@ -8,7 +1108,7 @@
       "Varactor",
       "Zener diode"
     ],
-    "answer": "Silicon Controlled Diode"
+    "answer": "b"
   },
   {
     "questionNumber": "2",
@@ -19,7 +1119,7 @@
       "Direct bearing",
       "Relative bearing"
     ],
-    "answer": "Relative bearing"
+    "answer": "d"
   },
   {
     "questionNumber": "3",
@@ -30,7 +1130,7 @@
       "Flip-flop",
       "Assembly language"
     ],
-    "answer": "ALU"
+    "answer": "a"
   },
   {
     "questionNumber": "4",
@@ -41,7 +1141,7 @@
       "UNIVAC",
       "ENIAC"
     ],
-    "answer": "UNIVAC"
+    "answer": "c"
   },
   {
     "questionNumber": "5",
@@ -52,7 +1152,7 @@
       "Algorithm",
       "FORTRAN"
     ],
-    "answer": "Algorithm"
+    "answer": "c"
   },
   {
     "questionNumber": "6",
@@ -63,7 +1163,7 @@
       "HARDWARE",
       "ALU"
     ],
-    "answer": "CPU"
+    "answer": "a"
   },
   {
     "questionNumber": "7",
@@ -74,7 +1174,7 @@
       "MSI",
       "VLSI"
     ],
-    "answer": "LSI"
+    "answer": "a"
   },
   {
     "questionNumber": "8",
@@ -85,7 +1185,7 @@
       "Producing 10 output pulses for every 1 input pulse",
       "Decoding a decimal number for display on seven-segment"
     ],
-    "answer": "Producing one output pulse for every 10 input"
+    "answer": "a"
   },
   {
     "questionNumber": "9",
@@ -96,7 +1196,7 @@
       "FLOWCHARTING",
       "ALGORITHM"
     ],
-    "answer": "DATA PROCESSING"
+    "answer": "a"
   },
   {
     "questionNumber": "10",
@@ -107,7 +1207,7 @@
       "Software",
       "Coldware"
     ],
-    "answer": "Hardware"
+    "answer": "a"
   },
   {
     "questionNumber": "11",
@@ -118,7 +1218,7 @@
       "H",
       "F"
     ],
-    "answer": "H"
+    "answer": "c"
   },
   {
     "questionNumber": "12",
@@ -129,7 +1229,7 @@
       "MSI",
       "SSI"
     ],
-    "answer": "MSI"
+    "answer": "c"
   },
   {
     "questionNumber": "13",
@@ -140,7 +1240,7 @@
       "8BC8",
       "884C"
     ],
-    "answer": "8CB4"
+    "answer": "a"
   },
   {
     "questionNumber": "14",
@@ -151,7 +1251,7 @@
       "Signal grid",
       "Suppressor grid"
     ],
-    "answer": "Suppressor grid"
+    "answer": "d"
   },
   {
     "questionNumber": "15",
@@ -162,7 +1262,7 @@
       "Octode",
       "Septode"
     ],
-    "answer": "Octode"
+    "answer": "c"
   },
   {
     "questionNumber": "16",
@@ -173,7 +1273,7 @@
       "30",
       "40"
     ],
-    "answer": "60"
+    "answer": "a"
   },
   {
     "questionNumber": "17",
@@ -184,7 +1284,7 @@
       "Chrominance",
       "PAL SECAM"
     ],
-    "answer": "Chrominance"
+    "answer": "c"
   },
   {
     "questionNumber": "18",
@@ -195,7 +1295,7 @@
       "Altimeter",
       "Increductometer"
     ],
-    "answer": "Global Positioning System"
+    "answer": "a"
   },
   {
     "questionNumber": "19",
@@ -206,7 +1306,7 @@
       "Resolution",
       "Column"
     ],
-    "answer": "Pixel"
+    "answer": "b"
   },
   {
     "questionNumber": "20",
@@ -217,7 +1317,7 @@
       "12.4 microsec",
       "24.8 microsec"
     ],
-    "answer": "12.4 microsec"
+    "answer": "c"
   },
   {
     "questionNumber": "21",
@@ -228,7 +1328,7 @@
       "Maxwell",
       "Lines"
     ],
-    "answer": "Weber"
+    "answer": "a"
   },
   {
     "questionNumber": "22",
@@ -239,7 +1339,7 @@
       "Equal to 1",
       "Much greater than 1"
     ],
-    "answer": "A little greater than 1"
+    "answer": "b"
   },
   {
     "questionNumber": "23",
@@ -250,7 +1350,7 @@
       "Hysteresis",
       "Hysteresis loss"
     ],
-    "answer": "Hysteresis"
+    "answer": "c"
   },
   {
     "questionNumber": "24",
@@ -261,7 +1361,7 @@
       "Flux",
       "Magnetic field"
     ],
-    "answer": "Reluctance"
+    "answer": "a"
   },
   {
     "questionNumber": "25",
@@ -272,7 +1372,7 @@
       "Mercury",
       "Eutectic alloy"
     ],
-    "answer": "Eutectic alloy"
+    "answer": "d"
   },
   {
     "questionNumber": "26",
@@ -283,7 +1383,7 @@
       "mmf",
       "flux"
     ],
-    "answer": "flux"
+    "answer": "d"
   },
   {
     "questionNumber": "27",
@@ -294,7 +1394,7 @@
       "Positive temperature coefficient",
       "Negative temperature coefficient"
     ],
-    "answer": "Positive temperature coefficient"
+    "answer": "c"
   },
   {
     "questionNumber": "28",
@@ -305,7 +1405,7 @@
       "Inverse Pi-network",
       "L-network"
     ],
-    "answer": "Pi-L network"
+    "answer": "b"
   },
   {
     "questionNumber": "29",
@@ -316,7 +1416,7 @@
       "Effective voltage",
       "Maximum voltage"
     ],
-    "answer": "working voltage"
+    "answer": "b"
   },
   {
     "questionNumber": "30",
@@ -327,7 +1427,7 @@
       "25 ohms",
       "0.004 Siemen"
     ],
-    "answer": "2.5 ohms"
+    "answer": "b"
   },
   {
     "questionNumber": "31",
@@ -338,7 +1438,7 @@
       "In the electromagnetic field in the conductor center",
       "In the magnetic field around the conductor"
     ],
-    "answer": "Along the surface"
+    "answer": "a"
   },
   {
     "questionNumber": "32",
@@ -349,7 +1449,7 @@
       "The matching network introduces negative resistance to cancel the resistive part of impedance.",
       "The matching network introduces transconductance to cancel the reactive part of an impedance."
     ],
-    "answer": "The matching network can cancel the reactive"
+    "answer": "b"
   },
   {
     "questionNumber": "33",
@@ -360,7 +1460,7 @@
       "Georg Ohm",
       "James Clerk Maxwell"
     ],
-    "answer": "Hans Christian Oersted"
+    "answer": "a"
   },
   {
     "questionNumber": "34",
@@ -371,7 +1471,7 @@
       "High hysteresis loss materials",
       "Low hysteresis loss materials"
     ],
-    "answer": "Soft magnetic materials"
+    "answer": "a"
   },
   {
     "questionNumber": "35",
@@ -382,7 +1482,7 @@
       "Ferromagnetic",
       "Diamagnetic"
     ],
-    "answer": "Ferromagnetic"
+    "answer": "c"
   },
   {
     "questionNumber": "36",
@@ -393,7 +1493,7 @@
       "residual magnetism",
       "coercivity"
     ],
-    "answer": "residual magnetism"
+    "answer": "c"
   },
   {
     "questionNumber": "37",
@@ -404,7 +1504,7 @@
       "3",
       "4"
     ],
-    "answer": "2"
+    "answer": "b"
   },
   {
     "questionNumber": "38",
@@ -415,7 +1515,7 @@
       "ampere=turn",
       "Maxwell"
     ],
-    "answer": "tesla"
+    "answer": "a"
   },
   {
     "questionNumber": "39",
@@ -426,7 +1526,7 @@
       "100",
       "1000"
     ],
-    "answer": "1"
+    "answer": "a"
   },
   {
     "questionNumber": "40",
@@ -437,7 +1537,7 @@
       "5 x 10 -5 Wb of flux",
       "5000 Tesla of flux density"
     ],
-    "answer": "0.5 Tesla of flux density"
+    "answer": "b"
   },
   {
     "questionNumber": "41",
@@ -448,18 +1548,18 @@
       "1000 A.t/m",
       "1000 A.t"
     ],
-    "answer": "1000 A.t"
+    "answer": "d"
   },
   {
-    "questionNumber": "42",
-    "question": "What is the reluctance of a magnetic path having a length of 2 x 10 -3 m and cross-sectional area of 2.5 x 10 -3 m 2 . The relative permeability is 100.",
+    "questionNumber": "2",
+    "question": "5 x 10 -3 m 2 . The relative permeability is 100.",
     "options": [
       "6366 A.t/Wb",
       "6000 A.t/Wb",
-      "8 x 10 -3 A.t/Wb",
-      "0.8 A.t/ Wb"
+      "8 x 10 -3",
+      "t/Wb"
     ],
-    "answer": "6366 A.t/Wb"
+    "answer": "d"
   },
   {
     "questionNumber": "43",
@@ -470,7 +1570,7 @@
       "300",
       "600"
     ],
-    "answer": "167 turns"
+    "answer": "c"
   },
   {
     "questionNumber": "44",
@@ -481,7 +1581,7 @@
       "Z = R",
       "Both a and c"
     ],
-    "answer": "Both X"
+    "answer": "d"
   },
   {
     "questionNumber": "45",
@@ -492,7 +1592,7 @@
       "7.12 MHz",
       "7.12 GHz"
     ],
-    "answer": "7.12 kHz"
+    "answer": "a"
   },
   {
     "questionNumber": "46",
@@ -503,7 +1603,7 @@
       "X L leads X C by 90°",
       "Z = jX L at resonance"
     ],
-    "answer": "the current lags V"
+    "answer": "a"
   },
   {
     "questionNumber": "47",
@@ -514,7 +1614,7 @@
       "The power factor is one",
       "The magnitude Z is √ R 2 + (X L – X C ) 2"
     ],
-    "answer": "Z = jX"
+    "answer": "a"
   },
   {
     "questionNumber": "48",
@@ -525,7 +1625,7 @@
       "27 mH",
       "18 mH"
     ],
-    "answer": "3 mH"
+    "answer": "a"
   },
   {
     "questionNumber": "49",
@@ -536,7 +1636,7 @@
       "R is 50 ohms",
       "X C = is 50, 000 ohms"
     ],
-    "answer": "bandwidth is 200 Hz"
+    "answer": "a"
   },
   {
     "questionNumber": "50",
@@ -547,7 +1647,7 @@
       "603 kHz",
       "303 kHz"
     ],
-    "answer": "503 kHz"
+    "answer": "a"
   },
   {
     "questionNumber": "51",
@@ -558,7 +1658,7 @@
       "40 pH",
       "40 nH"
     ],
-    "answer": "40 \u0002H"
+    "answer": "a"
   },
   {
     "questionNumber": "52",
@@ -569,7 +1669,7 @@
       "1.25",
       "0.5"
     ],
-    "answer": "1.25"
+    "answer": "c"
   },
   {
     "questionNumber": "53",
@@ -580,7 +1680,7 @@
       "900 M\u0001",
       "900 G\u0001"
     ],
-    "answer": "900 k\u0001"
+    "answer": "b"
   },
   {
     "questionNumber": "54",
@@ -591,7 +1691,7 @@
       "0.636",
       "1.11"
     ],
-    "answer": "1.4142"
+    "answer": "a"
   },
   {
     "questionNumber": "55",
@@ -602,7 +1702,7 @@
       "0 – j 300 \u0001",
       "300 + j 0 \u0001"
     ],
-    "answer": "300 + j 0 \u0001"
+    "answer": "d"
   },
   {
     "questionNumber": "56",
@@ -613,7 +1713,7 @@
       "Induced channel MOSFET",
       "IGFET"
     ],
-    "answer": "dual gate MOSFET"
+    "answer": "b"
   },
   {
     "questionNumber": "57",
@@ -624,7 +1724,7 @@
       "super conductor",
       "ceramic"
     ],
-    "answer": "Semi-conductor"
+    "answer": "b"
   },
   {
     "questionNumber": "58",
@@ -635,7 +1735,7 @@
       "Just above the saturation point",
       "At the saturation point"
     ],
-    "answer": "Just below the saturation point"
+    "answer": "a"
   },
   {
     "questionNumber": "59",
@@ -646,7 +1746,7 @@
       "High voltage",
       "High current"
     ],
-    "answer": "Diode resistance is either very low or very high"
+    "answer": "a"
   },
   {
     "questionNumber": "60",
@@ -657,7 +1757,7 @@
       "1 A",
       "40 A"
     ],
-    "answer": "4 A"
+    "answer": "b"
   },
   {
     "questionNumber": "61",
@@ -668,7 +1768,7 @@
       "12 mA",
       "1.2 mA"
     ],
-    "answer": "30 mA"
+    "answer": "a"
   },
   {
     "questionNumber": "62",
@@ -679,7 +1779,7 @@
       "3.5",
       "10"
     ],
-    "answer": "1"
+    "answer": "b"
   },
   {
     "questionNumber": "63",
@@ -690,7 +1790,7 @@
       "MESFET",
       "JUGFET"
     ],
-    "answer": "MESFET"
+    "answer": "c"
   },
   {
     "questionNumber": "64",
@@ -701,7 +1801,7 @@
       "Discharging the cells",
       "Polarizing the cells"
     ],
-    "answer": "Discharging the cells"
+    "answer": "c"
   },
   {
     "questionNumber": "65",
@@ -712,7 +1812,7 @@
       "5.8 V",
       "1.6 V"
     ],
-    "answer": "8.4 V"
+    "answer": "b"
   },
   {
     "questionNumber": "66",
@@ -723,7 +1823,7 @@
       "999.9 V",
       "900 V"
     ],
-    "answer": "999.9 V"
+    "answer": "c"
   },
   {
     "questionNumber": "67",
@@ -734,7 +1834,7 @@
       "12.00 hours",
       "26.65 hours"
     ],
-    "answer": "6.85 hrs"
+    "answer": "a"
   },
   {
     "questionNumber": "68",
@@ -745,7 +1845,7 @@
       "Output of solar cell is normally 0.5 V.",
       "Primary cells can be charged."
     ],
-    "answer": "The Nicd cell is primary type"
+    "answer": "b"
   },
   {
     "questionNumber": "69",
@@ -756,7 +1856,7 @@
       "Silver-zinc cell",
       "Mercury cell"
     ],
-    "answer": "Silver-zinc cell"
+    "answer": "c"
   },
   {
     "questionNumber": "70",
@@ -767,7 +1867,7 @@
       "10.00",
       "0.100"
     ],
-    "answer": "0.100"
+    "answer": "d"
   },
   {
     "questionNumber": "71",
@@ -778,7 +1878,7 @@
       "3",
       "7"
     ],
-    "answer": "6"
+    "answer": "b"
   },
   {
     "questionNumber": "72",
@@ -789,7 +1889,7 @@
       "6 V",
       "36 V"
     ],
-    "answer": "12 V"
+    "answer": "a"
   },
   {
     "questionNumber": "73",
@@ -800,7 +1900,7 @@
       "5",
       "10"
     ],
-    "answer": "8"
+    "answer": "a"
   },
   {
     "questionNumber": "74",
@@ -811,7 +1911,7 @@
       "100 hrs",
       "10 hrs"
     ],
-    "answer": "10 hours"
+    "answer": "d"
   },
   {
     "questionNumber": "75",
@@ -822,7 +1922,7 @@
       "A constant current source",
       "A shunt current source"
     ],
-    "answer": "A shunt regulator"
+    "answer": "b"
   },
   {
     "questionNumber": "76",
@@ -833,7 +1933,7 @@
       "one time",
       "one voltage (one input)"
     ],
-    "answer": "one input"
+    "answer": "a"
   },
   {
     "questionNumber": "77",
@@ -844,7 +1944,7 @@
       "8 cells",
       "10 cells"
     ],
-    "answer": "4"
+    "answer": "b"
   },
   {
     "questionNumber": "78",
@@ -855,7 +1955,7 @@
       "Class A",
       "Class D"
     ],
-    "answer": "Class B"
+    "answer": "b"
   },
   {
     "questionNumber": "79",
@@ -866,7 +1966,7 @@
       "0.130",
       "0.94"
     ],
-    "answer": "0.094"
+    "answer": "a"
   },
   {
     "questionNumber": "80",
@@ -877,7 +1977,7 @@
       "95.7",
       "81.2"
     ],
-    "answer": "81.2"
+    "answer": "d"
   },
   {
     "questionNumber": "81",
@@ -888,7 +1988,7 @@
       "Damping",
       "Forced oscillations"
     ],
-    "answer": "Fly-wheel effect"
+    "answer": "b"
   },
   {
     "questionNumber": "82",
@@ -899,7 +1999,7 @@
       "200 millivolts",
       "2000 millivolts"
     ],
-    "answer": "200 millivolts"
+    "answer": "c"
   },
   {
     "questionNumber": "83",
@@ -910,7 +2010,7 @@
       "Module",
       "Micro circuit"
     ],
-    "answer": "integrated circuit (IC)"
+    "answer": "a"
   },
   {
     "questionNumber": "84",
@@ -921,7 +2021,7 @@
       "Isolation",
       "Diffusion"
     ],
-    "answer": "Isolation"
+    "answer": "c"
   },
   {
     "questionNumber": "85",
@@ -932,7 +2032,7 @@
       "10 millivolts",
       "1000 millivolts"
     ],
-    "answer": "100 mV"
+    "answer": "b"
   },
   {
     "questionNumber": "86",
@@ -943,7 +2043,7 @@
       "Gate voltage",
       "Anode voltage"
     ],
-    "answer": "Breakover voltage"
+    "answer": "b"
   },
   {
     "questionNumber": "87",
@@ -954,7 +2054,7 @@
       "NPN conduction and PNP conduction",
       "Forward conducting and reverse conducting"
     ],
-    "answer": "Conducting non-conducting"
+    "answer": "a"
   },
   {
     "questionNumber": "88",
@@ -965,7 +2065,7 @@
       "Damping",
       "Switching"
     ],
-    "answer": "Latching"
+    "answer": "b"
   },
   {
     "questionNumber": "89",
@@ -976,7 +2076,7 @@
       "decreasing induction",
       "low frequencies"
     ],
-    "answer": "high frequencies"
+    "answer": "a"
   },
   {
     "questionNumber": "90",
@@ -987,7 +2087,7 @@
       "Gate and Ground",
       "Gate and Cathode"
     ],
-    "answer": "Gate and Anode"
+    "answer": "a"
   },
   {
     "questionNumber": "91",
@@ -998,7 +2098,7 @@
       "Spectroscopy",
       "Spectography"
     ],
-    "answer": "Spectroscopy"
+    "answer": "c"
   },
   {
     "questionNumber": "92",
@@ -1009,7 +2109,7 @@
       "parallel-series",
       "parallel"
     ],
-    "answer": "inverse-parallel"
+    "answer": "b"
   },
   {
     "questionNumber": "93",
@@ -1020,7 +2120,7 @@
       "increase counter-emf",
       "all the field winding current to continue flowing"
     ],
-    "answer": "protect drive circuits from high voltage transient"
+    "answer": "b"
   },
   {
     "questionNumber": "94",
@@ -1031,7 +2131,7 @@
       "Acquisition",
       "Electrolysis"
     ],
-    "answer": "Scanning"
+    "answer": "a"
   },
   {
     "questionNumber": "95",
@@ -1042,7 +2142,7 @@
       "Glass cockpit",
       "The cockpit"
     ],
-    "answer": "Glass cockpit"
+    "answer": "c"
   },
   {
     "questionNumber": "96",
@@ -1053,7 +2153,7 @@
       "ORION",
       "SPHINX"
     ],
-    "answer": "SPHINX"
+    "answer": "d"
   },
   {
     "questionNumber": "97",
@@ -1064,7 +2164,7 @@
       "four-layer diodes in parallel",
       "inverse parallel connected SCRs with common gate."
     ],
-    "answer": "inverse parallel connected SCRs with common"
+    "answer": "d"
   },
   {
     "questionNumber": "98",
@@ -1075,7 +2175,7 @@
       "FET",
       "MOSFET"
     ],
-    "answer": "UJT"
+    "answer": "b"
   },
   {
     "questionNumber": "99",
@@ -1086,7 +2186,7 @@
       "SCR",
       "Laser"
     ],
-    "answer": "relay"
+    "answer": "b"
   },
   {
     "questionNumber": "100",
@@ -1097,6 +2197,1106 @@
       "0.8",
       "0.225"
     ],
-    "answer": "0.025"
+    "answer": "a"
+  },
+  {
+    "questionNumber": "1",
+    "question": "The rendition of service by a duly licensed professional by virtue of his technical education, training, experience and competence.",
+    "options": [
+      "Professional practice",
+      "Professional service",
+      "Legal practice and service",
+      "Professional consultation"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "2",
+    "question": "A code is defined as:",
+    "options": [
+      "a fundamental belief that usually encompasses several rules",
+      "a system of non statutory, non mandatory rules on personal conduct",
+      "an oath taken by an individual in a ceremony",
+      "a guide for conduct and action in a certain situation"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "3",
+    "question": "A rule is defined as:",
+    "options": [
+      "a fundamental belief that usually encompasses several rules",
+      "a system of non statutory, non mandatory rules on personal conduct",
+      "an oath taken by an individual in a ceremony",
+      "a guide for conduct and action in a certain situation"
+    ],
+    "answer": "d"
+  },
+  {
+    "questionNumber": "4",
+    "question": "A canon is defined as:",
+    "options": [
+      "a fundamental belief that usually encompasses several rules",
+      "a system of non statutory, non mandatory rules on personal conduct",
+      "an oath taken by an individual in a ceremony",
+      "a guide for conduct and action in a certain situation"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "5",
+    "question": "Refers to a statement or an oath, often religious in nature, agreed by an individual in ceremonies.",
+    "options": [
+      "canon",
+      "code",
+      "creed",
+      "rule"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "6",
+    "question": "The tort law is concerned with _____.",
+    "options": [
+      "imprisonment",
+      "fine",
+      "compensation for injury",
+      "punishment"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "7",
+    "question": "A civil wrong committed by one person causing damage to another person of his property, emotional well being, or reputation.",
+    "options": [
+      "consequential damage",
+      "fraud",
+      "punitive damage",
+      "tort"
+    ],
+    "answer": "d"
+  },
+  {
+    "questionNumber": "8",
+    "question": "The condition in a contract between two parties, that only the parties to a contract may sue under it and that any third party names in that contract or who benefit from that contract cannot sue or be sued under that contract.",
+    "options": [
+      "doctrine of contract",
+      "party policy of contract",
+      "equity of contract",
+      "privity of contract"
+    ],
+    "answer": "d"
+  },
+  {
+    "questionNumber": "9",
+    "question": "A non performance that results in the injured party receiving something substantially less than or different from what the contract is intended.",
+    "options": [
+      "willful breach",
+      "material breach",
+      "unintentional breach",
+      "intentional breach"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "10",
+    "question": "Another term for “punitive damages”.",
+    "options": [
+      "liquidated damages",
+      "exemplary damages",
+      "compensatory damages",
+      "nominal damages"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "11",
+    "question": "One possible cause for an abrupt frequency variation in one self excited transmitter oscillator circuit resulting to poor frequency stability to hold a constant oscillation.",
+    "options": [
+      "poor soldered connection",
+      "heating of capacitor in an oscillator",
+      "DC and RF AC heating of resistors which cause change in values MOCK BOARD EXAMINATION IN GENERAL ENGINEERING AND APPLIED SCIENCES (D) June 9, 2009",
+      "Aging, which causes change in the condition of the characteristics of parts"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "12",
+    "question": "A device that diverts high transient voltage to the ground and away from the equipment being protected.",
+    "options": [
+      "alpeth",
+      "anchor",
+      "alarm",
+      "arrester"
+    ],
+    "answer": "d"
+  },
+  {
+    "questionNumber": "13",
+    "question": "The maximum number of lines for any building other than a one  or two storey residential building to be required a service entrance facility under the ECE building code.",
+    "options": [
+      "two lines",
+      "five lines",
+      "three lines",
+      "not required"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "14",
+    "question": "Refers to the terminal where riser cable pairs are terminated to serve a portion or an entire floor of a building.",
+    "options": [
+      "Floor Terminal distribution area",
+      "Raceway terminal",
+      "Floor distribution terminal",
+      "Riser Terminal"
+    ],
+    "answer": "d"
+  },
+  {
+    "questionNumber": "15",
+    "question": "Part of the housing system in the ECE code that is a circular opening through the floor structure to allow the passage of a cable or wire.",
+    "options": [
+      "Insert",
+      "Sleeve",
+      "Raceway",
+      "Slot"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "16",
+    "question": "In cable facilities for a building communications service, this is referred to as the physical cable within a building or series of buildings which may include both main cable pairs and house cable pairs but not station wiring cable.",
+    "options": [
+      "entrance cable",
+      "floor distribution cable",
+      "house cable",
+      "building cable"
+    ],
+    "answer": "d"
+  },
+  {
+    "questionNumber": "17",
+    "question": "A telephone company’s cable entering a building from telephone cable feeder to the main, cross connecting a point within the building.",
+    "options": [
+      "Telephone cable",
+      "Entrance cable",
+      "Connecting cable",
+      "Building cable"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "18",
+    "question": "This is a non combustible tubing which encases the riser cable between an enclosed type metallic terminal cabinets or boxes.",
+    "options": [
+      "Raceway",
+      "Riser shaft",
+      "Riser conduit",
+      "Entrance cable"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "19",
+    "question": "A series of closets connected by slots or short conduit sleeves between floors or open shaft of the building.",
+    "options": [
+      "Service fitting",
+      "Raceway",
+      "Riser conduit",
+      "Riser shaft"
+    ],
+    "answer": "d"
+  },
+  {
+    "questionNumber": "20",
+    "question": "This is referred to as a linkage by wire, radio, satellite, or other means, of two or more telecommunications carrier or operators with one another for the purpose of allowing or enabling the subscriber of one carrier or operator to access or reach the subscribers of other carriers or operators.",
+    "options": [
+      "interconnection",
+      "toll patching",
+      "gateway",
+      "outside plant sharing"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "21",
+    "question": "One of the major components required under the global maritime distress and safety system is the:",
+    "options": [
+      "provision of Morse Code",
+      "provision of Radiotelegraph Operator",
+      "provision of facsimile",
+      "provision of radio personnel"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "22",
+    "question": "Which one of the following is NOT the major components required on board ship under the global maritime distress and safety system?",
+    "options": [
+      "On board radio facilities",
+      "Radio operator telegraphy onboard",
+      "Shore base facilities",
+      "Radio personnel onboard"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "23",
+    "question": "At what position does a maritime ship main antenna have, when it is open circuited and MOCK BOARD EXAMINATION IN GENERAL ENGINEERING AND APPLIED SCIENCES (D) June 9, 2009 that auxiliary antenna is/are connected to the main receiver?",
+    "options": [
+      "AA",
+      "Emergency transmitter",
+      "Direction finder",
+      "Ground"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "24",
+    "question": "What position of maritime ship main antenna have, when the radio watch is secured or when the ship is in electrical storm?",
+    "options": [
+      "AA",
+      "Main transmitter",
+      "Grounded",
+      "HF"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "25",
+    "question": "What are the two legislative functions of the International Telecommunications Union in its international conference issues on orbital resources?",
+    "options": [
+      "Assign frequencies and organized conferences",
+      "Allocates frequency bands for the services and determine the principle of distribution of the orbit/spectrum resources distribution and assignment of frequencies",
+      "Determine principles of spectrum distribution and assignment of frequencies",
+      "Conduct conferences and allocation of orbital slots"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "26",
+    "question": "A person or entity intending to register as VoIP service provider is required to post a performance bond of _____.",
+    "options": [
+      "1 million",
+      "3 million",
+      "5 million",
+      "10 million"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "27",
+    "question": "One of the mnemonic management tool used is the SMEAC. What does the acronym SMEAC stands for?",
+    "options": [
+      "Situation, Mission, Execution, Administration, Coordination",
+      "Situation, Mission, Execution, Application, Communication",
+      "Situation, Mission, Execution, Administration, Communication",
+      "Strategy, Mission, Execution, Administration, Communication"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "28",
+    "question": "In the management tool, SMEAC, where A stands for administration, which question is appropriate for the to manager ask?",
+    "options": [
+      "What do we need to get it done?",
+      "What are we aiming to do?",
+      "How are we going to do it?",
+      "What is the operation environment?"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "29",
+    "question": "In project management, what is usually the first step underlying in the process of performing a project?",
+    "options": [
+      "Select appropriate performance measures.",
+      "Define the goals of the project and their relative importance.",
+      "Identify a need for a product or service.",
+      "Develop a technological concept."
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "30",
+    "question": "In the process of performing a project, after the need for a product or service is identified, what is usually the next step?",
+    "options": [
+      "Define the goals of the project and relative importance.",
+      "Develop a budget.",
+      "Develop schedule.",
+      "Develop the technological concept."
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "31",
+    "question": "What is usually the last step in the process of performing a project?",
+    "options": [
+      "Select appropriate performance measures",
+      "Implement the plan",
+      "Monitor and control the project.",
+      "Evaluate project success."
+    ],
+    "answer": "d"
+  },
+  {
+    "questionNumber": "32",
+    "question": "To consider the consequence of uncertainty on project management, laws on project management are developed. One of which is “A careless planned project will take ___ times longer to complete than expected”.",
+    "options": [
+      "Three",
+      "Four",
+      "Two",
+      "Two and a half"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "33",
+    "question": "In the typical functional organization hierarchy, the chief engineer is under the ____.",
+    "options": [
+      "finance manager",
+      "manufacturing manager",
+      "general manager",
+      "marketing manager MOCK BOARD EXAMINATION IN GENERAL ENGINEERING AND APPLIED SCIENCES (D) June 9, 2009"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "34",
+    "question": "A diagram of the organization’s official positions and formal lines of authority.",
+    "options": [
+      "Organizational chart",
+      "Authority chart",
+      "Policy chart",
+      "Control chart"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "35",
+    "question": "What is defined as the process of identifying and choosing alternative courses of action in a manner appropriate to the demands of the situations?",
+    "options": [
+      "Sampling Theory",
+      "Alternative Analysis",
+      "Problem solving",
+      "Decision Making"
+    ],
+    "answer": "d"
+  },
+  {
+    "questionNumber": "36",
+    "question": "What refers to the activity of incorporating the technical know how with the ability to organize and coordinate workforce, materials, equipment and all other resources including money?",
+    "options": [
+      "Engineering Management",
+      "Engineering Technology",
+      "Technical Management",
+      "General Management"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "1",
+    "question": "15. A 100 pair cable made of enameled wire costs P 0.55 per linear foot and the one that is made of tinned wire costs P 0.75 per linear foot. Determine the length of the cable run, in feet, so that the cost of each installation would be the same.",
+    "options": [
+      "1,000 ft",
+      "1,040 ft",
+      "1,100 ft",
+      "1,120 ft"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "38",
+    "question": "A leading shoe manufacturer produces a pair of Lebron James signature shoes at a labor cost of P 900.00 a pair, at a material cost of P 800.00 a pair. The fixed charge on the business is P 5,000,000.00 a month and the variable cost is P 400.00 a pair. Royalty to Lebron James is P 1,000.00 per pair of shoes sold. If the shoes sell at P 5,000.00 a pair, how many pairs must be produced each month for the manufacturer to break even?",
+    "options": [
+      "2,590",
+      "2,632",
+      "2,712",
+      "2,890"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "39",
+    "question": "Felicito wishes to bequeath to his son, Rey, the amount of P20,000 10 years from now. What amount should he invest now if it will earn interest of 8% compounded annually during the first 5 years and 12% compounded quarterly during the next 5 years.",
+    "options": [
+      "P7,635.45",
+      "7,653.45",
+      "7,365.45",
+      "7,536.45"
+    ],
+    "answer": "d"
+  },
+  {
+    "questionNumber": "40",
+    "question": "Efren deposits P10,000 in a fund for his son when he starts college to provide him with a fixed income at the end of each month during his 5 years studying an engineering course. Find the monthly income of the boy if the money is invested at 12% compounded monthly.",
+    "options": [
+      "P222.44",
+      "P224.24",
+      "P242.42",
+      "P422.22"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "41",
+    "question": "Alfredo has a debt of P50,000. It is to be amortized by means of 20 uniform quarterly payments with an interest of 8% compounded quarterly. Determine periodic payment if first payment is made 15 months after loan is granted.",
+    "options": [
+      "P3,093.90",
+      "P3,903.30",
+      "3,309.90",
+      "3,930.30 e. 9,330.30"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "42",
+    "question": "The product of mass and its velocity.",
+    "options": [
+      "Momentum",
+      "Impulse",
+      "Power",
+      "Energy"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "43",
+    "question": "Internal force that acts against distortion.",
+    "options": [
+      "Stress",
+      "Strain",
+      "Shear",
+      "Elasticity"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "44",
+    "question": "The capacity to satisfy human wants. MOCK BOARD EXAMINATION IN GENERAL ENGINEERING AND APPLIED SCIENCES (D) June 9, 2009",
+    "options": [
+      "Luxuries",
+      "Discount",
+      "Utility",
+      "Necessity"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "45",
+    "question": "What  is  the  effective  rate  corresponding  to 16% compounded daily if one year is considered at360 days?",
+    "options": [
+      "17.84%",
+      "16.78%",
+      "17.35%",
+      "13.75%"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "46",
+    "question": "It is a measure of the resistance that a body’s mass and distribution of its mass about the axis of rotation. This property is known as______.",
+    "options": [
+      "Moment of inertia",
+      "Friction",
+      "Torsion",
+      "Angular acceleration"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "47",
+    "question": "A man in a hot air balloon drops an apple at a height of 150 meters. If the balloon is rising at 15 m/s, find the highest point reached by the apple.",
+    "options": [
+      "141.15 m",
+      "171.15 m",
+      "151.15 m",
+      "161.15 m"
+    ],
+    "answer": "d"
+  },
+  {
+    "questionNumber": "48",
+    "question": "The reciprocal of bulk modulus of any fluid is called ______.",
+    "options": [
+      "Volume stress",
+      "Compressibility",
+      "Shape elasticity",
+      "Volume strain"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "49",
+    "question": "The property by virtue of which a body tends to return to its original size and shape after a deformation and when the deforming forces have been removed.",
+    "options": [
+      "Elasticity",
+      "Malleability",
+      "Ductility",
+      "Plasticity"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "50",
+    "question": "It is the ability of a material to be elongated",
+    "options": [
+      "Plasticity",
+      "Flexibility",
+      "Elasticity",
+      "Malleability"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "51",
+    "question": "Find the elongation in a 3m long steel bar by subjecting it to 50 Mpa stress. E=200 Gpa",
+    "options": [
+      "1mm",
+      "0.5 mm",
+      "0.75 mm",
+      "1.75 mm"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "52",
+    "question": "A material has a modulus of elasticity of 200 Gpa. Find the minimum cross sectional area of the said material so as not to elongate by more than 5 mm for every 2 m length when subjected to a 10 kN tensile force.",
+    "options": [
+      "20 mm 2",
+      "10 mm 2",
+      "30 mm 2",
+      "40 mm 2"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "53",
+    "question": "The reciprocal of Bulk modulus of any fluid is called______.",
+    "options": [
+      "Volume stress",
+      "Compressibility",
+      "Shape elasticity",
+      "Volume strain"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "54",
+    "question": "A stone is thrown outward, at an angle of 30 with the horizontal into the river from the cliff that is 120 meters above the water level at a velocity of 36 km/hr. At what height above the water level will the stone start to fall?",
+    "options": [
+      "121.27 m",
+      "131.274 m",
+      "141.274 m",
+      "161.274 m"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "55",
+    "question": "During installation, a section of an antenna tower was lifted to a height of 5 meters with a force of 400 kg moving through a distance of 20 meters by use of a pulley mounted on a frame. If the efficiency of a machine equals the output over the input multiplied by 100%, what is the efficiency of the pulley> the tower section weighs 1000 kg.",
+    "options": [
+      "62.5%",
+      "52.5%",
+      "72.5%",
+      "82.5%"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "56",
+    "question": "The SI unit of magnetic flux density equal to one weber per square meter is the",
+    "options": [
+      "Gauss",
+      "Oersted",
+      "Maxwell",
+      "Tesla MOCK BOARD EXAMINATION IN GENERAL ENGINEERING AND APPLIED SCIENCES (D) June 9, 2009"
+    ],
+    "answer": "d"
+  },
+  {
+    "questionNumber": "57",
+    "question": "The ratio of reflected light to the incident light on a surface is called ___",
+    "options": [
+      "SWR",
+      "Reflectance",
+      "Reflectivity",
+      "Irradiance"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "58",
+    "question": "In the FPS system, a mass that moves with an acceleration of one foot per second squared when a force of one pound acts on it is expressed in terms of ______.",
+    "options": [
+      "Poundal",
+      "Slugs",
+      "Dynes",
+      "Ergs"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "59",
+    "question": "A car’s brake system exerts 3000 Newtons. It will take ______ seconds before the car stops from a velocity of 30 meters per second.",
+    "options": [
+      "10",
+      "15",
+      "5",
+      "2"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "60",
+    "question": "A mothballed nuclear power plant at Chernobyll operates at an output of 100 megawatts daily. This reactor required a mass of_____ kilograms of nuclear fuel.",
+    "options": [
+      "0.96 x 10 5",
+      "9.6 x 10 5",
+      "0.0096 x 10 5",
+      "9.6 x 10 5"
+    ],
+    "answer": "d"
+  },
+  {
+    "questionNumber": "61",
+    "question": "A Landing Ship (LST) BRP LANAO DEL NORTE of the Philippine Navy used during the “Battle of Leyte GulP’ Golden Anniversary was drifting at a speed of two knots away from the shoreline. The ship’s drift speed in kilometers per hour is___",
+    "options": [
+      "3.704",
+      "7.304",
+      "3.407",
+      "1.852"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "62",
+    "question": "While chasing Cheetah and Jane, Tarzan was swinging in the vines somewhere in the remote jungles of Africa at a maximum height of seven (7) feet and a minimum height of three (3) feet above the ground. What was Tarzan’s maximum velocity?",
+    "options": [
+      "32 ft/sec",
+      "18 ft/sec",
+      "16 ft/sec",
+      "12 ft/sec"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "63",
+    "question": "Pegasus, the most trusted horse of Zeus, exerts one Horse Power to pull his “Chariot of Fire” at a force equivalent to 300 Newtons. The chariot’s speed in meters per second is ____",
+    "options": [
+      "250",
+      "0.25",
+      "25",
+      "2.5"
+    ],
+    "answer": "d"
+  },
+  {
+    "questionNumber": "64",
+    "question": "____ is a unit of pressure or stress resulting from a force of one Newton acting uniformly over an area of one square meter.",
+    "options": [
+      "Pascal",
+      "Torr",
+      "Stoke",
+      "Poise"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "65",
+    "question": "The “The Long March” rocket used in launching the Philippine satellite “Aguila” whose expanding gases leaves the rocket at 3 kilometers per second sulting from oxidation of solid propellants at a rate of 30 kilograms per second. The thrust force developed by the launcher rocket is about ____ Newtons.",
+    "options": [
+      "9x10 8",
+      "9x10 9",
+      "9x10 3",
+      "9x10 4"
+    ],
+    "answer": "d"
+  },
+  {
+    "questionNumber": "66",
+    "question": "A unit of distance used in astronomy equivalent to 3.08572 x 10 13 kilometers.",
+    "options": [
+      "Light  year",
+      "Parsec",
+      "Furlong",
+      "Fathom"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "67",
+    "question": "A member of the Philippine Navy Seals under the PN Special Warfare Group searching for survivors of the ill fated vessel, MIV Dona Paz, directs a beam of light at the surface of the sea at an angle of incidence of 40 degrees. Assuming a refractive index of 1.33 for water, the angle of refraction is  ___ degrees.",
+    "options": [
+      "58.75",
+      "49.75",
+      "39.75",
+      "29.75 MOCK BOARD EXAMINATION IN GENERAL ENGINEERING AND APPLIED SCIENCES (D) June 9, 2009"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "68",
+    "question": "_____ is a unit of length equal to 1,650,763.73 wavelengths of the orange red light radiated by the isotope Krypton 86 atom, as measured in vacuum. Angstrom",
+    "options": [
+      "Barn",
+      "Meter",
+      "Fathom",
+      "Furlong"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "69",
+    "question": "___ factor is mathematical expression also known as the present value of the annuity.",
+    "options": [
+      "Present Worth",
+      "Load",
+      "Power",
+      "Demand"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "70",
+    "question": "____ is the distribution of the initial cost by periodic changes to operation as in depreciation or the reduction of a debt by either periodic or irregular prearranged program.",
+    "options": [
+      "Annuity",
+      "Perpetuity",
+      "Capital Recovery",
+      "Amortization"
+    ],
+    "answer": "d"
+  },
+  {
+    "questionNumber": "71",
+    "question": "During the 1989 “military exercise”, an F 16 jet fighter on “persuasion flight” while horizontally flying at.a low altitude of 1 kilometer above the ground slows down at 720 km/hour and drops a bomb on the suspected lair of rebel soldiers. Determine the acute angle (in degrees) between the vertical and the line joining the aircraft and target at the instant when the bomb was released at Libis, Quezon City.",
+    "options": [
+      "70.73",
+      "29.33",
+      "39.23",
+      "70.37"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "72",
+    "question": "A 20 kilogram mortar projectile has a velocity of 600 meters per second. The shell acquired the velocity in a mortar barrel 3 meters long. The average force against the shell as it was fired was ____ KiloNewtons.",
+    "options": [
+      "2400",
+      "3600",
+      "1200",
+      "600"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "73",
+    "question": "An aluminum cube, 10 centimeters on a side, is subjected to a shearing force of (10) 6 Newtons. The top of the cube is displaced 0.03 centimeters with respect to the bottom. Its shear modulus is ____ Gigapascals.",
+    "options": [
+      "44",
+      "33",
+      "11",
+      "22"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "74",
+    "question": "A unit of heat which is equal to 1.055 joule is the ___",
+    "options": [
+      "BTU",
+      "Calorie",
+      "Therm",
+      "Torr"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "75",
+    "question": "In measuring pressure, 1 millimeter of mercury is equivalent to a unit called __",
+    "options": [
+      "Pascal",
+      "Psi",
+      "Torr",
+      "Therm"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "76",
+    "question": "A 60 gram bullet moving with a speed of 500 meters per second strikes a 5 kilogram block moving in the same direction with a speed of 30 meters per second. The resultant speed of the bullet and the block is ____ meters/second, assuming the bullet to be embedded in the block.",
+    "options": [
+      "53.6",
+      "63.5",
+      "35.6",
+      "65.3"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "77",
+    "question": "A ball rebounds vertically from a horizontal floor to a height of 20 meters. On the next rebound, it reaches a height of 14 meters. The coefficient of restitution between the ball and the floor was___",
+    "options": [
+      "0.483",
+      "0.837",
+      "19.8",
+      "16.565"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "78",
+    "question": "How much heat energy will be required to heat 100 grams of copper from 10 0 C to 100 0 C if its specific heat is 385 Joule / kg 0 K?",
+    "options": [
+      "4.37 kJoule",
+      "3.47 kJoule",
+      "7.34 kJoule",
+      "4.73 kJoule"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "79",
+    "question": "What is the pressure if one found of air at MOCK BOARD EXAMINATION IN GENERAL ENGINEERING AND APPLIED SCIENCES (D) June 9, 2009 15 psia and 200 o F is heated to 800 o F while keeping the volume constant?",
+    "options": [
+      "34.6 psia",
+      "28.6 psia",
+      "51.2 psia",
+      "102.8 psia"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "80",
+    "question": "The ability of solid matter to combine with similar atoms.",
+    "options": [
+      "Ductility",
+      "Malleability",
+      "Diffusion",
+      "Cohesion"
+    ],
+    "answer": "d"
+  },
+  {
+    "questionNumber": "81",
+    "question": "The gravitational constant of attraction has a numerical value of _______",
+    "options": [
+      "96.6 x 10 11",
+      "1.45 x 10 11",
+      "6.67 x 10 11",
+      "9.8"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "82",
+    "question": "The domain of coefficient of friction is",
+    "options": [
+      "Less than zero",
+      "Between zero and 1 exclusive",
+      "Between 0 and 1 inclusive",
+      "Greater than 1"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "83",
+    "question": "The force that keeps a body moving in a circular path is called ___",
+    "options": [
+      "Centrifugal",
+      "Inertia",
+      "Centripetal",
+      "Kinetic Energy"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "84",
+    "question": "An LRT train 5 m above the ground crosses a street at a speed of 20 m/s at the instant that a car running at a speed of 8 m/s is directly below the train. Find the rate at which the train and the car are separating one second later.",
+    "options": [
+      "20.98 in/s",
+      "20.89 m/s",
+      "20.78 in/s",
+      "20.87 m/s"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "85",
+    "question": "The basis for Bemoulli’s law for fluid flow is _____",
+    "options": [
+      "Conservation of mass",
+      "Fourier Law",
+      "Conservation of Energy",
+      "Sturm Liouville Theory"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "86",
+    "question": "The 3rd term of an AP is 4 and the 9th term is   14. Find the sum of the first six terms.",
+    "options": [
+      "15",
+      "17",
+      "14",
+      "16"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "87",
+    "question": "Force that tends to pull apart is called_____.",
+    "options": [
+      "Compression",
+      "Tension",
+      "Torsion",
+      "Distortion"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "88",
+    "question": "When stress equals strain, the body is ______.",
+    "options": [
+      "Distorted",
+      "Elastic",
+      "Rigid",
+      "Fixed"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "89",
+    "question": "The point which indicates the sales volume at which the enterprise will be able to pay these dividend is ______________.",
+    "options": [
+      "Break even Point",
+      "Break even Cost",
+      "Unhealthy Point",
+      "Inflection Point"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "90",
+    "question": "It is the amount which a willing buyer will pay to a willing seller for the property when neither  one is tinder compulsion to buy or to sell.",
+    "options": [
+      "Use Value",
+      "Market Value",
+      "Utility",
+      "Fair Value"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "91",
+    "question": "It is the value assigned to the property for the purpose of establishing rates.",
+    "options": [
+      "Scrap Value",
+      "Franchise Value",
+      "Rate Base Value",
+      "Salvage Value"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "92",
+    "question": "A flat circular coil with 100 turns has a radius of 5 centimeters. If an 4 ampere current is made to pass at the center of the coil, the magnetic field developed at the center is ____ Tesla.",
+    "options": [
+      "5.02 x 10 3",
+      "5.02 x 10 5",
+      "5.02 x 10 7",
+      "5.02 x 10 9"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "93",
+    "question": "Jennifer Bulak. while playing “jackstone”, MOCK BOARD EXAMINATION IN GENERAL ENGINEERING AND APPLIED SCIENCES (D) June 9, 2009 accidentally drops the rubber ball from a window about 63 centimeters high. Each time the ball hits the flat ground, it rebounds to two thirds (2/3) of the previous height from which it fell. The total distance traveled by the ball before coming to rest is ____ centimeters.",
+    "options": [
+      "315",
+      "513",
+      "135",
+      "153"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "94",
+    "question": "A pound of force is equivalent to _____ Newtons.",
+    "options": [
+      "2.25",
+      "4.45",
+      "3.45",
+      "5.44"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "95",
+    "question": "The vector operator on a vector function that, for a three dimensional function, is equal to the sum of the vector cross product of the unit vectors and partial derivatives in each of the component directions.",
+    "options": [
+      "Curl",
+      "D’ Alembertian",
+      "Poynting Vector",
+      "Argand’s Gradient"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "96",
+    "question": "In nuclear physics, a / an ______ is a particle of antimatter corresponding to a given particle in every respect except that charge and certain other discrete properties change sign.",
+    "options": [
+      "Antiparticle",
+      "Hadron",
+      "Lepton",
+      "Muon"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "97",
+    "question": "____ is a particle that exhibits a strong nuclear force.",
+    "options": [
+      "Lepton",
+      "Muon",
+      "Hadron",
+      "Pion"
+    ],
+    "answer": "c"
+  },
+  {
+    "questionNumber": "98",
+    "question": "Don Fausto wants to make 14% nominal interest compounded semi annually on   a bond investment. How much should he be willing to pay now for 12%, P 10,000 bond that will mature in ten (10) years and pays interest semi annually?",
+    "options": [
+      "P 8,940.50",
+      "p 2,584.19",
+      "P 3,118.05",
+      "P 867.82"
+    ],
+    "answer": "a"
+  },
+  {
+    "questionNumber": "99",
+    "question": "___ is the value of the equipment with use over a period of time, it could mean the difference in value between a new asset and the used asset currently in service.",
+    "options": [
+      "Loss",
+      "Depreciation",
+      "Gain",
+      "Sunk Cost"
+    ],
+    "answer": "b"
+  },
+  {
+    "questionNumber": "100",
+    "question": "The amplitudes of a certain waveform are: 11, 23 and 25. The value of the root mean square is_______",
+    "options": [
+      "24",
+      "25",
+      "26",
+      "27 MOCK BOARD EXAMINATION IN GENERAL ENGINEERING AND APPLIED SCIENCES (D) June 9, 2009"
+    ],
+    "answer": "b"
   }
 ]
