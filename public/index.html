@@ -138,7 +138,7 @@
       textSize(18);
       textAlign(CENTER, TOP);
       fill(0);
-      text('Upload a .txt, .pdf, or .docx file', width / 2, height / 4, width - 40);
+      text('Upload a .txt, .pdf, or .docx file', width / 2, height / 4);
       if (isUploading) {
         fill(200);
         rect(width / 2 - 100, height / 2 - 40, 200, 30);
@@ -165,11 +165,12 @@
         textSize(20);
         fill(0);
         textAlign(CENTER, CENTER);
-        text('Answer Feedback', width / 2, height / 2 - 40);
-        text(answerFeedback.correct ? 'Correct!' : 'Wrong!', width / 2, height / 2);
+        text('Answer Feedback', width / 2, height / 2 - 60);
+        text(answerFeedback.correct ? 'Correct!' : 'Wrong!', width / 2, height / 2 - 20);
         if (!answerFeedback.correct) {
           textSize(16);
-          text(`Correct answer: ${answerFeedback.correctAnswer}`, width / 2, height / 2 + 40, width - 40);
+          textAlign(CENTER, TOP);
+          text(`Correct answer: ${answerFeedback.correctAnswer}`, width / 2, height / 2 + 20);
         }
       }
     }
@@ -211,10 +212,10 @@
           state = 'upload';
           redraw();
         } else if (mouseX > width / 2 - 300 && mouseX < width / 2 - 150 && mouseY > 600 && mouseY < 650) {
-          resetQuiz();
-        } else if (mouseX > width / 2 + 150 && mouseX < width / 2 + 300 && mouseY > 600 && mouseY < 650) {
-          clearQuestions();
-        }
+            resetQuiz();
+          } else if (mouseX > width / 2 + 150 && mouseX < width / 2 + 300 && mouseY > 600 && mouseY < 650) {
+            clearQuestions();
+          }
       } else if (state === 'upload' && !isUploading) {
         if (mouseX > width / 2 - 100 && mouseX < width / 2 + 100 && mouseY > height / 2 - 40 && mouseY < height / 2 + 10) {
           document.getElementById('fileInput').click();
@@ -244,7 +245,7 @@
         answerFeedback = null;
         currentQuestion = (currentQuestion + 1) % questions.length;
         redraw();
-      }, 2000); // Increased to 2 seconds for readability
+      }, 2000);
       redraw();
     }
 
