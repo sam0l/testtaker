@@ -1,0 +1,1102 @@
+[
+  {
+    "questionNumber": "1",
+    "question": "A four-element solid-state device that combines the characteristics of both diodes and transistors.",
+    "options": [
+      "Tunnel diode",
+      "Silicon controlled rectifier",
+      "Varactor",
+      "Zener diode"
+    ],
+    "answer": "Silicon Controlled Diode"
+  },
+  {
+    "questionNumber": "2",
+    "question": "What type of radar target bearing is referenced to your ship or aircraft?",
+    "options": [
+      "True bearing",
+      "Magnetic bearing",
+      "Direct bearing",
+      "Relative bearing"
+    ],
+    "answer": "Relative bearing"
+  },
+  {
+    "questionNumber": "3",
+    "question": "Which part of the computer performs mathematical operation?",
+    "options": [
+      "ALU",
+      "CPU",
+      "Flip-flop",
+      "Assembly language"
+    ],
+    "answer": "ALU"
+  },
+  {
+    "questionNumber": "4",
+    "question": "The first mass-produced computer built by Eckert and Maunchy Computer Company in Philadelphia USA in 1950.",
+    "options": [
+      "IBM – 701",
+      "CRAY-1",
+      "UNIVAC",
+      "ENIAC"
+    ],
+    "answer": "UNIVAC"
+  },
+  {
+    "questionNumber": "5",
+    "question": "It is a sequence of operation in a digital computation.",
+    "options": [
+      "Flow chart",
+      "Truth table",
+      "Algorithm",
+      "FORTRAN"
+    ],
+    "answer": "Algorithm"
+  },
+  {
+    "questionNumber": "6",
+    "question": "What is the central processor of the computer which is sometimes referred to as the heart of a computer system/",
+    "options": [
+      "CPU",
+      "SOFTWARE",
+      "HARDWARE",
+      "ALU"
+    ],
+    "answer": "CPU"
+  },
+  {
+    "questionNumber": "7",
+    "question": "What is the process of designing more than 100 gates on a single chip?",
+    "options": [
+      "LSI",
+      "SSI",
+      "MSI",
+      "VLSI"
+    ],
+    "answer": "LSI"
+  },
+  {
+    "questionNumber": "8",
+    "question": "___ refers to a function of a decade counter digital IC.",
+    "options": [
+      "Producing one output pulse for every 10 input pulses",
+      "Adding two decimal numbers",
+      "Producing 10 output pulses for every 1 input pulse",
+      "Decoding a decimal number for display on seven-segment"
+    ],
+    "answer": "Producing one output pulse for every 10 input"
+  },
+  {
+    "questionNumber": "9",
+    "question": "A series of predefined actions or operations performed on a collection of facts.",
+    "options": [
+      "DATA PROCESSING",
+      "HASHING",
+      "FLOWCHARTING",
+      "ALGORITHM"
+    ],
+    "answer": "DATA PROCESSING"
+  },
+  {
+    "questionNumber": "10",
+    "question": "The physical machinery of a computer system.",
+    "options": [
+      "Hardware",
+      "Tupperware",
+      "Software",
+      "Coldware"
+    ],
+    "answer": "Hardware"
+  },
+  {
+    "questionNumber": "11",
+    "question": "Which of the following is not used in hexadecimal digital symbols?",
+    "options": [
+      "A",
+      "C",
+      "H",
+      "F"
+    ],
+    "answer": "H"
+  },
+  {
+    "questionNumber": "12",
+    "question": "___ refers to circuit with 10 to 100 integrated circuits.",
+    "options": [
+      "IC",
+      "Monolithic",
+      "MSI",
+      "SSI"
+    ],
+    "answer": "MSI"
+  },
+  {
+    "questionNumber": "13",
+    "question": "The decimal 36 020 is equivalent to hexadecimal ___.",
+    "options": [
+      "8CB4",
+      "8SBC",
+      "8BC8",
+      "884C"
+    ],
+    "answer": "8CB4"
+  },
+  {
+    "questionNumber": "14",
+    "question": "What is the name of an electrode found in a pentode but not in a tetrode?",
+    "options": [
+      "Control grid",
+      "Screen grid",
+      "Signal grid",
+      "Suppressor grid"
+    ],
+    "answer": "Suppressor grid"
+  },
+  {
+    "questionNumber": "15",
+    "question": "How do you call an eight element vacuum tube?",
+    "options": [
+      "Pentode",
+      "Hexode",
+      "Octode",
+      "Septode"
+    ],
+    "answer": "Octode"
+  },
+  {
+    "questionNumber": "16",
+    "question": "What is a gain of a vacuum tube having the following parameters: amplification factor is 80, external plate-load resistance of 30 000 ohms and the tubes internal plate resistance is 10 000 ohms?",
+    "options": [
+      "60",
+      "20",
+      "30",
+      "40"
+    ],
+    "answer": "60"
+  },
+  {
+    "questionNumber": "17",
+    "question": "What is the signal that provides color information in a colored TV?",
+    "options": [
+      "composite",
+      "NTSC  color bust",
+      "Chrominance",
+      "PAL SECAM"
+    ],
+    "answer": "Chrominance"
+  },
+  {
+    "questionNumber": "18",
+    "question": "An instrument used to measure one location in terms of coordinates.",
+    "options": [
+      "Global Positioning System",
+      "Hydrometer",
+      "Altimeter",
+      "Increductometer"
+    ],
+    "answer": "Global Positioning System"
+  },
+  {
+    "questionNumber": "19",
+    "question": "___ are individual points in graphic display.",
+    "options": [
+      "Row",
+      "Pixel",
+      "Resolution",
+      "Column"
+    ],
+    "answer": "Pixel"
+  },
+  {
+    "questionNumber": "20",
+    "question": "What is the reference cycle time in radar, when the signal is transmitted back to receiver?",
+    "options": [
+      "10.1 microsec",
+      "100.0 microsec",
+      "12.4 microsec",
+      "24.8 microsec"
+    ],
+    "answer": "12.4 microsec"
+  },
+  {
+    "questionNumber": "21",
+    "question": "What does SI magnetic flux refer?",
+    "options": [
+      "Weber",
+      "Flux",
+      "Maxwell",
+      "Lines"
+    ],
+    "answer": "Weber"
+  },
+  {
+    "questionNumber": "22",
+    "question": "___ is the relative permeability of paramagnetic substances.",
+    "options": [
+      "much lesser than 1",
+      "a little greater than 1",
+      "Equal to 1",
+      "Much greater than 1"
+    ],
+    "answer": "A little greater than 1"
+  },
+  {
+    "questionNumber": "23",
+    "question": "The time lag of the magnetic flux in a magnetic material behind the magnetizing force producing it caused by the molecular friction of the molecules trying to allow themselves with the magnetic force applied to the material.",
+    "options": [
+      "Hysteresis loop",
+      "Magnetic loss",
+      "Hysteresis",
+      "Hysteresis loss"
+    ],
+    "answer": "Hysteresis"
+  },
+  {
+    "questionNumber": "24",
+    "question": "What is the magnetic equivalent of electrical resistance?",
+    "options": [
+      "Reluctance",
+      "Magnetomotive force",
+      "Flux",
+      "Magnetic field"
+    ],
+    "answer": "Reluctance"
+  },
+  {
+    "questionNumber": "25",
+    "question": "An alloy that changes directly from solid to liquid with no plastic or semi-liquid state.",
+    "options": [
+      "Amalgam",
+      "Nickel-bronze",
+      "Mercury",
+      "Eutectic alloy"
+    ],
+    "answer": "Eutectic alloy"
+  },
+  {
+    "questionNumber": "26",
+    "question": "The current of an electronic circuit is analogous to ___ parameter of a magnetic circuit.",
+    "options": [
+      "flux density",
+      "reluctivity",
+      "mmf",
+      "flux"
+    ],
+    "answer": "flux"
+  },
+  {
+    "questionNumber": "27",
+    "question": "Term used in electronic measuring device when a material increases resistance due to heat produced by current flowing through them.",
+    "options": [
+      "Positive resistance coefficient",
+      "Negative resistance coefficient",
+      "Positive temperature coefficient",
+      "Negative temperature coefficient"
+    ],
+    "answer": "Positive temperature coefficient"
+  },
+  {
+    "questionNumber": "28",
+    "question": "Find which type of network provides the greatest harmonic suppression.",
+    "options": [
+      "Pi-network",
+      "Pi-L network",
+      "Inverse Pi-network",
+      "L-network"
+    ],
+    "answer": "Pi-L network"
+  },
+  {
+    "questionNumber": "29",
+    "question": "The maximum voltage that can be applied to a capacitor without the capacitor breaking down or shorting.",
+    "options": [
+      "Capacitor voltage",
+      "Working voltage",
+      "Effective voltage",
+      "Maximum voltage"
+    ],
+    "answer": "working voltage"
+  },
+  {
+    "questionNumber": "30",
+    "question": "Which of the following allows more current if applied to the same voltage?",
+    "options": [
+      "0.002 Siemen",
+      "2.5 ohms",
+      "25 ohms",
+      "0.004 Siemen"
+    ],
+    "answer": "2.5 ohms"
+  },
+  {
+    "questionNumber": "31",
+    "question": "Where does practically all of the RF current flow in a conductor?",
+    "options": [
+      "Along the surface",
+      "In the center of the conductor",
+      "In the electromagnetic field in the conductor center",
+      "In the magnetic field around the conductor"
+    ],
+    "answer": "Along the surface"
+  },
+  {
+    "questionNumber": "32",
+    "question": "How are networks able to transform one impedance to anther?",
+    "options": [
+      "Resistance in the networks substitute for resistances in the load.",
+      "The matching network can cancel the reactive part of an impedance and change the value of the resistive part of an impedance.",
+      "The matching network introduces negative resistance to cancel the resistive part of impedance.",
+      "The matching network introduces transconductance to cancel the reactive part of an impedance."
+    ],
+    "answer": "The matching network can cancel the reactive"
+  },
+  {
+    "questionNumber": "33",
+    "question": "Who discovered the most important electrical effects, which is the magnetic effect?",
+    "options": [
+      "Hans Christian Oersted",
+      "Sir Charles Wheatstone",
+      "Georg Ohm",
+      "James Clerk Maxwell"
+    ],
+    "answer": "Hans Christian Oersted"
+  },
+  {
+    "questionNumber": "34",
+    "question": "Which of the following magnetic materials which can be easily magnetized in both direction?",
+    "options": [
+      "Soft magnetic materials",
+      "Hard magnetic materials",
+      "High hysteresis loss materials",
+      "Low hysteresis loss materials"
+    ],
+    "answer": "Soft magnetic materials"
+  },
+  {
+    "questionNumber": "35",
+    "question": "Materials that have very high permeabilities (hundred and even thousand times that of free space).",
+    "options": [
+      "Paramagnetic",
+      "Non-magnetic",
+      "Ferromagnetic",
+      "Diamagnetic"
+    ],
+    "answer": "Ferromagnetic"
+  },
+  {
+    "questionNumber": "36",
+    "question": "The quantity of magnetism retained by a magnetic material after withdrawal of the magnetizing force is called.",
+    "options": [
+      "leftover magnetism",
+      "hysteresis",
+      "residual magnetism",
+      "coercivity"
+    ],
+    "answer": "residual magnetism"
+  },
+  {
+    "questionNumber": "37",
+    "question": "The K shell or the first has how many permissible numbers of orbiting electrons?",
+    "options": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "answer": "2"
+  },
+  {
+    "questionNumber": "38",
+    "question": "Flux density is measured in",
+    "options": [
+      "tesla",
+      "weber",
+      "ampere=turn",
+      "Maxwell"
+    ],
+    "answer": "tesla"
+  },
+  {
+    "questionNumber": "39",
+    "question": "One oersted (Oe) is equivalent to ___ Gb/cm.",
+    "options": [
+      "1",
+      "10",
+      "100",
+      "1000"
+    ],
+    "answer": "1"
+  },
+  {
+    "questionNumber": "40",
+    "question": "A magnetic flux of 2.5 x 10 -4 Wb through an area of 5 x 10 -4 square meters results in",
+    "options": [
+      "5 Wb of flux",
+      "0.5 Tesla of flux density",
+      "5 x 10 -5 Wb of flux",
+      "5000 Tesla of flux density"
+    ],
+    "answer": "0.5 Tesla of flux density"
+  },
+  {
+    "questionNumber": "41",
+    "question": "If a 20 V potential is applied across a relay coil with 50 turns having 1 \u0001 of resistance, the total magnetomotive producing magnetic flux in the circuit is",
+    "options": [
+      "10 Wb",
+      "50 T",
+      "1000 A.t/m",
+      "1000 A.t"
+    ],
+    "answer": "1000 A.t"
+  },
+  {
+    "questionNumber": "42",
+    "question": "What is the reluctance of a magnetic path having a length of 2 x 10 -3 m and cross-sectional area of 2.5 x 10 -3 m 2 . The relative permeability is 100.",
+    "options": [
+      "6366 A.t/Wb",
+      "6000 A.t/Wb",
+      "8 x 10 -3 A.t/Wb",
+      "0.8 A.t/ Wb"
+    ],
+    "answer": "6366 A.t/Wb"
+  },
+  {
+    "questionNumber": "43",
+    "question": "How many turns are needed to produce a magnetomotive across a solenoid of 100 turns having a resistance of 2 \u0001. Calculate the number of ampere-turns?",
+    "options": [
+      "100",
+      "50",
+      "300",
+      "600"
+    ],
+    "answer": "167 turns"
+  },
+  {
+    "questionNumber": "44",
+    "question": "Series resonance occurs when",
+    "options": [
+      "X L = X C",
+      "X L = R",
+      "Z = R",
+      "Both a and c"
+    ],
+    "answer": "Both X"
+  },
+  {
+    "questionNumber": "45",
+    "question": "At what frequency will an inductor of 5 mH have the same reactance as a capacitor of 0.1 \u0002F?",
+    "options": [
+      "7.12 kHz",
+      "4.12 Hz",
+      "7.12 MHz",
+      "7.12 GHz"
+    ],
+    "answer": "7.12 kHz"
+  },
+  {
+    "questionNumber": "46",
+    "question": "In a series RLC circuit",
+    "options": [
+      "the current lags V L by 90°",
+      "the current leads V L by 90°",
+      "X L leads X C by 90°",
+      "Z = jX L at resonance"
+    ],
+    "answer": "the current lags V"
+  },
+  {
+    "questionNumber": "47",
+    "question": "Which of the following conditions is not true for a series RLC circuit at resonance?",
+    "options": [
+      "Z = jX L",
+      "X L = X C",
+      "The power factor is one",
+      "The magnitude Z is √ R 2 + (X L – X C ) 2"
+    ],
+    "answer": "Z = jX"
+  },
+  {
+    "questionNumber": "48",
+    "question": "If three 9 mH inductors are connected in parallel without mutual inductance, then the total inductance is",
+    "options": [
+      "3 mH",
+      "9 mH",
+      "27 mH",
+      "18 mH"
+    ],
+    "answer": "3 mH"
+  },
+  {
+    "questionNumber": "49",
+    "question": "If resonant frequency is 10 kHz and quality factor is 50, then",
+    "options": [
+      "bandwidth is 200 Hz",
+      "X L = is 50, 000 ohms",
+      "R is 50 ohms",
+      "X C = is 50, 000 ohms"
+    ],
+    "answer": "bandwidth is 200 Hz"
+  },
+  {
+    "questionNumber": "50",
+    "question": "At what frequency will the current in a series RLC circuit reach its maximum value for an applied voltage of 15 with R = 500 \u0001, L = 100 \u0002H and C = 0.001\u0002F?",
+    "options": [
+      "503 kHz",
+      "403 kHz",
+      "603 kHz",
+      "303 kHz"
+    ],
+    "answer": "503 kHz"
+  },
+  {
+    "questionNumber": "51",
+    "question": "A series RLC circuit consists of a 10\u0001 resistor in series with L = 10\u0002H, and C = 100 \u0002F. Determine a new value of L for which the resonant frequency is one-half the original value.",
+    "options": [
+      "40\u0002H",
+      "10 mH",
+      "40 pH",
+      "40 nH"
+    ],
+    "answer": "40 \u0002H"
+  },
+  {
+    "questionNumber": "52",
+    "question": "A 0.09 microfarad capacitor is charged to 220 Volts. How long in milliseconds will it discharged to a level of 110 V if the discharged resistor has a resistance of 20, 000 ohms?",
+    "options": [
+      "1.5",
+      "2.5",
+      "1.25",
+      "0.5"
+    ],
+    "answer": "1.25"
+  },
+  {
+    "questionNumber": "53",
+    "question": "A trigger circuit consisting of a capacitor of 0.01 \u0002F is connected in series with a resistor. If the circuit requires 100 Vdc to operate, determine the value of the resistor when the constant is 0.009s.",
+    "options": [
+      "900 \u0001",
+      "900 k\u0001",
+      "900 M\u0001",
+      "900 G\u0001"
+    ],
+    "answer": "900 k\u0001"
+  },
+  {
+    "questionNumber": "54",
+    "question": "What is the peak factor for alternating current or voltage varying sinusoidally?",
+    "options": [
+      "1.4142",
+      "0.707",
+      "0.636",
+      "1.11"
+    ],
+    "answer": "1.4142"
+  },
+  {
+    "questionNumber": "55",
+    "question": "What is the complex impedance of a circuit with an absolute resistance of 300 \u0001?",
+    "options": [
+      "0 + j 300 \u0001",
+      "300 + j 90 \u0001",
+      "0 – j 300 \u0001",
+      "300 + j 0 \u0001"
+    ],
+    "answer": "300 + j 0 \u0001"
+  },
+  {
+    "questionNumber": "56",
+    "question": "Type of MOSFET that can be independently controlled by two separate signals.",
+    "options": [
+      "JFET",
+      "Dual-gate MOSFET",
+      "Induced channel MOSFET",
+      "IGFET"
+    ],
+    "answer": "dual gate MOSFET"
+  },
+  {
+    "questionNumber": "57",
+    "question": "It exhibits a negative temperature coefficient.",
+    "options": [
+      "conductor",
+      "semi-conductor",
+      "super conductor",
+      "ceramic"
+    ],
+    "answer": "Semi-conductor"
+  },
+  {
+    "questionNumber": "58",
+    "question": "In order to have the best efficiency and stability, where on the loadline should a solid-state power amplifier be operated?",
+    "options": [
+      "Just below the saturation point",
+      "At 1.414 times the saturation point",
+      "Just above the saturation point",
+      "At the saturation point"
+    ],
+    "answer": "Just below the saturation point"
+  },
+  {
+    "questionNumber": "59",
+    "question": "Find from the following statements, description of a defective diode.",
+    "options": [
+      "Diode resistance is either very low or very high on either direction.",
+      "Very low current",
+      "High voltage",
+      "High current"
+    ],
+    "answer": "Diode resistance is either very low or very high"
+  },
+  {
+    "questionNumber": "60",
+    "question": "Solve the collector current if base current is 200 mA and the current gain is 20.",
+    "options": [
+      "10 A",
+      "4 A",
+      "1 A",
+      "40 A"
+    ],
+    "answer": "4 A"
+  },
+  {
+    "questionNumber": "61",
+    "question": "Solve for the base current if collector current is 600 mA and the current gain is 20.",
+    "options": [
+      "30 mA",
+      "3 mA",
+      "12 mA",
+      "1.2 mA"
+    ],
+    "answer": "30 mA"
+  },
+  {
+    "questionNumber": "62",
+    "question": "A good material conductor should have ___ valence electrons.",
+    "options": [
+      "21",
+      "1",
+      "3.5",
+      "10"
+    ],
+    "answer": "1"
+  },
+  {
+    "questionNumber": "63",
+    "question": "A ___ is a junction field-effect transistor with Schottky barrier instead of a normal semiconductor junction.",
+    "options": [
+      "biFET",
+      "MOSFET",
+      "MESFET",
+      "JUGFET"
+    ],
+    "answer": "MESFET"
+  },
+  {
+    "questionNumber": "64",
+    "question": "In the operation of a dry cells we normally refer to the supply of current to load resistance where its current neutralize the separated charges at the electrons.",
+    "options": [
+      "Aligning the cells",
+      "Charging the cells",
+      "Discharging the cells",
+      "Polarizing the cells"
+    ],
+    "answer": "Discharging the cells"
+  },
+  {
+    "questionNumber": "65",
+    "question": "Find the output of a four (4) lead acid cells.",
+    "options": [
+      "3.2 V",
+      "8.4 V",
+      "5.8 V",
+      "1.6 V"
+    ],
+    "answer": "8.4 V"
+  },
+  {
+    "questionNumber": "66",
+    "question": "Find unloaded output of a power supply having a transformer regulation of 11.10% and 900 V load output.",
+    "options": [
+      "99.99 V",
+      "90 V",
+      "999.9 V",
+      "900 V"
+    ],
+    "answer": "999.9 V"
+  },
+  {
+    "questionNumber": "67",
+    "question": "Determine how long a battery will last whose rating is 100Ah; 24 volts and will run a 300 watts electronic equipment and a 50 watts light.",
+    "options": [
+      "6.85 hours",
+      "50.05 hours",
+      "12.00 hours",
+      "26.65 hours"
+    ],
+    "answer": "6.85 hrs"
+  },
+  {
+    "questionNumber": "68",
+    "question": "Which of the following statements is not true?",
+    "options": [
+      "Edison cell is storage type.",
+      "The Nicd cell is primary type",
+      "Output of solar cell is normally 0.5 V.",
+      "Primary cells can be charged."
+    ],
+    "answer": "The Nicd cell is primary type"
+  },
+  {
+    "questionNumber": "69",
+    "question": "Type of cell used mostly for emergency equipment. It is light, small, and has a large capacity of power for its size.",
+    "options": [
+      "Ni-cd cell",
+      "Silver-cadmium cell",
+      "Silver-zinc cell",
+      "Mercury cell"
+    ],
+    "answer": "Silver-zinc cell"
+  },
+  {
+    "questionNumber": "70",
+    "question": "Find the frequency in kilocycle per second in the armature of a 10 pole, 1, 200 rpm generator.",
+    "options": [
+      "100.0",
+      "1000.0",
+      "10.00",
+      "0.100"
+    ],
+    "answer": "0.100"
+  },
+  {
+    "questionNumber": "71",
+    "question": "How many silver zinc cells in series are needed for a 9V battery?",
+    "options": [
+      "9",
+      "6",
+      "3",
+      "7"
+    ],
+    "answer": "6"
+  },
+  {
+    "questionNumber": "72",
+    "question": "How much is the secondary voltage of a power transformer whose parameters are as follows, primary voltage is 240 V, 140 turns in the primary and 7 turns in the secondary.",
+    "options": [
+      "12 V",
+      "24 V",
+      "6 V",
+      "36 V"
+    ],
+    "answer": "12 V"
+  },
+  {
+    "questionNumber": "73",
+    "question": "How many nickel-cadmium cells are needed in series for a 10 V battery?",
+    "options": [
+      "8",
+      "12",
+      "5",
+      "10"
+    ],
+    "answer": "8"
+  },
+  {
+    "questionNumber": "74",
+    "question": "How long can a battery last with capacity of 50 ampere-hour running an equipment of 5 amperes?",
+    "options": [
+      "250 hrs",
+      "25 hrs",
+      "100 hrs",
+      "10 hrs"
+    ],
+    "answer": "10 hours"
+  },
+  {
+    "questionNumber": "75",
+    "question": "___ is a type of linear voltage used in applications where the load on the unregulated voltage source must be kept constant.",
+    "options": [
+      "A series regulator",
+      "A shunt regulator",
+      "A constant current source",
+      "A shunt current source"
+    ],
+    "answer": "A shunt regulator"
+  },
+  {
+    "questionNumber": "76",
+    "question": "What does the term single-phase indicates?",
+    "options": [
+      "one input",
+      "one current (one input)",
+      "one time",
+      "one voltage (one input)"
+    ],
+    "answer": "one input"
+  },
+  {
+    "questionNumber": "77",
+    "question": "How many lithium cells in series are needed for a 12 V battery?",
+    "options": [
+      "12 cells",
+      "4 cells",
+      "8 cells",
+      "10 cells"
+    ],
+    "answer": "4"
+  },
+  {
+    "questionNumber": "78",
+    "question": "Which class of amplifier is distinguished by the flow of current in the output essentially in 180 degrees pulses?",
+    "options": [
+      "Class C",
+      "Class B",
+      "Class A",
+      "Class D"
+    ],
+    "answer": "Class B"
+  },
+  {
+    "questionNumber": "79",
+    "question": "Find the ripple factor (Kr) of a sinusoidal signal with peak ripple of 4 volts on an average of 30.",
+    "options": [
+      "0.094",
+      "0.013",
+      "0.130",
+      "0.94"
+    ],
+    "answer": "0.094"
+  },
+  {
+    "questionNumber": "80",
+    "question": "Silicon diodes are used in a two-diode full-wave rectifier circuits to supply a load of 12 volts Dc. Assuming ideal diodes and the load resistance is 12 ohms, compute the efficiency of the rectifier in percentage.",
+    "options": [
+      "5.8",
+      "75",
+      "95.7",
+      "81.2"
+    ],
+    "answer": "81.2"
+  },
+  {
+    "questionNumber": "81",
+    "question": "____ is the characteristic of an oscillator that enables it to sustain oscillation after removal of the control stimulus.",
+    "options": [
+      "Momentum",
+      "Fly-wheel effect",
+      "Damping",
+      "Forced oscillations"
+    ],
+    "answer": "Fly-wheel effect"
+  },
+  {
+    "questionNumber": "82",
+    "question": "The gain of a different amplifier is 10, and all inputs are sine waves with a peak-to-peak amplitude of 10 millivolts. If the single input, differential output, differential amplifier has an output signal taken between the two output terminals. What will be the peak to peak amplitude of the combined output?",
+    "options": [
+      "20 millivolts",
+      "220 millivolts",
+      "200 millivolts",
+      "2000 millivolts"
+    ],
+    "answer": "200 millivolts"
+  },
+  {
+    "questionNumber": "83",
+    "question": "It consists of elements inseparably associated and formed on or within a single substrate.",
+    "options": [
+      "Integrated circuit (IC)",
+      "Microsoft",
+      "Module",
+      "Micro circuit"
+    ],
+    "answer": "integrated circuit (IC)"
+  },
+  {
+    "questionNumber": "84",
+    "question": "IC production method to prevent unwanted interaction between elements within a chip.",
+    "options": [
+      "Evaporation",
+      "Cathode splittering",
+      "Isolation",
+      "Diffusion"
+    ],
+    "answer": "Isolation"
+  },
+  {
+    "questionNumber": "85",
+    "question": "All input signals are waves with a peak amplitude of 10 millivolts. The gain of the differential amplifier is 10. If it is configured as a single input and a single output. What will be the peak-to- peak amplitude of the output signal?",
+    "options": [
+      "110 millivolts",
+      "100 millivolts",
+      "10 millivolts",
+      "1000 millivolts"
+    ],
+    "answer": "100 mV"
+  },
+  {
+    "questionNumber": "86",
+    "question": "How do you turn on a diac?",
+    "options": [
+      "Gate current",
+      "Breakover voltage",
+      "Gate voltage",
+      "Anode voltage"
+    ],
+    "answer": "Breakover voltage"
+  },
+  {
+    "questionNumber": "87",
+    "question": "Find the two stable operating conditions of an SCR?",
+    "options": [
+      "conducting and non-conducting",
+      "oscillating and quiescent",
+      "NPN conduction and PNP conduction",
+      "Forward conducting and reverse conducting"
+    ],
+    "answer": "Conducting non-conducting"
+  },
+  {
+    "questionNumber": "88",
+    "question": "The term used to describe the process whereby two transistors with positive feedback are used to stimulate the action of the thyristor.",
+    "options": [
+      "Arcing",
+      "Latching",
+      "Damping",
+      "Switching"
+    ],
+    "answer": "Latching"
+  },
+  {
+    "questionNumber": "89",
+    "question": "In the concept of induction heating in industrial electronics, the eddy current penetrates to greater depths at",
+    "options": [
+      "high frequencies",
+      "increasing induction",
+      "decreasing induction",
+      "low frequencies"
+    ],
+    "answer": "high frequencies"
+  },
+  {
+    "questionNumber": "90",
+    "question": "When testing an SCR with an ohmmeter, the SCR will conduct if what two elements are shorted together/",
+    "options": [
+      "Gate and anode",
+      "Ground and Cathode",
+      "Gate and Ground",
+      "Gate and Cathode"
+    ],
+    "answer": "Gate and Anode"
+  },
+  {
+    "questionNumber": "91",
+    "question": "Analysis of the spectrum of light or other form of electromagnetic radiation emitted or absorbed by a substance in order to investigate its structure.",
+    "options": [
+      "Flouroscopy",
+      "Calligraphy",
+      "Spectroscopy",
+      "Spectography"
+    ],
+    "answer": "Spectroscopy"
+  },
+  {
+    "questionNumber": "92",
+    "question": "A triac is a/an ___ equivalent of two SCRs.",
+    "options": [
+      "series",
+      "inverse-parallel",
+      "parallel-series",
+      "parallel"
+    ],
+    "answer": "inverse-parallel"
+  },
+  {
+    "questionNumber": "93",
+    "question": "The purpose of installing thyristors across the incoming power lines to speed the control system is to ___.",
+    "options": [
+      "cause the motor to caution",
+      "protect drive circuits from high voltage transient surges",
+      "increase counter-emf",
+      "all the field winding current to continue flowing"
+    ],
+    "answer": "protect drive circuits from high voltage transient"
+  },
+  {
+    "questionNumber": "94",
+    "question": "What is the systematic movement of a radar beam while searching or tracking a target?",
+    "options": [
+      "Scanning",
+      "Locked on",
+      "Acquisition",
+      "Electrolysis"
+    ],
+    "answer": "Scanning"
+  },
+  {
+    "questionNumber": "95",
+    "question": "A new concept in commercial aircraft where computers monitor aircraft systems reporting on their status only if requested by the pilot or if something is wrong and displayed on the screen when necessary.",
+    "options": [
+      "Virtual cockpit",
+      "Real cockpit",
+      "Glass cockpit",
+      "The cockpit"
+    ],
+    "answer": "Glass cockpit"
+  },
+  {
+    "questionNumber": "96",
+    "question": "Pentagon planners computer based advanced speech recognition system.",
+    "options": [
+      "TOMCAT",
+      "EAGLE",
+      "ORION",
+      "SPHINX"
+    ],
+    "answer": "SPHINX"
+  },
+  {
+    "questionNumber": "97",
+    "question": "A TRIAC behaves like two",
+    "options": [
+      "diodes in series",
+      "resistors and one diode",
+      "four-layer diodes in parallel",
+      "inverse parallel connected SCRs with common gate."
+    ],
+    "answer": "inverse parallel connected SCRs with common"
+  },
+  {
+    "questionNumber": "98",
+    "question": "Originally called a double-base diode. It is three- terminal, solid-state device that has several advantages over conventional transistor and has only one PN junction.",
+    "options": [
+      "UDT",
+      "UJT",
+      "FET",
+      "MOSFET"
+    ],
+    "answer": "UJT"
+  },
+  {
+    "questionNumber": "99",
+    "question": "An automatic switch, which is operated by current in a coil, is called _____.",
+    "options": [
+      "SCS",
+      "Relay",
+      "SCR",
+      "Laser"
+    ],
+    "answer": "relay"
+  },
+  {
+    "questionNumber": "100",
+    "question": "If the gain of an amplifier without feedback is 10 and with negative feedback is 8, then the feedback fraction is",
+    "options": [
+      "0.025",
+      "0.9",
+      "0.8",
+      "0.225"
+    ],
+    "answer": "0.025"
+  }
+]

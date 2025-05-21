@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Game</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/p5.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+  <div id="sketch-holder" class="w-full max-w-2xl"></div>
+  <script>
+    let state = 'start'; // Game states: start, quiz, upload
+    let questions = [];
+    let currentQuestion = 0;
+    let score = 0;
+    let questionNumber = 1;
+    let progress = 0; // Progress bar percentage
+    let isUploading = false; // Flag to track upload state
+    let loadingTimeout; // Timeout for question loading
+    let answerFeedback = null; // To track feedback state
+    let feedbackTimer = null; // Timer for feedback display
+    const API_URL = 'https://testtaker-f33a.onrender.com';
+
+    function setup() {
+      let canvas = createCanvas(600, 700);
+      canvas.parent('sketch-holder');
+      loadProgress();
+      fetchQuestions();
+      noLoop();
+    }
+
+    function draw() {
+      background(255);
+      textFont('Arial');
+      if (state === 'start') {
+        drawStartScreen();
+      } else if (state === 'quiz') {
+        drawQuizScreen();
+      } else if (state === 'upload') {
+        drawUploadScreen();
+      }
+      // Draw feedback if active
+      if (answerFeedback) {
+        drawFeedback();
+      }
+    }
+
+    function drawStartScreen() {
+      textAlign(CENTER, CENTER);
+      textSize(32);
+      fill(0);
+      text('Welcome to the Quiz Game!', width / 2, height / 4);
+
+      fill(100, 200, 100);
+      rect(width / 2 - 100, height / 2 - 40, 200, 50, 10);
+      fill(255);
+      textSize(20);
+      text('Play', width / 2, height / 2 - 15);
+
+      fill(100, 100, 200);
+      rect(width / 2 - 100, height / 2 + 20, 200, 50, 10);
+      fill(255);
+      text('Upload Questions', width / 2, height / 2 + 45);
+    }
+
+    function drawQuizScreen() {
+      if (questions.length === 0) {
+        textAlign(CENTER, CENTER);
+        textSize(20);
+        fill(0);
+        text('Loading questions...', width / 2, height / 2);
+        return;
+      }
+      let q = questions[currentQuestion];
+
+      // Score and question number
+      textSize(18);
+      textAlign(RIGHT, TOP);
+      fill(0);
+      text(`Score: ${score} | Question: ${questionNumber}`, width - 40, 40);
+
+      // Draw the question (centered, wrapped)
+      let questionBoxWidth = 400;
+      let questionBoxX = (width - questionBoxWidth) / 2;
+      textSize(22);
+      textAlign(LEFT, TOP);
+      fill(0);
+      text(q.question, questionBoxX, 100, questionBoxWidth, 120);
+
+      // Draw answer options
+      let buttonWidth = 400;
+      let buttonHeight = 50;
+      let buttonX = (width - buttonWidth) / 2;
+      let firstButtonY = 250;
+      let buttonSpacing = 20;
+
+      for (let i = 0; i < q.options.length; i++) {
+        let y = firstButtonY + i * (buttonHeight + buttonSpacing);
+
+        // Button background
+        if (answerFeedback && answerFeedback.selected === i) {
+          fill(answerFeedback.correct ? 0 : 255, answerFeedback.correct ? 255 : 0, 0);
+        } else {
+          fill(200);
+        }
+        rect(buttonX, y, buttonWidth, buttonHeight, 12);
+
+        // Button text
+        fill(0);
+        textSize(18);
+        textAlign(CENTER, CENTER);
+        text(q.options[i], buttonX + buttonWidth / 2, y + buttonHeight / 2);
+      }
+
+      // Draw upload button
+      fill(100, 100, 200);
+      rect(width / 2 - 100, 600, 200, 50, 10);
+      fill(255);
+      textSize(20);
+      textAlign(CENTER, CENTER);
+      text('Upload Questions', width / 2, 625);
+    }
+
+    function drawUploadScreen() {
+      textSize(18);
+      textAlign(CENTER, TOP);
+      fill(0);
+      text('Upload a .txt, .pdf, or .docx file', width / 2, height / 4, width - 40);
+      if (isUploading) {
+        fill(200);
+        rect(width / 2 - 100, height / 2 - 40, 200, 30);
+        fill(100, 200, 100);
+        rect(width / 2 - 100, height / 2 - 40, (progress / 100) * 200, 30);
+        fill(0);
+        textSize(16);
+        text(`Uploading: ${Math.round(progress)}%`, width / 2, height / 2 - 25);
+      } else {
+        fill(100, 100, 200);
+        rect(width / 2 - 100, height / 2 - 40, 200, 50, 10);
+        fill(255);
+        textSize(18);
+        text('Upload', width / 2, height / 2 - 15);
+
+        fill(200, 100, 100);
+        rect(width / 2 - 100, height / 2 + 20, 200, 50, 10);
+        fill(255);
+        text('Back', width / 2, height / 2 + 45);
+      }
+      if (progress === 66) { // Confirmation after parsing
+        textSize(14);
+        fill(0, 200, 0);
+        text('Upload successful!', width / 2, height / 2 + 80, width - 40);
+      }
+    }
+
+    function drawFeedback() {
+      if (answerFeedback) {
+        fill(255, 255, 255, 200); // Semi-transparent overlay
+        rect(0, 0, width, height);
+        textSize(20);
+        fill(0);
+        textAlign(CENTER, CENTER);
+        text('Answer Feedback', width / 2, height / 2 - 20);
+        text(answerFeedback.correct ? 'Correct!' : 'Wrong!', width / 2, height / 2 + 20);
+      }
+    }
+
+    function mousePressed() {
+      if (state === 'start') {
+        if (mouseX > width / 2 - 100 && mouseX < width / 2 + 100) {
+          if (mouseY > height / 2 - 40 && mouseY < height / 2 + 10) {
+            state = 'quiz';
+            currentQuestion = 0;
+            score = 0;
+            questionNumber = 1;
+            answerFeedback = null;
+            redraw();
+          } else if (mouseY > height / 2 + 20 && mouseY < height / 2 + 70) {
+            state = 'upload';
+            redraw();
+          }
+        }
+      } else if (state === 'quiz') {
+        let buttonWidth = 400;
+        let buttonHeight = 50;
+        let buttonX = (width - buttonWidth) / 2;
+        let firstButtonY = 250;
+        let buttonSpacing = 20;
+        for (let i = 0; i < 4; i++) {
+          let y = firstButtonY + i * (buttonHeight + buttonSpacing);
+          if (mouseX > buttonX && mouseX < buttonX + buttonWidth && mouseY > y && mouseY < y + buttonHeight) {
+            checkAnswer(i);
+            return; // Exit after selecting an answer
+          }
+        }
+        if (mouseX > width / 2 - 100 && mouseX < width / 2 + 100 && mouseY > 600 && mouseY < 650) {
+          state = 'upload';
+          redraw();
+        }
+      } else if (state === 'upload' && !isUploading) {
+        if (mouseX > width / 2 - 100 && mouseX < width / 2 + 100 && mouseY > height / 2 - 40 && mouseY < height / 2 + 10) {
+          document.getElementById('fileInput').click();
+        } else if (mouseX > width / 2 - 100 && mouseX < width / 2 + 100 && mouseY > height / 2 + 20 && mouseY < height / 2 + 70) {
+          state = 'quiz';
+          fetchQuestions();
+          redraw();
+        }
+      }
+    }
+
+    function checkAnswer(selected) {
+      let q = questions[currentQuestion];
+      // Accept both index and value as answer for compatibility
+      let correct = (q.answer === selected || q.options[selected] === q.answer);
+      answerFeedback = { selected, correct };
+      if (correct) score++;
+      questionNumber++;
+      saveProgress();
+
+      // Show feedback for 1.2 seconds
+      if (feedbackTimer) clearTimeout(feedbackTimer);
+      feedbackTimer = setTimeout(() => {
+        answerFeedback = null;
+        currentQuestion = (currentQuestion + 1) % questions.length;
+        redraw();
+      }, 1200);
+      redraw();
+    }
+
+    function saveProgress() {
+      localStorage.setItem('quizScore', score);
+      localStorage.setItem('questionNumber', questionNumber);
+    }
+
+    function loadProgress() {
+      score = parseInt(localStorage.getItem('quizScore')) || 0;
+      questionNumber = parseInt(localStorage.getItem('questionNumber')) || 1;
+    }
+
+    function fetchQuestions() {
+      clearTimeout(loadingTimeout);
+      questions = [];
+      progress = 0;
+
+      loadingTimeout = setTimeout(() => {
+        if (questions.length === 0) {
+          questions = [];
+          alert('Failed to load questions after timeout. Please try again.');
+        }
+      }, 10000);
+
+      fetch(`${API_URL}/api/questions`, { timeout: 10000 })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok: ' + response.statusText);
+          }
+          return response.json();
+        })
+        .then(data => {
+          questions = data;
+          progress = 100;
+          isUploading = false;
+          clearTimeout(loadingTimeout);
+          redraw();
+        })
+        .catch(error => {
+          questions = [];
+          progress = 0;
+          isUploading = false;
+          clearTimeout(loadingTimeout);
+          alert('Error fetching questions: ' + error.message);
+        });
+    }
+
+    document.getElementById('fileInput')?.addEventListener('change', (event) => {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const formData = new FormData();
+      formData.append('file', file);
+
+      isUploading = true;
+      progress = 0;
+
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 15000);
+
+      fetch(`${API_URL}/api/upload`, {
+        method: 'POST',
+        body: formData,
+        signal: controller.signal
+      })
+        .then(response => {
+          clearTimeout(timeoutId);
+          if (!response.ok) {
+            return response.text().then(text => {
+              throw new Error(`Network response was not ok: ${response.status} - ${text}`);
+            });
+          }
+          return response.json();
+        })
+        .then(data => {
+          progress = 33; // Start progress
+          const checkQuestions = () => {
+            fetch(`${API_URL}/api/questions`)
+              .then(resp => resp.json())
+              .then(qs => {
+                if (qs.length > 0 || progress >= 66) {
+                  progress = 66;
+                  fetchQuestions();
+                } else {
+                  progress = Math.min(progress + 10, 65);
+                  setTimeout(checkQuestions, 500);
+                }
+              });
+          };
+          checkQuestions();
+        })
+        .catch(error => {
+          clearTimeout(timeoutId);
+          progress = 0;
+          isUploading = false;
+          alert('Error uploading file: ' + error.message);
+        });
+      redraw();
+    });
+  </script>
+  <input type="file" id="fileInput" accept=".txt,.pdf,.docx" class="mt-4 p-2 border rounded" style="display: none;">
+</body>
+</html>
