@@ -3,499 +3,788 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><strike>BEST</strike> okay ece quiz game</title>
+  <title>WHO WANTS TO BE A ECELLIONAIRE</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/p5.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      overflow: hidden; /* Prevent scrolling */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f3f4f6; /* Tailwind gray-100 */
+    }
+    #sketch-holder {
+      border-radius: 12px; /* Rounded corners for the canvas holder */
+      overflow: hidden; /* Ensures content respects border-radius */
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    }
+    /* Style for the dropdown and new category input */
+    .html-element {
+      position: absolute;
+      z-index: 10; /* Ensure it's above the canvas */
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      padding: 8px;
+      font-size: 16px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      background-color: #fff; /* White background for dropdown/input */
+      color: #333; /* Text color for input/select */
+    }
+    /* Specific styling for select/dropdown */
+    #categoryDropdown {
+        appearance: none; /* Remove default arrow */
+        background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22M7%204L5%206L3%204L2%205L6%209L10%205L9%204L7%206Z%22%2F%3E%3C%2Fsvg%3E');
+        background-repeat: no-repeat;
+        background-position: right 8px center;
+        padding-right: 30px; /* Make space for the custom arrow */
+    }
+  </style>
 </head>
 <body class="bg-gray-100 flex items-center justify-center h-screen">
-  <div id="sketch-holder" class="w-full max-w-2xl"></div>
-  <input type="file" id="fileInput" accept=".txt,.pdf,.docx" class="mt-4 p-2 border rounded" style="display: none;">
+  <div id="sketch-holder"></div>
+  
   <script>
-    let state = 'start';
-    let questions = [];
-    let currentQuestion = 0;
+    let state = 'start'; // 'start', 'categorySelect', 'quiz', 'score', 'upload', 'loading'
+    let questions = []; // All questions loaded from questions.json
+    let filteredQuestions = []; // Questions for the current quiz session
+    let currentQuestionIndex = 0; // Index in filteredQuestions
     let score = 0;
-    let questionNumber = 1;
-    let progress = 0;
+    let questionNumberDisplay = 1; // 1-based index for display
+    let progress = 0; // For upload progress bar
     let isUploading = false;
     let loadingTimeout;
-    let answerFeedback = null;
+    let answerFeedback = null; // Stores { selected: index, correct: boolean, correctAnswerIndex: index }
     let feedbackTimer = null;
-    let selectedCategory = null; // New variable to store selected category
-    const API_URL = 'https://testtaker-f33a.onrender.com';
-    const CATEGORIES = ['ELECTRONICS', 'ESAT', 'GEAS', 'MATHEMATICS'];
+    let selectedQuizCategory = null; // Category chosen for the quiz
+    let uploadCategory = ''; // Category chosen for upload dropdown
+
+    // Fixed categories for the dropdown and game selection
+    const FIXED_CATEGORIES = ["ELECTRONICS", "ESAT", "GEAS", "MATHEMATICS"];
+
+    const API_URL = 'https://testtaker-f33a.onrender.com'; // Your API endpoint
+
+    // HTML elements for upload form (managed directly in DOM)
+    let fileInput;
+    let categoryDropdown;
+    let newCategoryInput; // For "Add New Category" option
 
     function setup() {
-      let canvas = createCanvas(600, 700);
+      // Canvas size for smartphone portrait
+      let canvas = createCanvas(360, 640); 
       canvas.parent('sketch-holder');
+      
+      // Initialize HTML elements for upload form
+      fileInput = createFileInput(); // No handler here, attach later
+      fileInput.id('fileInput');
+      fileInput.parent('sketch-holder');
+      fileInput.elt.style.display = 'none'; // Hide initially
+      fileInput.elt.className = 'html-element'; // Apply common styling
+      // Attach event listener directly to the underlying DOM element
+      fileInput.elt.addEventListener('change', handleFileSelect);
+
+
+      categoryDropdown = createSelect();
+      categoryDropdown.id('categoryDropdown');
+      categoryDropdown.parent('sketch-holder');
+      categoryDropdown.changed(handleCategoryChange);
+      categoryDropdown.elt.style.display = 'none'; // Hide initially
+      categoryDropdown.elt.className = 'html-element'; // Apply common styling
+
+      newCategoryInput = createInput('');
+      newCategoryInput.id('newCategoryInput');
+      newCategoryInput.parent('sketch-holder');
+      newCategoryInput.attribute('placeholder', 'Enter New Category Name');
+      newCategoryInput.changed(handleNewCategoryInput);
+      newCategoryInput.elt.style.display = 'none'; // Hide initially
+      newCategoryInput.elt.className = 'html-element'; // Apply common styling
+
       loadProgress();
-      fetchQuestions(); // Fetch all questions initially to get a count or for general play
-      noLoop();
+      fetchQuestions(); // Fetch all questions and populate categories on setup
+      textAlign(CENTER, CENTER);
+      rectMode(CENTER); // Set rectMode to CENTER globally
+      textFont('Arial');
+      textSize(16); // Default text size
+      noLoop(); // Stop draw loop until needed, redraw() will be called manually
     }
 
     function draw() {
-      background(255);
-      textFont('Arial');
-      if (state === 'start') {
-        drawStartScreen();
-      } else if (state === 'quiz') {
-        drawQuizScreen();
-      } else if (state === 'upload') {
-        drawUploadScreen();
-      } else if (state === 'categories') {
-        drawCategoriesScreen();
-      }
-      if (answerFeedback) {
-        drawFeedback();
-      }
-    }
-
-    function drawStartScreen() {
-      textAlign(CENTER, CENTER);
-      textSize(32);
-      fill(0);
-      text('<strike>BEST</strike> okay ece quiz game', width / 2, height / 4);
-
-      fill(100, 200, 100);
-      rect(width / 2 - 100, height / 2 - 100, 200, 50, 10);
-      fill(255);
-      textSize(20);
-      text('Play All Questions', width / 2, height / 2 - 75);
-
-      fill(100, 100, 200);
-      rect(width / 2 - 100, height / 2 - 30, 200, 50, 10);
-      fill(255);
-      text('Categories', width / 2, height / 2 - 5);
-
-      fill(255, 165, 0);
-      rect(width / 2 - 100, height / 2 + 40, 200, 50, 10);
-      fill(255);
-      text('Upload Questions', width / 2, height / 2 + 65);
-
-      fill(200, 100, 100);
-      rect(width / 2 - 100, height / 2 + 110, 200, 50, 10);
-      fill(255);
-      text('Reset Quiz', width / 2, height / 2 + 135);
-
-      fill(150, 150, 150);
-      rect(width / 2 - 100, height / 2 + 180, 200, 50, 10);
-      fill(255);
-      text('Clear All Questions', width / 2, height / 2 + 205);
-    }
-
-    function drawQuizScreen() {
-      if (questions.length === 0) {
-        textAlign(CENTER, CENTER);
-        textSize(20);
-        fill(0);
-        text('Loading questions...', width / 2, height / 2);
-        return;
-      }
-      let q = questions[currentQuestion];
-
-      textSize(18);
-      textAlign(RIGHT, TOP);
-      fill(0);
-      text(`Score: ${score} | Question: ${questionNumber}`, width - 40, 40);
-
-      textSize(18);
-      textAlign(LEFT, TOP);
-      fill(0);
-      text(`Category: ${selectedCategory || 'All'}`, 40, 40);
-
-      let questionBoxWidth = 400;
-      let questionBoxX = (width - questionBoxWidth) / 2;
-      textSize(22);
-      textAlign(LEFT, TOP);
-      fill(0);
-      text(q.question, questionBoxX, 100, questionBoxWidth, 120);
-
-      let buttonWidth = 400;
-      let buttonHeight = 50;
-      let buttonX = (width - buttonWidth) / 2;
-      let firstButtonY = 250;
-      let buttonSpacing = 20;
-
-      for (let i = 0; i < q.options.length; i++) {
-        let y = firstButtonY + i * (buttonHeight + buttonSpacing);
-        if (answerFeedback && answerFeedback.selected === i) {
-          fill(answerFeedback.correct ? 0 : 255, answerFeedback.correct ? 255 : 0, 0);
+      background(243, 244, 246); // Light gray background
+      noStroke();
+      
+      // Manage visibility and position of HTML elements based on state
+      if (state === 'upload') {
+        categoryDropdown.elt.style.display = 'block';
+        // Position dropdown relative to canvas
+        categoryDropdown.position(width / 2 - categoryDropdown.width / 2, 140);
+        
+        if (uploadCategory === 'new_category_option') {
+          newCategoryInput.elt.style.display = 'block';
+          newCategoryInput.position(width / 2 - newCategoryInput.width / 2, 180);
         } else {
-          fill(200);
+          newCategoryInput.elt.style.display = 'none';
         }
-        rect(buttonX, y, buttonWidth, buttonHeight, 12);
-        fill(0);
-        textSize(18);
-        textAlign(CENTER, CENTER);
-        text(q.options[i], buttonX + buttonWidth / 2, y + buttonHeight / 2);
-      }
-
-      fill(100, 100, 200);
-      rect(width / 2 - 100, 600, 200, 50, 10);
-      fill(255);
-      textSize(20);
-      textAlign(CENTER, CENTER);
-      text('Back to Menu', width / 2, 625);
-    }
-
-    function drawUploadScreen() {
-      textSize(18);
-      textAlign(CENTER, TOP);
-      fill(0);
-      text('Upload a .txt, .pdf, or .docx file', width / 2, height / 4);
-      textSize(16);
-      text('Select Category for Upload:', width / 2, height / 4 + 40);
-
-      // Category selection for upload
-      let categoryButtonsY = height / 4 + 70;
-      let catButtonWidth = 120;
-      let catButtonHeight = 30;
-      let catButtonSpacing = 10;
-      for (let i = 0; i < CATEGORIES.length; i++) {
-        let categoryName = CATEGORIES[i];
-        let x = width / 2 - (CATEGORIES.length / 2) * (catButtonWidth + catButtonSpacing) + i * (catButtonWidth + catButtonSpacing);
-        fill(selectedCategory === categoryName ? 150 : 200);
-        rect(x, categoryButtonsY, catButtonWidth, catButtonHeight, 5);
-        fill(0);
-        textSize(14);
-        text(categoryName, x + catButtonWidth / 2, categoryButtonsY + catButtonHeight / 2);
-      }
-
-      if (isUploading) {
-        fill(200);
-        rect(width / 2 - 100, height / 2 + 100, 200, 30);
-        fill(100, 200, 100);
-        rect(width / 2 - 100, height / 2 + 100, (progress / 100) * 200, 30);
       } else {
-        fill(100, 100, 200);
-        rect(width / 2 - 100, height / 2 + 100, 200, 50, 10);
-        fill(255);
-        textSize(18);
-        text('Select File & Upload', width / 2, height / 2 + 125);
+        categoryDropdown.elt.style.display = 'none';
+        newCategoryInput.elt.style.display = 'none';
+      }
 
-        fill(200, 100, 100);
-        rect(width / 2 - 100, height / 2 + 170, 200, 50, 10);
-        fill(255);
-        text('Back to Menu', width / 2, height / 2 + 195);
+      switch (state) {
+        case 'start':
+          drawStartScreen();
+          break;
+        case 'categorySelect':
+          drawCategorySelectScreen();
+          break;
+        case 'quiz':
+          drawQuizScreen();
+          break;
+        case 'score':
+          drawScoreScreen();
+          break;
+        case 'upload':
+          drawUploadScreen();
+          break;
+        case 'loading':
+          drawLoadingScreen();
+          break;
       }
     }
 
-    function drawCategoriesScreen() {
-      textAlign(CENTER, CENTER);
-      textSize(32);
-      fill(0);
-      text('Select a Category', width / 2, height / 4);
-
-      let buttonWidth = 250;
-      let buttonHeight = 60;
-      let buttonX = (width - buttonWidth) / 2;
-      let firstButtonY = height / 2 - 100;
-      let buttonSpacing = 20;
-
-      for (let i = 0; i < CATEGORIES.length; i++) {
-        let y = firstButtonY + i * (buttonHeight + buttonSpacing);
-        fill(100, 200, 100);
-        rect(buttonX, y, buttonWidth, buttonHeight, 10);
-        fill(255);
-        textSize(20);
-        text(CATEGORIES[i], width / 2, y + buttonHeight / 2);
-      }
-
-      fill(200, 100, 100);
-      rect(width / 2 - 100, firstButtonY + CATEGORIES.length * (buttonHeight + buttonSpacing), 200, 50, 10);
-      fill(255);
-      textSize(20);
-      text('Back to Menu', width / 2, firstButtonY + CATEGORIES.length * (buttonHeight + buttonSpacing) + 25);
-    }
-
-    function drawFeedback() {
-      if (answerFeedback) {
-        fill(255, 255, 255, 200);
-        rect(0, 0, width, height);
-        textSize(20);
-        fill(0);
-        textAlign(CENTER, CENTER);
-        text('Answer Feedback', width / 2, height / 2 - 60);
-        text(answerFeedback.correct ? 'Correct!' : 'Wrong!', width / 2, height / 2 - 20);
-        if (!answerFeedback.correct) {
-          textSize(16);
-          textAlign(CENTER, TOP);
-          text(`Correct answer: ${answerFeedback.correctAnswer}`, width / 2, height / 2 + 20);
-        }
-      }
-    }
-
-    function mousePressed() {
-      if (state === 'start') {
-        if (mouseX > width / 2 - 100 && mouseX < width / 2 + 100) {
-          if (mouseY > height / 2 - 100 && mouseY < height / 2 - 50) { // Play All Questions
-            state = 'quiz';
-            selectedCategory = null;
-            currentQuestion = 0;
-            score = 0;
-            questionNumber = 1;
-            answerFeedback = null;
-            saveProgress();
-            fetchQuestions(); // Fetch all questions
-          } else if (mouseY > height / 2 - 30 && mouseY < height / 2 + 20) { // Categories
-            state = 'categories';
-          } else if (mouseY > height / 2 + 40 && mouseY < height / 2 + 90) { // Upload Questions
-            state = 'upload';
-            selectedCategory = null; // Reset category selection for upload
-          } else if (mouseY > height / 2 + 110 && mouseY < height / 2 + 160) { // Reset Quiz
-            resetQuiz();
-          } else if (mouseY > height / 2 + 180 && mouseY < height / 2 + 230) { // Clear All Questions
-            clearQuestions(null); // Clear all questions
-          }
-        }
-      } else if (state === 'quiz') {
-        let buttonWidth = 400;
-        let buttonHeight = 50;
-        let buttonX = (width - buttonWidth) / 2;
-        let firstButtonY = 250;
-        let buttonSpacing = 20;
-        for (let i = 0; i < questions[currentQuestion].options.length; i++) {
-          let y = firstButtonY + i * (buttonHeight + buttonSpacing);
-          if (mouseX > buttonX && mouseX < buttonX + buttonWidth && mouseY > y && mouseY < y + buttonHeight) {
-            checkAnswer(i);
-            return;
-          }
-        }
-        if (mouseX > width / 2 - 100 && mouseX < width / 2 + 100 && mouseY > 600 && mouseY < 650) { // Back to Menu
-          state = 'start';
-          redraw();
-        }
-      } else if (state === 'upload' && !isUploading) {
-        let categoryButtonsY = height / 4 + 70;
-        let catButtonWidth = 120;
-        let catButtonHeight = 30;
-        let catButtonSpacing = 10;
-        // Check for category selection
-        for (let i = 0; i < CATEGORIES.length; i++) {
-          let categoryName = CATEGORIES[i];
-          let x = width / 2 - (CATEGORIES.length / 2) * (catButtonWidth + catButtonSpacing) + i * (catButtonWidth + catButtonSpacing);
-          if (mouseX > x && mouseX < x + catButtonWidth && mouseY > categoryButtonsY && mouseY < categoryButtonsY + catButtonHeight) {
-            selectedCategory = categoryName;
-            redraw();
-            return;
-          }
-        }
-
-        if (mouseX > width / 2 - 100 && mouseX < width / 2 + 100 && mouseY > height / 2 + 100 && mouseY < height / 2 + 150) { // Select File & Upload
-          document.getElementById('fileInput').click();
-        } else if (mouseX > width / 2 - 100 && mouseX < width / 2 + 100 && mouseY > height / 2 + 170 && mouseY < height / 2 + 220) { // Back to Menu
-          state = 'start';
-          redraw();
-        }
-      } else if (state === 'categories') {
-        let buttonWidth = 250;
-        let buttonHeight = 60;
-        let buttonX = (width - buttonWidth) / 2;
-        let firstButtonY = height / 2 - 100;
-        let buttonSpacing = 20;
-
-        for (let i = 0; i < CATEGORIES.length; i++) {
-          let y = firstButtonY + i * (buttonHeight + buttonSpacing);
-          if (mouseX > buttonX && mouseX < buttonX + buttonWidth && mouseY > y && mouseY < y + buttonHeight) {
-            selectedCategory = CATEGORIES[i];
-            state = 'quiz';
-            currentQuestion = 0;
-            score = 0;
-            questionNumber = 1;
-            answerFeedback = null;
-            saveProgress();
-            fetchQuestions(selectedCategory);
-            return;
-          }
-        }
-        let backButtonY = firstButtonY + CATEGORIES.length * (buttonHeight + buttonSpacing);
-        if (mouseX > width / 2 - 100 && mouseX < width / 2 + 100 && mouseY > backButtonY && mouseY < backButtonY + 50) { // Back to Menu
-          state = 'start';
-          redraw();
-        }
-      }
-    }
-
-    function checkAnswer(selected) {
-      let q = questions[currentQuestion];
-      let correctIndex = 'abcd'.indexOf(q.answer.toLowerCase());
-      let correct = selected === correctIndex;
-      answerFeedback = {
-        selected,
-        correct,
-        correctAnswer: correctIndex >= 0 ? q.options[correctIndex] : 'Unknown'
-      };
-      if (correct) score++;
-      questionNumber++;
-      saveProgress();
-
-      if (feedbackTimer) clearTimeout(feedbackTimer);
-      feedbackTimer = setTimeout(() => {
-        answerFeedback = null;
-        currentQuestion = (currentQuestion + 1) % questions.length;
-        redraw();
-      }, 2000);
-      redraw();
-    }
-
-    function saveProgress() {
-      localStorage.setItem('quizScore', score);
-      localStorage.setItem('questionNumber', questionNumber);
-      localStorage.setItem('selectedCategory', selectedCategory);
-    }
-
-    function loadProgress() {
-      score = parseInt(localStorage.getItem('quizScore')) || 0;
-      questionNumber = parseInt(localStorage.getItem('questionNumber')) || 1;
-      selectedCategory = localStorage.getItem('selectedCategory');
-    }
-
-    function fetchQuestions(category = null) {
-      clearTimeout(loadingTimeout);
-      questions = [];
-      progress = 0;
-
-      loadingTimeout = setTimeout(() => {
-        if (questions.length === 0) {
-          questions = [];
-          alert('Failed to load questions after timeout. Please try again.');
-        }
-      }, 10000);
-
-      let url = `${API_URL}/api/questions`;
-      if (category) {
-        url += `?category=${category}`;
-      }
-
-      fetch(url, { timeout: 10000 })
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok: ' + response.statusText);
-          }
-          return response.json();
-        })
-        .then(data => {
-          questions = data;
-          progress = 100;
-          isUploading = false;
-          clearTimeout(loadingTimeout);
-          redraw();
-        })
-        .catch(error => {
-          console.error('Error fetching questions:', error.message);
-          questions = [];
-          progress = 0;
-          isUploading = false;
-          clearTimeout(loadingTimeout);
-          alert('Error fetching questions: ' + error.message);
-        });
-    }
-
-    async function resetQuiz() {
-      try {
-        const response = await fetch(`${API_URL}/api/reset`, { method: 'POST' });
-        if (!response.ok) {
-          throw new Error('Network response was not ok: ' + await response.text());
-        }
-        const result = await response.json();
-        score = 0;
-        questionNumber = 1;
-        currentQuestion = 0;
-        answerFeedback = null;
-        saveProgress();
-        fetchQuestions(selectedCategory); // Refetch based on current category
-        alert(result.message);
-      } catch (error) {
-        console.error('Error resetting quiz:', error.message);
-        alert('Error resetting quiz: ' + error.message);
-      }
-    }
-
-    async function clearQuestions(category = null) {
-      let confirmationMessage = 'Are you sure you want to delete all questions? This cannot be undone.';
-      let requestBody = { confirm: 'DELETE' };
-
-      if (category) {
-        confirmationMessage = `Are you sure you want to delete all questions for category "${category}"? This cannot be undone.`;
-        requestBody.category = category;
-      }
-
-      if (!confirm(confirmationMessage)) {
-        return;
-      }
-      try {
-        const response = await fetch(`${API_URL}/api/clear`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(requestBody)
-        });
-        if (!response.ok) {
-          throw new Error('Network response was not ok: ' + await response.text());
-        }
-        const result = await response.json();
-        score = 0;
-        questionNumber = 1;
-        currentQuestion = 0;
-        answerFeedback = null;
-        saveProgress();
-        fetchQuestions(selectedCategory); // Refetch based on current category
-        alert(result.message);
-      } catch (error) {
-        console.error('Error clearing questions:', error.message);
-        alert('Error clearing questions: ' + error.message);
-      }
-    }
-
-    document.getElementById('fileInput').addEventListener('change', (event) => {
+    // --- HTML Element Handlers ---
+    async function handleFileSelect(event) {
       const file = event.target.files[0];
       if (!file) return;
 
-      if (!selectedCategory) {
-        alert('Please select a category for the uploaded questions.');
+      const allowedTypes = ['application/pdf', 'text/plain', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+      if (!allowedTypes.includes(file.type)) {
+        alert('Unsupported file type. Please select a .txt, .pdf, or .docx file.');
+        event.target.value = ''; // Clear input for unsupported type
         return;
       }
 
+      // Check if a category is selected first
+      let finalCategory = uploadCategory;
+      if (uploadCategory === 'new_category_option') {
+          finalCategory = newCategoryInput.value().trim();
+          if (!finalCategory) {
+              alert('Please enter a name for the new category.');
+              event.target.value = ''; // Clear file input
+              return;
+          }
+      }
+      if (!finalCategory || finalCategory === 'Select Category') {
+          alert('Please select or enter a category before choosing a file.');
+          event.target.value = ''; // Clear file input
+          return;
+      }
+      
+      // If category is selected, proceed with upload
+      await uploadFile(file, finalCategory);
+      event.target.value = ''; // Clear file input after upload attempt
+    }
+
+    function handleCategoryChange() {
+      uploadCategory = categoryDropdown.value();
+      redraw(); // Update new category input visibility and button state
+    }
+
+    function handleNewCategoryInput() {
+      // The value is already updated in newCategoryInput.value()
+      redraw(); // Update button state
+    }
+
+    // --- Drawing Functions ---
+    function drawLoadingScreen() {
+      fill(0);
+      textSize(24);
+      textAlign(CENTER, CENTER);
+      text('Loading...', width / 2, height / 2 - 30);
+      textSize(16);
+      text('Please wait while data is fetched or processed.', width / 2, height / 2);
+    }
+
+    function drawStartScreen() {
+      fill(0);
+      textSize(32); // Reduced font size for title
+      textAlign(CENTER, CENTER);
+      text('WHO WANTS TO BE A ECELLIONAIRE', width / 2, 80, width - 40); // Added maxWidth to prevent clipping
+
+      // Start Quiz Button
+      drawButton(width / 2, height / 2 - 80, 250, 60, 'Start Quiz', true);
+
+      // Upload Questions Button
+      drawButton(width / 2, height / 2, 250, 60, 'Upload Questions', true);
+
+      // Clear All Questions Button
+      drawButton(width / 2, height / 2 + 80, 250, 60, 'Clear All Questions', true);
+    }
+
+    function drawCategorySelectScreen() {
+      fill(0);
+      textSize(28);
+      textAlign(CENTER, CENTER);
+      text('Select a Category', width / 2, 60);
+
+      if (categories.length === 0) {
+        textSize(20);
+        text('No categories available. Upload questions!', width / 2, height / 2);
+      } else {
+        let buttonWidth = 250;
+        let buttonHeight = 45;
+        let startY = 120;
+        let spacing = 55;
+
+        categories.forEach((category, index) => {
+          drawButton(width / 2, startY + index * spacing, buttonWidth, buttonHeight, category, true);
+        });
+      }
+
+      // Back Button
+      drawButton(width / 2, height - 70, 200, 50, 'Back to Main Menu', true);
+    }
+
+    function drawQuizScreen() {
+      if (filteredQuestions.length === 0) {
+        fill(0);
+        textSize(24);
+        textAlign(CENTER, CENTER);
+        text('No questions available for this category.', width / 2, height / 2 - 30);
+        textSize(18);
+        text('Upload questions or try another category.', width / 2, height / 2);
+        // This button's click logic is handled in mouseClicked
+        drawButton(width / 2, height / 2 + 60, 200, 50, 'Main Menu', true); 
+        return;
+      }
+
+      let q = filteredQuestions[currentQuestionIndex];
+      if (!q) {
+        // All questions answered
+        state = 'score';
+        redraw();
+        return;
+      }
+
+      // Score and Question Number
+      fill(0);
+      textSize(18);
+      textAlign(LEFT, TOP);
+      text(`Question ${questionNumberDisplay}/${filteredQuestions.length}`, 20, 20);
+      textAlign(RIGHT, TOP);
+      text(`Score: ${score}`, width - 20, 20);
+
+      // Question Text Box
+      let questionBoxX = width / 2;
+      let questionBoxY = 120; 
+      let questionBoxWidth = width - 40;
+      let questionBoxHeight = 120; // Fixed height for question box to ensure options are consistent
+      fill(255);
+      rect(questionBoxX, questionBoxY, questionBoxWidth, questionBoxHeight, 10);
+      
+      fill(0);
+      textSize(20);
+      textAlign(CENTER, CENTER); // Center text within the box
+      text(q.question, questionBoxX, questionBoxY, questionBoxWidth - 20, questionBoxHeight - 20); // Center text within rect
+
+      // Options
+      let optionYStart = questionBoxY + questionBoxHeight / 2 + 30; // Start options below question box
+      let optionHeight = 50;
+      let optionSpacing = 15; 
+
+      for (let i = 0; i < q.options.length; i++) {
+        let optionY = optionYStart + i * (optionHeight + optionSpacing);
+        let optionX = width / 2;
+        let optionWidth = width - 60;
+
+        // Draw option box
+        let optionFillColor = 255; // Default white
+        let optionStrokeColor = 150; // Default grey border
+
+        // Highlight on hover if no feedback
+        let isHovering = mouseX > optionX - optionWidth / 2 && mouseX < optionX + optionWidth / 2 &&
+                         mouseY > optionY - optionHeight / 2 && mouseY < optionY + optionHeight / 2;
+        if (isHovering && answerFeedback === null) {
+          optionFillColor = color(200, 220, 255); // Light blue on hover
+        }
+
+        // Show feedback if an answer was submitted
+        if (answerFeedback !== null) {
+          if (i === q.correctAnswer) { // Correct answer
+            optionFillColor = color(144, 238, 144, 180); // Light green for correct
+          } else if (i === answerFeedback.selected) { // User's selected (incorrect) answer
+            optionFillColor = color(255, 99, 71, 180); // Tomato red for incorrect selected
+          }
+        }
+        
+        fill(optionFillColor);
+        stroke(optionStrokeColor);
+        strokeWeight(1);
+        rect(optionX, optionY, optionWidth, optionHeight, 10);
+
+        // Draw option text (e.g., A. Option Text)
+        fill(0);
+        textSize(18);
+        textAlign(CENTER, CENTER); // Center text within option button
+        text(`${String.fromCharCode(65 + i)}. ${q.options[i]}`, optionX, optionY, optionWidth - 20, optionHeight - 10);
+      }
+    }
+
+    function drawScoreScreen() {
+      fill(0);
+      textSize(36);
+      textAlign(CENTER, CENTER);
+      text('Quiz Complete!', width / 2, height / 2 - 100);
+      textSize(28);
+      text(`You scored ${score} out of ${filteredQuestions.length}`, width / 2, height / 2 - 30);
+
+      // Restart Quiz Button
+      drawButton(width / 2, height / 2 + 60, 200, 50, 'Restart Quiz', true);
+
+      // Main Menu Button
+      drawButton(width / 2, height / 2 + 120, 200, 50, 'Main Menu', true);
+    }
+
+    function drawUploadScreen() {
+      fill(0);
+      textSize(32);
+      textAlign(CENTER, TOP);
+      text('Upload Questions', width / 2, 30);
+
+      // Category Dropdown Label
+      fill(0);
+      textSize(18);
+      textAlign(LEFT, TOP);
+      // Position label relative to dropdown
+      text('Select Category:', categoryDropdown.x, 110); 
+
+      // "Choose File" button (p5.js drawn button that triggers HTML file input)
+      drawButton(width / 2, 240, 250, 50, 'Choose File', true);
+      
+      // Display selected file name
+      const selectedFileDOM = document.getElementById('fileInput').files[0];
+      if (selectedFileDOM) {
+        fill(0);
+        textSize(14);
+        textAlign(CENTER, TOP);
+        text(`Selected: ${selectedFileDOM.name}`, width / 2, 275);
+      }
+
+      // Upload progress bar
+      if (isUploading) {
+        fill(200);
+        rect(width / 2, height / 2 + 100, 300, 15, 5); // Centered rect
+        fill(96, 165, 250);
+        // Adjust for rectMode(CENTER) for the progress bar fill
+        rect(width / 2 - 150 + (map(progress, 0, 100, 0, 300) / 2), height / 2 + 100, map(progress, 0, 100, 0, 300), 15, 5);
+        
+        fill(0);
+        textAlign(CENTER, CENTER);
+        textSize(16);
+        text(`Uploading: ${floor(progress)}%`, width / 2, height / 2 + 100 + 25);
+      }
+
+      // Back to Main Menu Button
+      drawButton(width / 2, height - 70, 200, 50, 'Back to Main Menu', true);
+    }
+
+    // Helper function to draw a button
+    function drawButton(x, y, w, h, label, active = true) {
+      let buttonColor = color(59, 130, 246); // Blue
+      let textColor = color(255); // White
+
+      if (!active) {
+          buttonColor = color(180); // Grey for disabled
+      } else if (mouseX > x - w / 2 && mouseX < x + w / 2 && mouseY > y - h / 2 && mouseY < y + h / 2) {
+          buttonColor = color(70, 170, 220); // Hover color
+      }
+
+      fill(buttonColor);
+      stroke(buttonColor.levels[0] - 20, buttonColor.levels[1] - 20, buttonColor.levels[2] - 20); // Darker border
+      strokeWeight(2);
+      rect(x, y, w, h, 12);
+      noStroke(); // No stroke for text
+      fill(textColor);
+      textSize(20);
+      textAlign(CENTER, CENTER); // Ensure text is centered within the button
+      text(label, x, y);
+    }
+
+    // Helper to check if mouse is over a button
+    function checkButton(x, y, w, h) {
+      return mouseX > x - w / 2 && mouseX < x + w / 2 && mouseY > y - h / 2 && mouseY < y + h / 2;
+    }
+
+    // --- Event Handlers (for p5.js mouse clicks) ---
+    function mouseClicked() {
+      if (answerFeedback !== null) return; // Prevent clicks during feedback display
+
+      if (state === 'start') {
+        // Start Quiz Button
+        if (checkButton(width / 2, height / 2 - 80, 250, 60)) {
+          if (questions.length === 0) {
+            alert('No questions available. Please upload a file first.');
+          } else {
+            state = 'categorySelect';
+            // Categories are already extracted by fetchQuestions on setup
+          }
+          redraw();
+        }
+        // Upload Questions Button
+        else if (checkButton(width / 2, height / 2, 250, 60)) {
+          state = 'upload';
+          populateCategoryDropdown(); // Ensure dropdown is populated
+          redraw();
+        }
+        // Clear All Questions Button
+        else if (checkButton(width / 2, height / 2 + 80, 250, 60)) {
+          clearQuestions();
+          // Redraw will be handled by clearQuestions's finally block
+        }
+      } else if (state === 'categorySelect') {
+        let buttonWidth = 250;
+        let buttonHeight = 45;
+        let startY = 120;
+        let spacing = 55;
+
+        // Category buttons
+        categories.forEach((category, index) => {
+          if (checkButton(width / 2, startY + index * spacing, buttonWidth, buttonHeight)) {
+            selectedQuizCategory = category;
+            filterQuestionsByCategory(selectedQuizCategory);
+            startQuiz(); // Start quiz with filtered questions
+            redraw();
+            return; // Exit loop after click
+          }
+        });
+
+        // Back to Main Menu button
+        if (checkButton(width / 2, height - 70, 200, 50)) {
+          state = 'start';
+          redraw();
+        }
+      } else if (state === 'quiz') {
+        let q = filteredQuestions[currentQuestionIndex];
+        if (!q || !q.options) return; // Guard against undefined question or options
+
+        let optionYStart = 120 + 120 / 2 + 30; // Based on question box position
+        let optionHeight = 50;
+        let optionSpacing = 15; 
+
+        for (let i = 0; i < q.options.length; i++) {
+          let y = optionYStart + i * (optionHeight + optionSpacing);
+          let optionX = width / 2;
+          let optionWidth = width - 60;
+
+          if (checkButton(optionX, y + optionHeight / 2, optionWidth, optionHeight)) { // Check button with its center
+            checkAnswer(i); // Pass index directly
+            break; // Exit loop after an answer is clicked
+          }
+        }
+        // "Main Menu" button on "No questions available" screen
+        if (filteredQuestions.length === 0 && checkButton(width / 2, height / 2 + 60, 200, 50)) {
+            state = 'start';
+            redraw();
+        }
+      } else if (state === 'score') {
+        // Restart Quiz Button
+        if (checkButton(width / 2, height / 2 + 60, 200, 50)) {
+          resetQuiz(); // Resets to start screen
+          redraw();
+        }
+        // Main Menu Button
+        else if (checkButton(width / 2, height / 2 + 120, 200, 50)) {
+          resetQuiz(); // Resets to start screen
+          state = 'start';
+          redraw();
+        }
+      } else if (state === 'upload') {
+        // "Choose File" button click (triggers HTML file input)
+        if (checkButton(width / 2, 240, 250, 50)) {
+          // The handleFileSelect function will perform category check
+          fileInput.elt.click(); // Programmatically click the hidden HTML file input
+        }
+
+        // Back to Main Menu button click
+        if (checkButton(width / 2, height - 70, 200, 50)) {
+          state = 'start';
+          // Reset upload form state
+          fileInput.elt.value = ''; // Clear selected file input visual
+          uploadCategory = '';
+          populateCategoryDropdown(); // Reset dropdown to default
+          newCategoryInput.value(''); // Clear new category input
+          redraw();
+        }
+      }
+    }
+
+    // --- Quiz Logic ---
+    function startQuiz() {
+      currentQuestionIndex = 0;
+      score = 0;
+      questionNumberDisplay = 1;
+      state = 'quiz';
+      answerFeedback = null; // Clear any lingering feedback
+      saveProgress();
+    }
+
+    function checkAnswer(selectedIndex) {
+      if (feedbackTimer) return; // Prevent multiple clicks during feedback
+
+      let q = filteredQuestions[currentQuestionIndex];
+      let isCorrect = (selectedIndex === q.correctAnswer); 
+
+      answerFeedback = { selected: selectedIndex, correct: isCorrect, correctAnswerIndex: q.correctAnswer };
+      if (isCorrect) {
+        score++;
+      }
+
+      saveProgress(); // Save score immediately
+
+      feedbackTimer = setTimeout(() => {
+        answerFeedback = null;
+        feedbackTimer = null;
+        currentQuestionIndex++;
+        questionNumberDisplay++;
+        saveProgress(); // Save progress after moving to next question
+        if (currentQuestionIndex < filteredQuestions.length) {
+          redraw();
+        } else {
+          state = 'score'; // Quiz finished
+          redraw();
+        }
+      }, 1500); // Display feedback for 1.5 seconds
+      redraw(); // Update immediately to show feedback
+    }
+
+    function resetQuiz() {
+      clearTimeout(feedbackTimer);
+      currentQuestionIndex = 0;
+      score = 0;
+      questionNumberDisplay = 1;
+      selectedQuizCategory = null; // Clear selected quiz category
+      filteredQuestions = []; // Clear filtered questions
+      state = 'start';
+      saveProgress();
+      fetchQuestions(); // Re-fetch all questions to ensure latest data
+    }
+
+    // --- Progress & Storage ---
+    function saveProgress() {
+      const progressData = {
+        currentQuestionIndex,
+        score,
+        questionNumberDisplay,
+        state,
+        selectedQuizCategory
+      };
+      localStorage.setItem('quizProgress', JSON.stringify(progressData));
+    }
+
+    function loadProgress() {
+      const savedProgress = localStorage.getItem('quizProgress');
+      if (savedProgress) {
+        const progressData = JSON.parse(savedProgress);
+        currentQuestionIndex = progressData.currentQuestionIndex || 0;
+        score = progressData.score || 0;
+        questionNumberDisplay = progressData.questionNumberDisplay || 1;
+        state = progressData.state || 'start';
+        selectedQuizCategory = progressData.selectedQuizCategory || null;
+      }
+    }
+
+    // --- API Calls ---
+    async function fetchQuestions() {
+      state = 'loading'; // Show loading screen
+      redraw();
+      clearTimeout(loadingTimeout); // Clear any previous loading timeout
+
+      loadingTimeout = setTimeout(() => {
+        if (questions.length === 0) {
+          console.warn('Loading questions taking too long, check server or network.');
+          alert('Failed to load questions. Please try again or upload a file.');
+          state = 'start'; // Revert to start state on timeout
+          redraw();
+        }
+      }, 10000); // 10-second timeout for loading questions
+
+      try {
+        const response = await fetch(`${API_URL}/api/questions`);
+        if (!response.ok) {
+          const errorText = await response.text();
+          throw new Error(`Network response was not ok: ${response.status} - ${errorText}`);
+        }
+        const data = await response.json();
+        questions = data;
+        extractCategories(); // Extract categories from fetched questions
+        
+        // If a category was previously selected, filter questions for it
+        if (selectedQuizCategory) {
+          filterQuestionsByCategory(selectedQuizCategory);
+          // If no questions for the selected category, go back to category selection
+          if (filteredQuestions.length === 0) {
+            state = 'categorySelect';
+            selectedQuizCategory = null; // Clear selection
+          } else {
+            // If questions exist and we were in a quiz state, stay in quiz state.
+            // Otherwise, go to start.
+            if (state !== 'quiz' && state !== 'score') { // Only change if not already in quiz/score
+                state = 'start'; 
+            }
+          }
+        } else {
+          state = 'start'; // Default to start if no category was selected
+        }
+        console.log('Questions fetched:', questions.length);
+      } catch (error) {
+        console.error('Error fetching questions:', error);
+        alert('Error fetching questions: ' + error.message);
+        state = 'start'; // Ensure we are on the start screen if fetching fails
+      } finally {
+        clearTimeout(loadingTimeout);
+        redraw();
+      }
+    }
+
+    function extractCategories() {
+      const dynamicCategories = new Set();
+      questions.forEach(q => {
+        if (q.category) {
+          dynamicCategories.add(q.category);
+        }
+      });
+      // Combine fixed categories with any dynamically loaded ones, then sort
+      categories = Array.from(new Set([...FIXED_CATEGORIES, ...Array.from(dynamicCategories)])).sort();
+      console.log('Extracted categories:', categories);
+    }
+
+    function filterQuestionsByCategory(category) {
+      filteredQuestions = questions.filter(q => q.category === category);
+      currentQuestionIndex = 0; // Reset for new category
+      score = 0;
+      questionNumberDisplay = 1;
+      console.log(`Filtered questions for category "${category}":`, filteredQuestions.length);
+    }
+
+    function populateCategoryDropdown() {
+        categoryDropdown.html(''); // Clear existing options
+
+        // Add default "Select Category" option
+        let defaultOption = categoryDropdown.option('Select Category');
+        defaultOption.attribute('value', '');
+        defaultOption.attribute('disabled', 'true');
+        defaultOption.attribute('selected', 'true');
+
+        // Add "Add New Category" option
+        let newCategoryOption = categoryDropdown.option('Add New Category');
+        newCategoryOption.attribute('value', 'new_category_option');
+
+        // Add fixed and dynamically fetched categories
+        categories.forEach(cat => {
+            if (cat !== 'new_category_option' && cat !== '') { // Avoid adding the special option or empty string if it somehow gets into categories
+                categoryDropdown.option(cat);
+            }
+        });
+        // Ensure the dropdown correctly reflects the selected category if it was already set
+        categoryDropdown.value(uploadCategory);
+    }
+
+    async function clearQuestions() {
+      if (!confirm('Are you sure you want to clear all questions? This cannot be undone.')) {
+        return;
+      }
+      try {
+        const response = await fetch(`${API_URL}/api/questions`, {
+          method: 'DELETE',
+        });
+        if (!response.ok) {
+          const errorText = await response.text();
+          throw new Error(`Failed to clear questions: ${response.status} - ${errorText}`);
+        }
+        const result = await response.json();
+        console.log(result.message);
+        questions = []; // Clear local questions array
+        filteredQuestions = []; // Clear filtered questions
+        categories = []; // Clear categories
+        resetQuiz(); // Reset quiz state (goes to start)
+        alert('All questions cleared successfully!'); // More specific message
+      } catch (error) {
+        console.error('Error clearing questions:', error.message);
+        alert('Error clearing questions: ' + error.message);
+      } finally {
+        fetchQuestions(); // Re-fetch to ensure UI reflects empty state
+        redraw();
+      }
+    }
+
+    // Event listener for hidden file input change - now attached in setup
+    async function uploadFile(file, finalCategory) {
       const formData = new FormData();
       formData.append('file', file);
-      formData.append('category', selectedCategory); // Append category to form data
+      formData.append('category', finalCategory); // Append the category to the form data
 
       isUploading = true;
       progress = 0;
-      redraw(); // Update UI to show progress bar
+      state = 'upload'; // Set state to upload immediately
+      redraw(); // Redraw to show upload screen
 
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 15000);
+      const timeoutId = setTimeout(() => {
+        controller.abort();
+        alert('Upload timed out. Please try again.');
+        isUploading = false;
+        progress = 0;
+        state = 'start';
+        redraw();
+      }, 30000); // 30 seconds timeout for larger files
 
-      fetch(`${API_URL}/api/upload`, {
-        method: 'POST',
-        body: formData,
-        signal: controller.signal
-      })
-        .then(response => {
-          clearTimeout(timeoutId);
-          if (!response.ok) {
-            return response.text().then(text => {
-              throw new Error(`Network response was not ok: ${response.status} - ${text}`);
-            });
-          }
-          return response.json();
-        })
-        .then(data => {
-          progress = 100;
-          isUploading = false;
-          fetchQuestions(selectedCategory); // Refetch questions for the selected category after upload
-          alert(`Upload successful! Added ${data.questionsAdded} questions to ${data.category} category.`);
-          redraw();
-        })
-        .catch(error => {
-          console.error('Upload error:', error.message);
-          progress = 0;
-          isUploading = false;
-          clearTimeout(timeoutId);
-          alert('Error during upload: ' + error.message);
-          redraw();
+      try {
+        const response = await fetch(`${API_URL}/api/upload`, {
+          method: 'POST',
+          body: formData,
+          signal: controller.signal
         });
-    });
+
+        clearTimeout(timeoutId); // Clear timeout if fetch completes
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          throw new Error(`Network response was not ok: ${response.status} - ${errorText}`);
+        }
+        const data = await response.json();
+        progress = 100;
+        isUploading = false;
+
+        if (data.questionsAdded > 0) {
+          alert('Upload complete! ' + data.questionsAdded + ' questions added. Total questions: ' + data.totalQuestions);
+        } else {
+          alert('Upload complete, but no new questions were added. Check file format.');
+        }
+
+        if (data.errors && data.errors.length > 0) {
+            console.warn('Upload errors:', data.errors);
+            alert('Some errors occurred during parsing. Check browser console for details.');
+        }
+
+        await fetchQuestions(); // Re-fetch all questions to update categories and state
+        state = 'categorySelect'; // Go to category selection after successful upload
+        redraw();
+
+      } catch (error) {
+        console.error('Upload error:', error.message);
+        progress = 0;
+        isUploading = false;
+        state = 'start'; // Go back to start on error
+        redraw();
+        alert('Upload failed: ' + error.message);
+      } finally {
+        // Reset file input value and dropdown/input for next upload
+        // This is now handled in handleFileSelect after uploadFile is called
+        uploadCategory = '';
+        populateCategoryDropdown();
+        newCategoryInput.value('');
+      }
+    }
   </script>
 </body>
 </html>
