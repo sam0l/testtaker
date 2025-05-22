@@ -92,7 +92,7 @@ async function parseText(text, uploadCategory) {
     const newQuestions = [];
     const errors = [];
     let currentQuestion = null;
-    let inOptions = false;
+    let inOptionsPhase = false; // Flag to indicate we are currently parsing options for the current question
     let detectedCategory = uploadCategory || "UNCATEGORIZED"; // Use uploadCategory as primary, fallback to UNCATEGORIZED
 
     // Attempt to extract category from the first few lines of the document
@@ -107,8 +107,8 @@ async function parseText(text, uploadCategory) {
 
     // Regex for answer section headers (to skip or extract answers from)
     const answerSectionHeaderRegex = /MOCK BOARD EXAM ANSWERS|ANSWERS AND SOLUTIONS|ANSWERS:|SOLUTION(?:S)?:/i;
-    // Regex for individual answers in an answer section (e.g., "1. B", "45. A")
-    const answerLineRegex = /^(\d+)\.\s*([A-Ea-e])/;
+    // Relaxed Regex for individual answers in an answer section (e.g., "1. B", "45. A", "1 A")
+    const answerLineRegex = /^(\d+)\s*[.)]?\s*([A-Ea-e])/;
     let answersFromSection = {}; // To store answers from a dedicated section
 
     let inAnswerSection = false;
@@ -129,15 +129,11 @@ async function parseText(text, uploadCategory) {
                 const ansLetter = answerMatch[2].toUpperCase();
                 answersFromSection[qNum] = ansLetter;
                 // console.log(`[Parser] Parsed answer from section: Q${qNum} -> ${ansLetter}`);
-            } else {
-                // Heuristic: If we see a line that doesn't look like an answer after being in the answer section,
-                // it might mean the answer section has ended. This is a simple heuristic.
-                // You might need more sophisticated logic based on your document structure.
-                // if (Object.keys(answersFromSection).length > 0 && !line.match(/^\d+/) && !line.match(/^[a-zA-Z]/)) {
-                //     inAnswerSection = false; // Uncomment this if you want strict answer section boundaries
-                // }
             }
-            continue; // Continue to next line if in answer section
+            // Do not `continue` here, as an answer section might be followed by more questions
+            // or other content that needs to be parsed. The `inAnswerSection` flag will
+            // ensure lines matching `answerLineRegex` are processed, but other lines won't
+            // be skipped if they don't match.
         }
 
 
@@ -159,28 +155,36 @@ async function parseText(text, uploadCategory) {
                 correctAnswer: undefined, // Will be set from answer section or inline
                 category: detectedCategory // Assign detected category
             };
-            inOptions = true; // Assume next lines are options
-        } else if (inOptions && line.match(/^[a-dA-D][).]\s*/)) { // Options (e.g., "a) Option text", "A. Option text")
+            inOptionsPhase = true; // Assume next lines are options
+        } else if (currentQuestion) {
+            // Option pattern (e.g., "a) Option text", "A. Option text", "a. Option text")
             const optionMatch = line.match(/^[a-dA-D][).]\s*(.*)/);
-            if (currentQuestion && optionMatch) {
-                currentQuestion.options.push(optionMatch[1].trim());
-            }
-        } else if (line.toLowerCase().startsWith('answer:') || line.toLowerCase().startsWith('ans:')) {
-            const answerMatch = line.match(/(?:answer|ans):\s*([a-dA-D])/i);
-            if (currentQuestion && answerMatch) {
-                currentQuestion.correctAnswer = answerMatch[1].toLowerCase().charCodeAt(0) - 'a'.charCodeAt(0);
-                inOptions = false; // Assume options are done after inline answer
-            }
-        } else if (currentQuestion && inOptions) {
-            // If it's not a new question or an option, and we're still in options, it's part of the previous option or question
-            if (currentQuestion.options.length > 0) {
+            if (optionMatch) {
+                const optionText = optionMatch[1].trim();
+                currentQuestion.options.push(optionText);
+                inOptionsPhase = true; // Confirm we are in options phase
+
+                // Handle inline answers with '*'
+                if (optionText.endsWith('*')) {
+                    const cleanOptionText = optionText.slice(0, -1).trim();
+                    currentQuestion.options[currentQuestion.options.length - 1] = cleanOptionText; // Clean the option text
+                    currentQuestion.correctAnswer = currentQuestion.options.length - 1; // Set correct answer
+                    console.log(`[Parser] Inline answer detected for Q${currentQuestion.questionNumber}: Option ${String.fromCharCode(65 + currentQuestion.correctAnswer)}`);
+                }
+            } else if (line.toLowerCase().startsWith('answer:') || line.toLowerCase().startsWith('ans:')) {
+                const answerMatch = line.match(/(?:answer|ans):\s*([a-dA-D])/i);
+                if (answerMatch) {
+                    currentQuestion.correctAnswer = answerMatch[1].toLowerCase().charCodeAt(0) - 'a'.charCodeAt(0);
+                    inOptionsPhase = false; // Assume options are done after inline answer
+                    console.log(`[Parser] Inline 'Answer:' found for Q${currentQuestion.questionNumber}: Option ${String.fromCharCode(65 + currentQuestion.correctAnswer)}`);
+                }
+            } else if (inOptionsPhase && currentQuestion.options.length > 0) {
+                // If we are in options phase and have existing options, append this line to the last option
                 currentQuestion.options[currentQuestion.options.length - 1] += ' ' + line;
-            } else if (currentQuestion.question) {
+            } else {
+                // If not an option, and not in options phase, but we have a current question, assume it's more question text
                 currentQuestion.question += ' ' + line;
             }
-        } else if (currentQuestion) {
-            // If not an option, and not inOptions mode, but we have a current question, assume it's more question text
-            currentQuestion.question += ' ' + line;
         }
     }
 
@@ -193,9 +197,9 @@ async function parseText(text, uploadCategory) {
         }
     }
 
-    // Post-processing: Assign correct answers from the answer section (overwrites inline if found)
+    // Post-processing: Assign correct answers from the answer section (overwrites inline if found, but inline is prioritized if found first)
     newQuestions.forEach(q => {
-        if (answersFromSection[q.questionNumber]) {
+        if (answersFromSection[q.questionNumber] && q.correctAnswer === undefined) { // Only assign if not already set by inline '*' or 'Answer:'
             const answerLetter = answersFromSection[q.questionNumber];
             const answerIndex = 'ABCD'.indexOf(answerLetter); // Convert A, B, C, D to 0, 1, 2, 3
             if (answerIndex !== -1 && answerIndex < q.options.length) {
@@ -208,93 +212,7 @@ async function parseText(text, uploadCategory) {
             errors.push(`No answer found for Q${q.questionNumber} in document or section.`);
         }
     });
-    
+
     console.log(`[Parser] Final parsed questions count: ${newQuestions.length}`);
     return { questions: newQuestions, errors: errors };
 }
-
-
-// Initial load of questions when server starts
-loadQuestions();
-
-// API Endpoints
-app.get('/api/questions', (req, res) => {
-  res.json(questions);
-});
-
-app.post('/api/upload', async (req, res) => {
-  if (!req.files || Object.keys(req.files).length === 0) {
-    return res.status(400).json({ message: 'No files were uploaded.' });
-  }
-
-  const file = req.files.file;
-  const uploadCategory = req.body.category || 'UNCATEGORIZED'; // Get category from form data
-  const filePath = path.join(uploadsDir, file.name);
-  console.log('Received file:', file.name, 'Saving to:', filePath, 'with upload category:', uploadCategory);
-
-  try {
-    await file.mv(filePath);
-    console.log('File moved to:', filePath);
-
-    let result = { questions: [], errors: [] };
-    if (file.mimetype === 'application/pdf') {
-      result = await parsePDF(filePath, uploadCategory);
-    } else if (file.mimetype === 'text/plain') {
-      const content = await fs.readFile(filePath, 'utf8');
-      result = await parseText(content, uploadCategory);
-    } else if (file.mimetype === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
-      result = await parseDocx(filePath, uploadCategory);
-    } else {
-      console.log('Unsupported file type:', file.mimetype);
-      return res.status(400).json({ message: 'Unsupported file type. Please upload .txt, .pdf, or .docx files.' });
-    }
-
-    // Filter out duplicate questions before adding
-    const existingQuestionIdentifiers = new Set(questions.map(q => `${q.category}-${q.questionNumber}-${q.question}`));
-    const uniqueNewQuestions = result.questions.filter(q => {
-        // Ensure question has a category, number, and text to form a unique identifier
-        if (!q.category || !q.questionNumber || !q.question) {
-            result.errors.push(`Skipped malformed question: missing category, number, or text.`);
-            return false;
-        }
-        const identifier = `${q.category}-${q.questionNumber}-${q.question}`;
-        if (existingQuestionIdentifiers.has(identifier)) {
-            result.errors.push(`Duplicate question skipped (Q${q.questionNumber} in ${q.category}).`);
-            return false;
-        }
-        existingQuestionIdentifiers.add(identifier);
-        return true;
-    });
-
-    questions = questions.concat(uniqueNewQuestions);
-    await saveQuestions();
-    await fs.unlink(filePath).catch((err) => console.error(`Error deleting uploaded file ${filePath}:`, err)); // More robust deletion
-    console.log('Upload complete, questions added:', uniqueNewQuestions.length, 'total questions:', questions.length);
-    res.json({
-      message: 'File parsed and questions added',
-      questionsAdded: uniqueNewQuestions.length,
-      errors: result.errors,
-      totalQuestions: questions.length
-    });
-  } catch (error) {
-    console.error('Error processing upload:', error);
-    await fs.unlink(filePath).catch((err) => console.error(`Error deleting uploaded file ${filePath} after processing error:`, err));
-    res.status(500).json({ message: `Error processing file: ${error.message}` });
-  }
-});
-
-app.delete('/api/questions', async (req, res) => {
-  try {
-    questions = []; // Clear the in-memory questions array
-    await saveQuestions(); // Save the empty array to questions.json
-    console.log('All questions cleared.');
-    res.json({ message: 'All questions cleared successfully.' });
-  } catch (error) {
-    console.error('Error clearing questions:', error);
-    res.status(500).json({ message: `Error clearing questions: ${error.message}` });
-  }
-});
-
-app.listen(port, () => {
-  console.log(`Server listening at http://localhost:${port}`);
-});
