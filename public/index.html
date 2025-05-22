@@ -671,26 +671,38 @@
     }
 
     function populateCategoryDropdown() {
-        categoryDropdown.html(''); // Clear existing options
+        if (!categoryDropdown || !categoryDropdown.elt) {
+            console.error("populateCategoryDropdown called but categoryDropdown or its DOM element is null/undefined!");
+            return;
+        }
+
+        categoryDropdown.elt.innerHTML = ''; // Clear existing options directly
 
         // Add default "Select Category" option
-        let defaultOption = categoryDropdown.option('Select Category');
-        defaultOption.attribute('value', '');
-        defaultOption.attribute('disabled', 'true');
-        defaultOption.attribute('selected', 'true');
+        let defaultOptionElement = document.createElement('option');
+        defaultOptionElement.textContent = 'Select Category';
+        defaultOptionElement.value = '';
+        defaultOptionElement.disabled = true;
+        defaultOptionElement.selected = true;
+        categoryDropdown.elt.appendChild(defaultOptionElement);
 
         // Add "Add New Category" option
-        let newCategoryOption = categoryDropdown.option('Add New Category');
-        newCategoryOption.attribute('value', 'new_category_option');
+        let newCategoryOptionElement = document.createElement('option');
+        newCategoryOptionElement.textContent = 'Add New Category';
+        newCategoryOptionElement.value = 'new_category_option';
+        categoryDropdown.elt.appendChild(newCategoryOptionElement);
 
         // Add fixed and dynamically fetched categories
         categories.forEach(cat => {
             if (cat !== 'new_category_option' && cat !== '') { // Avoid adding the special option or empty string if it somehow gets into categories
-                categoryDropdown.option(cat);
+                let optionElement = document.createElement('option');
+                optionElement.textContent = cat;
+                optionElement.value = cat;
+                categoryDropdown.elt.appendChild(optionElement);
             }
         });
         // Ensure the dropdown correctly reflects the selected category if it was already set
-        categoryDropdown.value(uploadCategory);
+        categoryDropdown.elt.value = uploadCategory; // Set value on the raw DOM element
     }
 
     async function clearQuestions() {
