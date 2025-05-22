@@ -91,6 +91,7 @@
       categoryDropdown.changed(handleCategoryChange);
       categoryDropdown.elt.style.display = 'none'; // Hide initially
       categoryDropdown.elt.className = 'html-element'; // Apply common styling
+      categoryDropdown.size(250, 35); // Set size for dropdown
 
       newCategoryInput = createInput('');
       newCategoryInput.id('newCategoryInput');
@@ -99,6 +100,7 @@
       newCategoryInput.changed(handleNewCategoryInput);
       newCategoryInput.elt.style.display = 'none'; // Hide initially
       newCategoryInput.elt.className = 'html-element'; // Apply common styling
+      newCategoryInput.size(240, 25); // Set size for input field
 
       loadProgress();
       fetchQuestions(); // Fetch all questions and populate categories on setup
@@ -114,7 +116,7 @@
       noStroke();
       
       // Manage visibility and position of HTML elements based on state
-      if (state === 'uploadScreen') { // Changed from 'upload' to 'uploadScreen'
+      if (state === 'uploadScreen') { 
         categoryDropdown.elt.style.display = 'block';
         // Position dropdown relative to canvas
         categoryDropdown.position(width / 2 - categoryDropdown.width / 2, 140);
@@ -143,7 +145,7 @@
         case 'score':
           drawScoreScreen();
           break;
-        case 'uploadScreen': // Changed from 'upload' to 'uploadScreen'
+        case 'uploadScreen': 
           drawUploadScreen();
           break;
         case 'loading':
@@ -154,19 +156,8 @@
 
     // --- HTML Element Handlers ---
     async function handleFileSelect(event) {
-      const file = event.target.files[0];
-      if (!file) return;
-
-      const allowedTypes = ['application/pdf', 'text/plain', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
-      if (!allowedTypes.includes(file.type)) {
-        alert('Unsupported file type. Please select a .txt, .pdf, or .docx file.');
-        event.target.value = ''; // Clear input for unsupported type
-        return;
-      }
-
-      // File is selected, but upload is triggered by "Parse and Upload" button
-      // We don't start upload here, just ensure the file is ready for uploadFile()
-      // The file input element itself holds the selected file.
+      // This function is now only responsible for updating the UI to show the selected filename
+      // The actual upload is triggered by the "Parse and Upload File" button click.
       redraw(); // Redraw to update the 'Selected: filename' text and button state
     }
 
@@ -491,7 +482,15 @@
       } else if (state === 'uploadScreen') { // Changed to uploadScreen
         // "Choose File" button click (triggers HTML file input)
         if (checkButton(width / 2, 240, 250, 50)) {
-          // The handleFileSelect function will perform category check
+          // Check if a category is selected first
+          let finalCategoryForCheck = uploadCategory;
+          if (uploadCategory === 'new_category_option') {
+              finalCategoryForCheck = newCategoryInput.value().trim();
+          }
+          if (!finalCategoryForCheck || finalCategoryForCheck === 'Select Category') {
+              alert('Please select or enter a category before choosing a file.');
+              return;
+          }
           fileInput.elt.click(); // Programmatically click the hidden HTML file input
         }
         // "Parse and Upload File" button click
