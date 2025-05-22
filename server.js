@@ -55,9 +55,6 @@ async function saveQuestions() {
 // --- Parsing Functions (from your existing code) ---
 
 async function parsePDF(filePath) {
-    // ... (Your parsePDF function code - it was very long, keeping as is)
-    // Placeholder to make sure the structure is complete.
-    // Ensure your parsePDF, parseText, parseDocx functions are correctly defined here.
     let dataBuffer = await fs.readFile(filePath);
     const data = await pdfParse(dataBuffer);
     const text = data.text;
@@ -67,13 +64,11 @@ async function parsePDF(filePath) {
 }
 
 async function parseText(content) {
-    // ... (Your parseText function code)
     console.log('[Parser] Text content extracted:', content.substring(0, 200) + '...');
     return extractQuestionsAndAnswers(content);
 }
 
 async function parseDocx(filePath) {
-    // ... (Your parseDocx function code)
     const { value } = await mammoth.extractRawText({ path: filePath });
     console.log('[Parser] DOCX text extracted:', value.substring(0, 200) + '...');
     return extractQuestionsAndAnswers(value);
@@ -92,13 +87,21 @@ function extractQuestionsAndAnswers(text) {
     if (answerMatch && answerMatch[1]) {
         const answerText = answerMatch[1];
         console.log('[Parser] Found potential answer section:', answerText.substring(0, 100) + '...');
-        // Regex to find patterns like "1. A", "2) B", "3 C", "4.C" etc.
-        const answerLineRegex = /(\d+)\s*[\.\)]?\s*([A-Z])(?:\s|$)/g;
+        // Regex to find patterns like "1. A", "2) B", "3 C", "4.C" (existing) AND "A 1", "B 2" (new)
+        const answerLineRegex = /(?:(\d+)\s*[\.\)]?\s*([A-Z]))|(?:([A-Z])\s*(\d+))(?:\s|$)/g;
         let match;
         while ((match = answerLineRegex.exec(answerText)) !== null) {
-            const qNum = match[1];
-            const answerLetter = match[2];
-            answersFromSection[qNum] = answerLetter;
+            let qNum, answerLetter;
+            if (match[1] && match[2]) { // Pattern: 1. A or 1) A
+                qNum = match[1];
+                answerLetter = match[2];
+            } else if (match[3] && match[4]) { // Pattern: A 1
+                answerLetter = match[3];
+                qNum = match[4];
+            }
+            if (qNum && answerLetter) {
+                answersFromSection[qNum] = answerLetter;
+            }
         }
         console.log('[Parser] Answers from section:', answersFromSection);
     } else {
@@ -125,14 +128,12 @@ function extractQuestionsAndAnswers(text) {
                         if (answerIndex !== -1 && answerIndex < currentQuestion.options.length) {
                             currentQuestion.correctAnswer = answerIndex;
                             currentQuestion.question = currentQuestion.question.replace(inlineAnswerMatch[0], '').trim(); // Remove answer from question text
-                            // console.log(`[Parser] Set inline answer for Q${currentQuestion.questionNumber}: ${answerLetter} (index ${answerIndex})`);
                         }
                     } else if (currentQuestion.options.some(opt => opt.startsWith('*') || opt.startsWith('(*)'))) {
                         const starredOptionIndex = currentQuestion.options.findIndex(opt => opt.startsWith('*') || opt.startsWith('(*)'));
                         if (starredOptionIndex !== -1) {
                             currentQuestion.correctAnswer = starredOptionIndex;
                             currentQuestion.options[starredOptionIndex] = currentQuestion.options[starredOptionIndex].replace(/^\*?\s*\(\*\)\s*/, '').trim();
-                            // console.log(`[Parser] Set starred answer for Q${currentQuestion.questionNumber}: index ${starredOptionIndex}`);
                         }
                     }
                 }
@@ -166,13 +167,12 @@ function extractQuestionsAndAnswers(text) {
                 const optionLetter = optionMatch[1].toLowerCase();
                 const optionText = optionMatch[2].trim();
 
-                // Check for inline answer indication
+                // Check for inline answer indication (e.g., "a. Option Text *")
                 if (optionText.includes('*') || optionText.toLowerCase().includes('answer:')) {
                     if (currentQuestion.correctAnswer === undefined) { // Only set if not already determined by a previous method
                         const answerIndex = optionLetters.indexOf(optionLetter);
                         if (answerIndex !== -1) {
                             currentQuestion.correctAnswer = answerIndex;
-                            // console.log(`[Parser] Set inline answer for Q${currentQuestion.questionNumber} (option): ${optionLetter} (index ${answerIndex})`);
                         }
                     }
                 }
@@ -222,7 +222,6 @@ function extractQuestionsAndAnswers(text) {
             const answerIndex = optionLetters.indexOf(answerLetter); // Convert a, b, c, d to 0, 1, 2, 3
             if (answerIndex !== -1 && answerIndex < q.options.length) {
                 q.correctAnswer = answerIndex;
-                // console.log(`[Parser] Assigned correct answer for Q${q.questionNumber} from section: ${answerLetter} (index ${answerIndex})`);
             } else {
                 errors.push(`Answer for Q${q.questionNumber} (${answerLetter}) from section not found in options or invalid index.`);
             }
