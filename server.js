@@ -26,8 +26,15 @@ fs.mkdir(uploadsDir, { recursive: true })
   .then(() => console.log('Uploads directory ensured:', uploadsDir))
   .catch(err => console.error('Error ensuring uploads directory:', err));
 
-let questions = [];
+let questions = []; // For general questions.json
+let categorizedQuestions = {
+  ELECTRONICS: [],
+  ESAT: [],
+  GEAS: [],
+  MATHEMATICS: []
+};
 const questionFile = 'questions.json';
+const categorizedQuestionFile = 'cuestions.json'; // New file for categorized questions
 
 async function loadQuestions() {
   try {
@@ -35,17 +42,46 @@ async function loadQuestions() {
     questions = JSON.parse(data);
     console.log('Loaded questions from', questionFile, ':', questions.length, 'questions');
   } catch (error) {
-    console.error('Error loading questions:', error.message);
+    console.error('Error loading general questions:', error.message);
     questions = [];
+  }
+
+  try {
+    const data = await fs.readFile(categorizedQuestionFile, 'utf8');
+    const parsedData = JSON.parse(data);
+    // Ensure all categories exist and merge loaded data
+    for (const category of Object.keys(categorizedQuestions)) {
+      if (parsedData[category]) {
+        categorizedQuestions[category] = parsedData[category];
+      } else {
+        categorizedQuestions[category] = [];
+      }
+    }
+    console.log('Loaded categorized questions from', categorizedQuestionFile);
+  } catch (error) {
+    console.error('Error loading categorized questions:', error.message);
+    categorizedQuestions = {
+      ELECTRONICS: [],
+      ESAT: [],
+      GEAS: [],
+      MATHEMATICS: []
+    };
   }
 }
 
 async function saveQuestions() {
   try {
     await fs.writeFile(questionFile, JSON.stringify(questions, null, 2));
-    console.log('Saved questions to', questionFile, ':', questions.length, 'questions');
+    console.log('Saved general questions to', questionFile, ':', questions.length, 'questions');
   } catch (error) {
-    console.error('Error saving questions:', error.message);
+    console.error('Error saving general questions:', error.message);
+  }
+
+  try {
+    await fs.writeFile(categorizedQuestionFile, JSON.stringify(categorizedQuestions, null, 2));
+    console.log('Saved categorized questions to', categorizedQuestionFile);
+  } catch (error) {
+    console.error('Error saving categorized questions:', error.message);
   }
 }
 
@@ -238,15 +274,28 @@ app.use((req, res, next) => {
 
 app.get('/api/questions', async (req, res) => {
   await loadQuestions();
-  const randomizedQuestions = shuffleArray(questions);
-  res.json(randomizedQuestions);
+  const category = req.query.category ? req.query.category.toUpperCase() : null;
+  let questionsToSend = [];
+
+  if (category && categorizedQuestions[category]) {
+    questionsToSend = shuffleArray(categorizedQuestions[category]);
+  } else {
+    // If no category or invalid category, send general questions and all categorized questions combined
+    let allQuestions = [...questions];
+    for (const cat in categorizedQuestions) {
+      allQuestions = allQuestions.concat(categorizedQuestions[cat]);
+    }
+    questionsToSend = shuffleArray(allQuestions);
+  }
+  res.json(questionsToSend);
 });
 
 app.post('/api/reset', async (req, res) => {
   try {
     await loadQuestions();
-    console.log('Quiz reset, reloaded questions:', questions.length);
-    res.json({ message: 'Quiz reset successfully', questionCount: questions.length });
+    console.log('Quiz reset, reloaded questions.');
+    const totalQuestionCount = questions.length + Object.values(categorizedQuestions).flat().length;
+    res.json({ message: 'Quiz reset successfully', questionCount: totalQuestionCount });
   } catch (error) {
     console.error('Error resetting quiz:', error.message);
     res.status(500).json({ message: 'Error resetting quiz: ' + error.message });
@@ -258,10 +307,30 @@ app.post('/api/clear', async (req, res) => {
     if (!req.body.confirm || req.body.confirm !== 'DELETE') {
       return res.status(400).json({ message: 'Confirmation required: send { "confirm": "DELETE" } in request body' });
     }
-    questions = [];
-    await saveQuestions();
-    console.log('Questions cleared, questions.json wiped');
-    res.json({ message: 'Questions cleared successfully' });
+
+    const categoryToClear = req.body.category ? req.body.category.toUpperCase() : null;
+
+    if (categoryToClear) {
+      if (categorizedQuestions[categoryToClear]) {
+        categorizedQuestions[categoryToClear] = [];
+        await saveQuestions();
+        console.log(`Questions for category ${categoryToClear} cleared.`);
+        res.json({ message: `Questions for category ${categoryToClear} cleared successfully` });
+      } else {
+        return res.status(400).json({ message: `Invalid category: ${categoryToClear}` });
+      }
+    } else {
+      questions = [];
+      categorizedQuestions = {
+        ELECTRONICS: [],
+        ESAT: [],
+        GEAS: [],
+        MATHEMATICS: []
+      };
+      await saveQuestions();
+      console.log('All questions cleared (general and categorized).');
+      res.json({ message: 'All questions cleared successfully' });
+    }
   } catch (error) {
     console.error('Error clearing questions:', error.message);
     res.status(500).json({ message: 'Error clearing questions: ' + error.message });
@@ -276,7 +345,8 @@ app.post('/api/upload', async (req, res) => {
 
   const file = req.files.file;
   const filePath = path.join(uploadsDir, file.name);
-  console.log('Received file:', file.name, 'Saving to:', filePath);
+  const category = req.body.category ? req.body.category.toUpperCase() : null; // Get category from form data
+  console.log('Received file:', file.name, 'Saving to:', filePath, 'Category:', category);
 
   try {
     await file.mv(filePath);
@@ -295,13 +365,20 @@ app.post('/api/upload', async (req, res) => {
       return res.status(400).json({ message: 'Unsupported file type' });
     }
 
-    questions = questions.concat(result.questions);
+    if (category && categorizedQuestions[category]) {
+      categorizedQuestions[category] = categorizedQuestions[category].concat(result.questions);
+    } else {
+      questions = questions.concat(result.questions);
+    }
+    
     await saveQuestions();
     await fs.unlink(filePath).catch(() => {});
-    console.log('Upload complete, total questions:', questions.length);
+    const totalQuestionCount = questions.length + Object.values(categorizedQuestions).flat().length;
+    console.log('Upload complete, total questions:', totalQuestionCount);
     res.json({
       message: 'File parsed and questions added',
       questionsAdded: result.questions.length,
+      category: category || 'general',
       errors: result.errors
     });
   } catch (error) {
