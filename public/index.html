@@ -46,7 +46,7 @@
   <div id="sketch-holder"></div>
   
   <script>
-    let state = 'start'; // 'start', 'categorySelect', 'quiz', 'score', 'upload', 'loading'
+    let state = 'start'; // 'start', 'categorySelect', 'quiz', 'score', 'uploadScreen', 'loading'
     let questions = []; // All questions loaded from questions.json
     let filteredQuestions = []; // Questions for the current quiz session
     let currentQuestionIndex = 0; // Index in filteredQuestions
@@ -58,7 +58,7 @@
     let answerFeedback = null; // Stores { selected: index, correct: boolean, correctAnswerIndex: index }
     let feedbackTimer = null;
     let selectedQuizCategory = null; // Category chosen for the quiz
-    let uploadCategory = ''; // Category chosen for upload dropdown
+    let uploadCategory = ''; // Category chosen for upload dropdown (for new uploads)
 
     // Fixed categories for the dropdown and game selection
     const FIXED_CATEGORIES = ["ELECTRONICS", "ESAT", "GEAS", "MATHEMATICS"];
@@ -114,7 +114,7 @@
       noStroke();
       
       // Manage visibility and position of HTML elements based on state
-      if (state === 'upload') {
+      if (state === 'uploadScreen') { // Changed from 'upload' to 'uploadScreen'
         categoryDropdown.elt.style.display = 'block';
         // Position dropdown relative to canvas
         categoryDropdown.position(width / 2 - categoryDropdown.width / 2, 140);
@@ -143,7 +143,7 @@
         case 'score':
           drawScoreScreen();
           break;
-        case 'upload':
+        case 'uploadScreen': // Changed from 'upload' to 'uploadScreen'
           drawUploadScreen();
           break;
         case 'loading':
@@ -164,25 +164,10 @@
         return;
       }
 
-      // Check if a category is selected first
-      let finalCategory = uploadCategory;
-      if (uploadCategory === 'new_category_option') {
-          finalCategory = newCategoryInput.value().trim();
-          if (!finalCategory) {
-              alert('Please enter a name for the new category.');
-              event.target.value = ''; // Clear file input
-              return;
-          }
-      }
-      if (!finalCategory || finalCategory === 'Select Category') {
-          alert('Please select or enter a category before choosing a file.');
-          event.target.value = ''; // Clear file input
-          return;
-      }
-      
-      // If category is selected, proceed with upload
-      await uploadFile(file, finalCategory);
-      event.target.value = ''; // Clear file input after upload attempt
+      // File is selected, but upload is triggered by "Parse and Upload" button
+      // We don't start upload here, just ensure the file is ready for uploadFile()
+      // The file input element itself holds the selected file.
+      redraw(); // Redraw to update the 'Selected: filename' text and button state
     }
 
     function handleCategoryChange() {
@@ -207,7 +192,7 @@
 
     function drawStartScreen() {
       fill(0);
-      textSize(32); // Reduced font size for title
+      textSize(30); // Reduced font size for title
       textAlign(CENTER, CENTER);
       text('WHO WANTS TO BE A ECELLIONAIRE', width / 2, 80, width - 40); // Added maxWidth to prevent clipping
 
@@ -345,7 +330,7 @@
       drawButton(width / 2, height / 2 + 120, 200, 50, 'Main Menu', true);
     }
 
-    function drawUploadScreen() {
+    function drawUploadScreen() { // Changed to uploadScreen
       fill(0);
       textSize(32);
       textAlign(CENTER, TOP);
@@ -369,6 +354,10 @@
         textAlign(CENTER, TOP);
         text(`Selected: ${selectedFileDOM.name}`, width / 2, 275);
       }
+
+      // "Parse and Upload File" button
+      let parseUploadEnabled = selectedFileDOM && (uploadCategory !== '' && uploadCategory !== 'Select Category' && !(uploadCategory === 'new_category_option' && newCategoryInput.value().trim() === ''));
+      drawButton(width / 2, 350, 250, 50, 'Parse and Upload File', parseUploadEnabled);
 
       // Upload progress bar
       if (isUploading) {
@@ -432,7 +421,7 @@
         }
         // Upload Questions Button
         else if (checkButton(width / 2, height / 2, 250, 60)) {
-          state = 'upload';
+          state = 'uploadScreen'; // Changed to uploadScreen
           populateCategoryDropdown(); // Ensure dropdown is populated
           redraw();
         }
@@ -465,7 +454,8 @@
         }
       } else if (state === 'quiz') {
         let q = filteredQuestions[currentQuestionIndex];
-        if (!q || !q.options) return; // Guard against undefined question or options
+        // Only allow answer selection if feedback is not active and questions exist
+        if (!q || !q.options || answerFeedback !== null) return; 
 
         let optionYStart = 120 + 120 / 2 + 30; // Based on question box position
         let optionHeight = 50;
@@ -476,7 +466,7 @@
           let optionX = width / 2;
           let optionWidth = width - 60;
 
-          if (checkButton(optionX, y + optionHeight / 2, optionWidth, optionHeight)) { // Check button with its center
+          if (checkButton(optionX, y, optionWidth, optionHeight)) { // Check button with its center
             checkAnswer(i); // Pass index directly
             break; // Exit loop after an answer is clicked
           }
@@ -498,15 +488,30 @@
           state = 'start';
           redraw();
         }
-      } else if (state === 'upload') {
+      } else if (state === 'uploadScreen') { // Changed to uploadScreen
         // "Choose File" button click (triggers HTML file input)
         if (checkButton(width / 2, 240, 250, 50)) {
           // The handleFileSelect function will perform category check
           fileInput.elt.click(); // Programmatically click the hidden HTML file input
         }
+        // "Parse and Upload File" button click
+        else if (checkButton(width / 2, 350, 250, 50)) {
+            const selectedFileDOM = document.getElementById('fileInput').files[0];
+            let finalCategory = uploadCategory;
+            if (uploadCategory === 'new_category_option') {
+                finalCategory = newCategoryInput.value().trim();
+            }
+            // Check if button is enabled (logic is same as drawUploadScreen)
+            let parseUploadEnabled = selectedFileDOM && (finalCategory !== '' && finalCategory !== 'Select Category');
 
+            if (parseUploadEnabled) {
+                uploadFile(selectedFileDOM, finalCategory);
+            } else {
+                alert('Please select a file and a category before uploading.');
+            }
+        }
         // Back to Main Menu button click
-        if (checkButton(width / 2, height - 70, 200, 50)) {
+        else if (checkButton(width / 2, height - 70, 200, 50)) {
           state = 'start';
           // Reset upload form state
           fileInput.elt.value = ''; // Clear selected file input visual
@@ -717,7 +722,7 @@
       }
     }
 
-    // Event listener for hidden file input change - now attached in setup
+    // Function to handle file upload (called by "Parse and Upload File" button)
     async function uploadFile(file, finalCategory) {
       const formData = new FormData();
       formData.append('file', file);
@@ -725,7 +730,7 @@
 
       isUploading = true;
       progress = 0;
-      state = 'upload'; // Set state to upload immediately
+      state = 'uploadScreen'; // Set state to uploadScreen immediately
       redraw(); // Redraw to show upload screen
 
       const controller = new AbortController();
@@ -779,10 +784,10 @@
         alert('Upload failed: ' + error.message);
       } finally {
         // Reset file input value and dropdown/input for next upload
-        // This is now handled in handleFileSelect after uploadFile is called
+        fileInput.elt.value = ''; // Clear selected file input visual
         uploadCategory = '';
-        populateCategoryDropdown();
-        newCategoryInput.value('');
+        populateCategoryDropdown(); // Reset dropdown to default
+        newCategoryInput.value(''); // Clear new category input
       }
     }
   </script>
